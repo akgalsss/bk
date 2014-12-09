@@ -4,3 +4,8 @@
 	min-width: 100%;
 	position: absolute;
 }
+
+
+.toolTextBlock {
+	background-color: #f00;
+}
