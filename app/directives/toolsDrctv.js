@@ -1,5 +1,15 @@
 pageBuilder.directive("tool", function(){
+	var linkFn = function(scope, element, attrs) {       
+		
+		var button = element.find('button');        
+		
+		button.bind("click", function() {
+			scope.toolTextBlock(scope.textBlockParams);
+		});
+		
+	};
 	return {
+		link: linkFn,
 		restrict: "E",
 		template: "<button draggable>Tool Name</button>",
 	}
