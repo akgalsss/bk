@@ -11,7 +11,7 @@ pageBuilder.directive("tool", function(){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button draggable>Tool Name</button>",
+		template: "<button class='toolItem' draggable>T</button>",
 	}
 });
 
