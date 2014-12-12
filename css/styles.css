@@ -24,4 +24,6 @@
 
 .toolTextBlock {
 	background-color: #f00;
+	width: 100px;
+	height: 150px;
 }
