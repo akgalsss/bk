@@ -1,12 +1,20 @@
 /* Tool palete styles */
 #toolPalete {
+	background: #fff;
+	border: 1px solid;
+	margin-left: 10px;
+	margin-top: 10px;
+	padding: 7px;
 	position: absolute;
+	width: 66px;
 	z-index: 100;
 }
 
 .toolItem {
 	border-radius: 25px;
 	height: 50px;
+	margin: 0px;
+	margin-bottom: 7px;
 	padding: 0px;
 	text-align: center;
 	width: 50px;
@@ -24,6 +32,9 @@
 
 .toolTextBlock {
 	background-color: #f00;
-	width: 100px;
-	height: 150px;
 }
+
+.imageTextBlock {
+	background-color: #00f0;
+}
+

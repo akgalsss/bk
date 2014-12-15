@@ -36,22 +36,38 @@ pageBuilder.directive('draggable', ['$document', function($document) {
 }]);
 
 
-// tool directive functionality. Use: <tool></tool>
-pageBuilder.directive("tool", function($compile){
+// text tool directive functionality. Use: <text-tool></text-tool>
+pageBuilder.directive("textTool", function($compile){
 	var linkFn = function(scope, element, attrs) {       
 		
-		var button = element.find('button');        
-		
-		button.bind("click", function() {
+		element.bind("click", function() {
 			scope.toolTextBlock(scope.textBlockParams);
 		});
 		
 	};
+
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='toolItem' draggable>T</button>",
+		template: "<button class='toolItem textTool'>T</button>",
 	}
 });
 
+
+// image tool directive functionality. Use: <image-tool></image-tool>
+pageBuilder.directive("imageTool", function($compile){
+	var linkFn = function(scope, element, attrs) {       
+		
+		element.bind("click", function() {
+			scope.toolImageBlock(scope.textBlockParams);
+		});
+		
+	};
+	
+	return {
+		link: linkFn,
+		restrict: "E",
+		template: "<button class='toolItem imageTool'>I</button>",
+	}
+});
 
