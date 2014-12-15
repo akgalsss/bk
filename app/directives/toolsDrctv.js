@@ -36,12 +36,30 @@ pageBuilder.directive('draggable', ['$document', function($document) {
 }]);
 
 
+// save directive functionality. Use: <save></save>
+pageBuilder.directive("save", function($compile){
+	var linkFn = function(scope, element, attrs) {       
+		
+		element.bind("click", function() {
+			scope.save();
+		});
+		
+	};
+	
+	return {
+		link: linkFn,
+		restrict: "E",
+		template: "<button class='toolItem save'>S</button>",
+	}
+});
+
+
 // text tool directive functionality. Use: <text-tool></text-tool>
 pageBuilder.directive("textTool", function($compile){
 	var linkFn = function(scope, element, attrs) {       
 		
 		element.bind("click", function() {
-			scope.toolTextBlock(scope.textBlockParams);
+			scope.toolTextBlock();
 		});
 		
 	};
@@ -59,11 +77,11 @@ pageBuilder.directive("imageTool", function($compile){
 	var linkFn = function(scope, element, attrs) {       
 		
 		element.bind("click", function() {
-			scope.toolImageBlock(scope.textBlockParams);
+			scope.toolImageBlock();
 		});
 		
 	};
-	
+
 	return {
 		link: linkFn,
 		restrict: "E",

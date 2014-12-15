@@ -10,6 +10,19 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 		angular.element(page).append($compile(template)($scope));
 	}
 
+	$scope.save = function () {
+		console.log("save click");
+
+		var template;
+
+		template = JSON.stringify( );
+
+		// template = $("#page").toJSO();
+
+		console.log(template);
+
+	}
+
 
 	$scope.toolTextBlock = function () {
 		var tool = {} ;
