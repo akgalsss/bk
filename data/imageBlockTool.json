@@ -1,5 +1,6 @@
 {
-	"width":"140px",
-	"height":"140px",
-	"data":"<img src='http://lorempixel.com/140/140/' width='140' height='140' alt='Lorem Pixel Image'/>"
+	"width"  : "140px",
+	"height" : "140px",
+	"data"   : "<img src='http://lorempixel.com/140/140/' width='140' height='140' alt='Lorem Pixel Image'/>", 
+	"class"  : "toolImageBlock"
 }

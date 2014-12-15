@@ -1,5 +1,6 @@
 {
-	"width":"250px",
-	"height":"120px",
-	"data":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, corporis!"
+	"width"  : "250px",
+	"height" : "120px",
+	"data"   : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, corporis!",
+	"class"  : "toolTextBlock"
 }
