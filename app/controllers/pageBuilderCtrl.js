@@ -10,19 +10,55 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 		angular.element(page).append($compile(template)($scope));
 	}
 
-	$scope.save = function () {
-		console.log("save click");
 
-		var template;
+	// create json object 
+	var make_json = function (obj) {
+console.log("make_json", obj);
+		var result_obj = {}; 
 
-		template = JSON.stringify( );
+		function itarate_object(main) {
+			var result = {},
+				loop = function(main) {
+				do {
+					console.log("main", main);
+					result.className = main[0]['className'];
+					result.width = main[0]['clientWidth'];
+					result.height = main[0]['clientHeight'];
+					result.draggable = main[0]['draggable'];
 
-		// template = $("#page").toJSO();
+					if(main[0]['childElementCount']) {
+						console.log("child");
+						console.log("child_first", $(main[0].firstElementChild).toArray());
+						result.child = loop($(main[0].firstElementChild).toArray());
 
-		console.log(template);
+					}
+				}
+				while (main = main.nextSibling);
+			}
+			loop(main);
 
+			return result;
+		}
+
+
+		result_obj = itarate_object($(obj).toArray());
+
+		console.log("result_obj", result_obj);
+		
+		return result_obj;
 	}
 
+
+	// save page template
+	$scope.save = function () {
+		var template;
+
+		template = $("#page");
+		template = make_json(template);
+	}
+
+
+	// tools function
 
 	$scope.toolTextBlock = function () {
 		var tool = {} ;
@@ -58,8 +94,4 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 			console.log("BK_ERR: get image tool data - ", status);
 		});;
 	}
-
-
-
-
 }

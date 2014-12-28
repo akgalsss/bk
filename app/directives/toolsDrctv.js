@@ -43,7 +43,6 @@ pageBuilder.directive("save", function($compile){
 		element.bind("click", function() {
 			scope.save();
 		});
-		
 	};
 	
 	return {
@@ -61,7 +60,6 @@ pageBuilder.directive("textTool", function($compile){
 		element.bind("click", function() {
 			scope.toolTextBlock();
 		});
-		
 	};
 
 	return {
@@ -79,7 +77,6 @@ pageBuilder.directive("imageTool", function($compile){
 		element.bind("click", function() {
 			scope.toolImageBlock();
 		});
-		
 	};
 
 	return {
