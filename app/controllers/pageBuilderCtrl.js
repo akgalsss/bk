@@ -13,37 +13,40 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 
 	// create json object 
 	var make_json = function (obj) {
-console.log("make_json", obj);
 		var result_obj = {}; 
 
 		function itarate_object(main) {
-			var result = {},
-				loop = function(main) {
+			var result = {}, loop;
+
+			loop = function(main) {
+				var elem = {}, rslt = [];
+
 				do {
-					console.log("main", main);
-					result.className = main[0]['className'];
-					result.width = main[0]['clientWidth'];
-					result.height = main[0]['clientHeight'];
-					result.draggable = main[0]['draggable'];
+					// set needed values of obj
+					elem.className = main[0]['className'];
+					elem.width = main[0]['clientWidth'];
+					elem.height = main[0]['clientHeight'];
+					elem.draggable = (main[0]['draggable'] !== "undefine") ? true : false;
+					//elem.inline_style = $(main[0]['innerHTML']).attr('style');
+					//elem.data = main[0]['innerText'];
 
+					// if have children - create it struct
 					if(main[0]['childElementCount']) {
-						console.log("child");
-						console.log("child_first", $(main[0].firstElementChild).toArray());
-						result.child = loop($(main[0].firstElementChild).toArray());
-
+						elem.child = loop($(main[0].firstElementChild).toArray());
 					}
-				}
-				while (main = main.nextSibling);
+					rslt.push(elem);
+					console.log(rslt);
+				} while (main = main.nextSibling);
+
+				return elem;
 			}
-			loop(main);
+
+			result = loop(main);
 
 			return result;
 		}
 
-
 		result_obj = itarate_object($(obj).toArray());
-
-		console.log("result_obj", result_obj);
 		
 		return result_obj;
 	}
@@ -54,7 +57,13 @@ console.log("make_json", obj);
 		var template;
 
 		template = $("#page");
+
+		console.log(template);
+
 		template = make_json(template);
+
+		//send template to server
+		console.log(template);
 	}
 
 
