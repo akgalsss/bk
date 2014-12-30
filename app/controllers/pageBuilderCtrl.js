@@ -3,9 +3,17 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 	// render and display tool 
 	var renderTool = function (tool) {
 
-		var page = $('#page'),
-			template = "<div draggable class='"+tool.class+"' style='background-color: "+((tool.color)?tool.color:"")+"; width:"+tool.width+"; height: "
-			+tool.height+"'>"+tool.data+"</div>";
+		var page = $('#page'), template = " ", style =" ", attributes = " ";
+
+		attributes = (tool.draggable) ? attributes+" draggable" : attributes;
+		style = "background-color: "+((tool.style.color)?tool.style.color:"")+"; width:"+tool.style.width+"; height: "
+			+tool.style.height;
+
+		if (tool.class.indexOf("toolImageBlock") > -1) {
+			template = tool.data 
+		} else {
+			template = "<"+tool.tagName+attributes+" class='"+tool.class+"' style='"+style+"''>"+tool.data+"</"+tool.tagName+">";
+		}
 
 		angular.element(page).append($compile(template)($scope));
 	}
@@ -19,26 +27,38 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 			var result = {}, loop;
 
 			loop = function(main) {
-				var elem = {}, rslt = [];
-
+				var elem = {}, rslt = [], loopContinue = true;
+				
 				do {
 					// set needed values of obj
-					elem.className = main[0]['className'];
-					elem.width = main[0]['clientWidth'];
-					elem.height = main[0]['clientHeight'];
-					elem.draggable = (main[0]['draggable'] !== "undefine") ? true : false;
-					//elem.inline_style = $(main[0]['innerHTML']).attr('style');
-					//elem.data = main[0]['innerText'];
+					elem.tagName = main[0]['nodeName'];
+					elem.id = main[0]['id'];
+					elem.class = main[0]['attributes']['class']['nodeValue'];
+					elem.draggable = (main[0]['attributes']['draggable'] !== undefined) ? main[0]['attributes']['draggable']['specified'] : false;
+					elem.style = {
+						width : main[0]['style']['width'],
+						height : main[0]['style']['height'],
+						backgroundColor : main[0]['style']['background-color']
+					};
+
+					// add textBlock text to store
+					if (elem.class.indexOf("toolTextBlock") > -1) {
+						elem.data = main[0]['innerText'];
+					}
 
 					// if have children - create it struct
 					if(main[0]['childElementCount']) {
 						elem.child = loop($(main[0].firstElementChild).toArray());
 					}
 					rslt.push(elem);
-					console.log(rslt);
-				} while (main = main.nextSibling);
 
-				return elem;
+					if (main[0]['nextElementSibling'] != null) {
+						main = $(main[0]['nextSibling']);
+					} else { loopContinue = false;}
+
+				} while (loopContinue);
+
+				return rslt;
 			}
 
 			result = loop(main);
@@ -57,13 +77,12 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 		var template;
 
 		template = $("#page");
-
 		console.log(template);
-
 		template = make_json(template);
+		template = template[0];
 
 		//send template to server
-		console.log(template);
+		console.log('send this template to server: ', template);
 	}
 
 
@@ -83,7 +102,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 
 		$http.get('/data/textBlockTool.json').success(function(data) {
 			tool = data;
-			tool.color = color;
+			tool.style.color = color;
 			renderTool(tool);
 		}).
 		error(function(data, status, headers, config) {

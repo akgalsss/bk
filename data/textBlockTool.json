@@ -1,6 +1,11 @@
-{
-	"width"  : "250px",
-	"height" : "120px",
-	"data"   : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, corporis!",
-	"class"  : "toolTextBlock"
+{  
+  "tagName":"DIV",
+  "id":"",
+  "class":"toolTextBlock ng-scope",
+  "draggable":true,
+  "style":{  
+    "width":"250px",
+    "height":"120px"
+  },
+  "data":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, corporis!"
 }
