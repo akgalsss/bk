@@ -19,15 +19,38 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 	}
 
 
-	// create json object 
-	var make_json = function (obj) {
-		var result_obj = {}; 
+	// /* create json object */
 
+	var make_json = function (obj) {
+		var result_obj = {};
+
+		// make clone obj to prevent refence links
+		function make_clone_obj(source) {
+			if (Object.prototype.toString.call(source) === '[object Array]') {
+				var clone = [];
+				for (var i=0; i<source.length; i++) {
+					clone[i] = make_clone_obj(source[i]);
+				}
+				return clone;
+			} else if (typeof(source)=="object") {
+				var clone = {};
+				for (var prop in source) {
+					if (source.hasOwnProperty(prop)) {
+						clone[prop] = make_clone_obj(source[prop]);
+					}
+				}
+				return clone;
+			} else {
+				return source;
+			}
+		}
+
+		// iterate through object and create it struct
 		function itarate_object(main) {
 			var result = {}, loop;
 
 			loop = function(main) {
-				var elem = {}, rslt = [], loopContinue = true;
+				var elempush, elem = Object.create({}), rslt = [], loopContinue = true;
 				
 				do {
 					// set needed values of obj
@@ -50,7 +73,9 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 					if(main[0]['childElementCount']) {
 						elem.child = loop($(main[0].firstElementChild).toArray());
 					}
-					rslt.push(elem);
+
+					elempush = make_clone_obj(elem);
+					rslt.push(elempush);
 
 					if (main[0]['nextElementSibling'] != null) {
 						main = $(main[0]['nextSibling']);
@@ -77,17 +102,17 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 		var template;
 
 		template = $("#page");
-		console.log(template);
 		template = make_json(template);
 		template = template[0];
 
 		//send template to server
-		console.log('send this template to server: ', template);
+		console.log('Send this template to server: ', template);
 	}
 
 
-	// tools function
+	// /* tools function */
 
+	//text tool
 	$scope.toolTextBlock = function () {
 		var tool = {} ;
 
@@ -110,7 +135,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 		});;
 	}
 
-
+	// image tool
 	$scope.toolImageBlock = function () {
 		var tool = {} ;
 
