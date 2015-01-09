@@ -7,5 +7,5 @@
     "width":"140px",
     "height":"140px"
   },
-  "data":"<img draggable src='http://lorempixel.com/140/140/' width='140' height='140' alt='Lorem Pixel Image'/>"
+  "data":"<img draggable src='http://lorempixel.com/140/140/' class='toolImageBlock ng-scope' width='140' height='140' alt='Lorem Pixel Image'/>"
 }

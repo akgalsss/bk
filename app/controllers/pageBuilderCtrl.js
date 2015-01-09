@@ -50,9 +50,13 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 			var result = {}, loop;
 
 			loop = function(main) {
-				var elempush, elem = Object.create({}), rslt = [], loopContinue = true;
+				var elempush, rslt = [], loopContinue = true;
 				
 				do {
+					var elem = {};
+
+					//console.log("main_obj:",main);
+
 					// set needed values of obj
 					elem.tagName = main[0]['nodeName'];
 					elem.id = main[0]['id'];
@@ -69,6 +73,11 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 						elem.data = main[0]['innerText'];
 					}
 
+					// add textBlock text to store
+					if (elem.class.indexOf("toolImageBlock") > -1) {
+						elem.data = main[0]['outerHTML'];
+					}
+
 					// if have children - create it struct
 					if(main[0]['childElementCount']) {
 						elem.child = loop($(main[0].firstElementChild).toArray());
@@ -76,6 +85,9 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 
 					elempush = make_clone_obj(elem);
 					rslt.push(elempush);
+
+					// clear prev version of obj
+					elem = undefined;
 
 					if (main[0]['nextElementSibling'] != null) {
 						main = $(main[0]['nextSibling']);
