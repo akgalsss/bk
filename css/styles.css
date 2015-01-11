@@ -20,6 +20,11 @@
 	width: 50px;
 }
 
+.toolItem.save {
+	background-color: #FF0;
+	color: #000;
+}
+
 
 
 /* Page Styles */

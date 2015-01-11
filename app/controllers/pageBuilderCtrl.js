@@ -1,24 +1,5 @@
 function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 
-	// render and display tool 
-	var renderTool = function (tool) {
-
-		var page = $('#page'), template = " ", style =" ", attributes = " ";
-
-		attributes = (tool.draggable) ? attributes+" draggable" : attributes;
-		style = "background-color: "+((tool.style.color)?tool.style.color:"")+"; width:"+tool.style.width+"; height: "
-			+tool.style.height;
-
-		if (tool.class.indexOf("toolImageBlock") > -1) {
-			template = tool.data 
-		} else {
-			template = "<"+tool.tagName+attributes+" class='"+tool.class+"' style='"+style+"''>"+tool.data+"</"+tool.tagName+">";
-		}
-
-		angular.element(page).append($compile(template)($scope));
-	}
-
-
 	// /* create json object */
 
 	var make_json = function (obj) {
@@ -54,8 +35,6 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 				
 				do {
 					var elem = {};
-
-					//console.log("main_obj:",main);
 
 					// set needed values of obj
 					elem.tagName = main[0]['nodeName'];
@@ -117,6 +96,9 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 		template = make_json(template);
 		template = template[0];
 
+		//create string from json obj
+		//template = JSON.stringify(template);
+
 		//send template to server
 		console.log('Send this template to server: ', template);
 	}
@@ -124,36 +106,63 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 
 	// /* tools function */
 
+	// append rendered tool to page and display
+	var appendRenderedToolToPage = function (tool) {
+
+		var page = $('#page');
+		angular.element(page).append($compile(tool)($scope));
+	}
+
+
 	//text tool
+
+	// render and display tool 
+	var renderTextBlockTool = function (tool) {
+
+		var template = " ", style =" ", attributes = " ";
+
+		attributes = (tool.draggable) ? attributes+" draggable" : attributes;
+
+		style = ((tool.style.backgroundColor)?"background-color: "+tool.style.backgroundColor +"; ":"");
+		style += " width:"+tool.style.width+"; ";
+		style += " height: "+tool.style.height+"; ";
+		style += " padding:"+tool.style.padding+"; ";
+		style += " border: "+tool.style.border+"; ";
+
+		template = "<"+tool.tagName+" class='"+tool.class+"'"+attributes;
+		template +=" style='"+style+"'>"+tool.data+"</"+tool.tagName+">";
+
+		return template;
+	}
+
 	$scope.toolTextBlock = function () {
 		var tool = {} ;
 
-		//--  mockup color generator
-		var letters = '0123456789ABCDEF'.split(''),
-			color = '#';
-
-		for (var i = 0; i < 6; i++ ) {
-			color += letters[Math.floor(Math.random() * 16)];
-		} 
-		//-- end mockup
-
 		$http.get('/data/textBlockTool.json').success(function(data) {
 			tool = data;
-			tool.style.color = color;
-			renderTool(tool);
+			tool = renderTextBlockTool(tool);
+			appendRenderedToolToPage (tool);
 		}).
 		error(function(data, status, headers, config) {
 			console.log("BK_ERR: get text tool data - ", status);
 		});;
 	}
 
+
 	// image tool
+	// render and display tool 
+	var renderImageBlockTool = function (tool) {
+
+		return tool.data;
+	}
+
 	$scope.toolImageBlock = function () {
 		var tool = {} ;
 
 		$http.get('/data/imageBlockTool.json').success(function(data) {
 			tool = data;
-			renderTool(tool);
+			tool = renderImageBlockTool(tool);
+			appendRenderedToolToPage (tool);
 		}).
 		error(function(data, status, headers, config) {
 			console.log("BK_ERR: get image tool data - ", status);
