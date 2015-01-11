@@ -24,7 +24,7 @@ pageBuilder.directive('draggable', ['$document', function($document) {
 
 			element.css({
 				top: y + 'px',
-				left:  x + 'px'
+				left: x + 'px'
 			});
 		}
 
@@ -34,6 +34,8 @@ pageBuilder.directive('draggable', ['$document', function($document) {
 		}
 
 		element.bind("dblclick", function() {
+			angular.element(".ng-scope").removeClass("activeTool");
+			element.addClass("activeTool");
 			scope.showPropPanel();
 		});
 	};
@@ -98,7 +100,7 @@ pageBuilder.directive("propTable", function($compile){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<table><tr><td class='prop'>Width:</td><td class='value'>160</td></tr><tr><td class='prop'>Height:</td><td class='value'>120</td></tr></table>",
+		template: "<table id='propTable'></table>",
 	}
 });
 

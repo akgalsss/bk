@@ -107,6 +107,27 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 
 	// show panel with properties
 	$scope.showPropPanel = function () {
+
+		var propTable = angular.element('#propTable'), activeTool = angular.element('.activeTool'), rows;
+
+		activeTool = angular.element(activeTool).toArray();
+
+		console.log(activeTool);
+
+
+		if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolTextBlock") > -1) {
+			rows = "<tr><td class='prop'>width:</td><td class='value'>"+activeTool[0]['style']['width']+"</td></tr>";
+			rows += "<tr><td class='prop'>height:</td><td class='value'>"+activeTool[0]['style']['height']+"</td></tr>";
+			rows += "<tr><td class='prop'>backgroundColor:</td><td class='value'>"+activeTool[0]['style']['background-color']+"</td></tr>";
+		}
+
+		if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolImageBlock") > -1) {
+			rows = "<tr><td class='prop'>width:</td><td class='value'>"+activeTool[0]['width']+"</td></tr>";
+			rows += "<tr><td class='prop'>height:</td><td class='value'>"+activeTool[0]['height']+"</td></tr>";
+		}
+
+		angular.element(propTable).html($compile(rows)($scope));
+
 		sharedData.showPropPanel = true;
 		$scope.$apply();
 	}
@@ -132,9 +153,9 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 	// render and display tool 
 	var renderTextBlockTool = function (tool) {
 
-		var template = " ", style =" ", attributes = " ";
+		var template, style, attributes;
 
-		attributes = (tool.draggable) ? attributes+" draggable" : attributes;
+		attributes = (tool.draggable) ? " draggable" : " ";
 
 		style = ((tool.style.backgroundColor)?"background-color: "+tool.style.backgroundColor +"; ":"");
 		style += " width:"+tool.style.width+"; ";

@@ -3,5 +3,5 @@
   "id":"",
   "class":"toolImageBlock ng-scope",
   "draggable":true,
-  "data":"<img draggable=\"\" src=\"http://lorempixel.com/140/140/\" class=\"toolImageBlock ng-scope\" width=\"140\" height=\"140\" alt=\"Lorem Pixel Image\" style=\"position: relative; cursor: pointer;\">"
+  "data":"<img draggable src='http://lorempixel.com/140/140/' class='toolImageBlock ng-scope' width='140' height='140' alt='Lorem Pixel Image' style='position: relative; cursor: pointer;'>"
 }
