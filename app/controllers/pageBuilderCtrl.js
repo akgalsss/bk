@@ -1,4 +1,4 @@
-function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
+function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 
 	// /* create json object */
 
@@ -103,6 +103,17 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 
 		//send template to server
 		console.log('Send this template to server: ', template);
+	}
+
+	// show panel with properties
+	$scope.showPropPanel = function () {
+		sharedData.showPropPanel = true;
+		$scope.$apply();
+	}
+
+	// hide panel with properties
+	$scope.hidePropPanel = function () {
+		sharedData.showPropPanel = false;
 	}
 
 

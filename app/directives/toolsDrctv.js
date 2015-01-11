@@ -32,6 +32,10 @@ pageBuilder.directive('draggable', ['$document', function($document) {
 			$document.off('mousemove', mousemove);
 			$document.off('mouseup', mouseup);
 		}
+
+		element.bind("dblclick", function() {
+			scope.showPropPanel();
+		});
 	};
 }]);
 

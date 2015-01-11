@@ -27,7 +27,7 @@
 
 
 /* Properties Panel */
-#propertiesPanel {
+#propPanel {
 	background: #fff;
 	border: 1px solid;
 	bottom: 0;
@@ -40,16 +40,26 @@
 	z-index: 100;
 }
 
-#propertiesPanel.active {
+#propPanel.active {
 	display: block;
 }
 
-#propertiesPanel table {
+#propPanel table {
 	margin-bottom: 0px;
 }
 
-#propertiesPanel .prop {
+#propPanel .prop {
 	color: #888;
+}
+
+#propPanel .close_button {
+	font-weight: bold;
+	float: right;
+	cursor: pointer;
+}
+
+#propPanel .close_button:hover {
+	font-weight: normal;
 }
 
 

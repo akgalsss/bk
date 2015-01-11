@@ -12,3 +12,7 @@ var pageBuilder = angular
 		});
 
 	}]);
+
+pageBuilder.factory('sharedData', function () {
+	return { showPropPanel : false };
+});
