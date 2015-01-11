@@ -32,7 +32,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 
 			loop = function(main) {
 				var elempush, rslt = [], loopContinue = true;
-				
+
 				do {
 					var elem = {};
 
@@ -49,6 +49,8 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 
 					// add textBlock text to store
 					if (elem.class.indexOf("toolTextBlock") > -1) {
+						elem.style.padding = main[0]['style']['padding'];
+						elem.style.border = main[0]['style']['border'];
 						elem.data = main[0]['innerText'];
 					}
 
@@ -59,7 +61,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 
 					// if have children - create it struct
 					if(main[0]['childElementCount']) {
-						elem.child = loop($(main[0].firstElementChild).toArray());
+						elem.child = loop(angular.element(main[0].firstElementChild).toArray());
 					}
 
 					elempush = make_clone_obj(elem);
@@ -69,7 +71,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 					elem = undefined;
 
 					if (main[0]['nextElementSibling'] != null) {
-						main = $(main[0]['nextSibling']);
+						main = angular.element(main[0]['nextSibling']);
 					} else { loopContinue = false;}
 
 				} while (loopContinue);
@@ -82,8 +84,8 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 			return result;
 		}
 
-		result_obj = itarate_object($(obj).toArray());
-		
+		result_obj = itarate_object(angular.element(obj).toArray());
+
 		return result_obj;
 	}
 
@@ -92,12 +94,12 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 	$scope.save = function () {
 		var template;
 
-		template = $("#page");
+		template = angular.element("#page");
 		template = make_json(template);
 		template = template[0];
 
 		//create string from json obj
-		//template = JSON.stringify(template);
+		template = JSON.stringify(template);
 
 		//send template to server
 		console.log('Send this template to server: ', template);
@@ -109,7 +111,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http) {
 	// append rendered tool to page and display
 	var appendRenderedToolToPage = function (tool) {
 
-		var page = $('#page');
+		var page = angular.element('#page');
 		angular.element(page).append($compile(tool)($scope));
 	}
 

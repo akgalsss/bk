@@ -38,7 +38,7 @@ pageBuilder.directive('draggable', ['$document', function($document) {
 
 // save directive functionality. Use: <save></save>
 pageBuilder.directive("save", function($compile){
-	var linkFn = function(scope, element, attrs) {       
+	var linkFn = function(scope, element, attrs) {
 		
 		element.bind("click", function() {
 			scope.save();
@@ -55,7 +55,7 @@ pageBuilder.directive("save", function($compile){
 
 // text tool directive functionality. Use: <text-tool></text-tool>
 pageBuilder.directive("textTool", function($compile){
-	var linkFn = function(scope, element, attrs) {       
+	var linkFn = function(scope, element, attrs) {
 		
 		element.bind("click", function() {
 			scope.toolTextBlock();
@@ -72,7 +72,7 @@ pageBuilder.directive("textTool", function($compile){
 
 // image tool directive functionality. Use: <image-tool></image-tool>
 pageBuilder.directive("imageTool", function($compile){
-	var linkFn = function(scope, element, attrs) {       
+	var linkFn = function(scope, element, attrs) {
 		
 		element.bind("click", function() {
 			scope.toolImageBlock();
@@ -83,6 +83,18 @@ pageBuilder.directive("imageTool", function($compile){
 		link: linkFn,
 		restrict: "E",
 		template: "<button class='toolItem imageTool'>I</button>",
+	}
+});
+
+
+// properties table directive functionality. Use: <prop-table></prop-table>
+pageBuilder.directive("propTable", function($compile){
+	var linkFn = function(scope, element, attrs) { };
+
+	return {
+		link: linkFn,
+		restrict: "E",
+		template: "<table><tr><td class='prop'>Width:</td><td class='value'>160</td></tr><tr><td class='prop'>Height:</td><td class='value'>120</td></tr></table>",
 	}
 });
 

@@ -1,10 +1,10 @@
-/* Tool palete styles */
-#toolPalete {
+/* Tools panel styles */
+#toolsPanel {
 	background: #fff;
 	border: 1px solid;
 	margin-left: 10px;
 	margin-top: 10px;
-	padding: 7px;
+	padding: 8px;
 	position: absolute;
 	width: 66px;
 	z-index: 100;
@@ -23,6 +23,33 @@
 .toolItem.save {
 	background-color: #FF0;
 	color: #000;
+}
+
+
+/* Properties Panel */
+#propertiesPanel {
+	background: #fff;
+	border: 1px solid;
+	bottom: 0;
+	display: none;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	padding: 8px;
+	position: absolute;
+	width: 134px;
+	z-index: 100;
+}
+
+#propertiesPanel.active {
+	display: block;
+}
+
+#propertiesPanel table {
+	margin-bottom: 0px;
+}
+
+#propertiesPanel .prop {
+	color: #888;
 }
 
 
