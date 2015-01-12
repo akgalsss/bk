@@ -6,7 +6,12 @@ var pageBuilder = angular
 			templateUrl: '/views/pageBuilderView.html',
 			controller: 'pageBuilderCtrl',
 		});
-		
+
+		$routeProvider.when('/page', {
+			templateUrl: '/views/pageView.html',
+			controller: 'pageCtrl',
+		});
+
 		$routeProvider.otherwise({
 			redirectTo: '/'
 		});

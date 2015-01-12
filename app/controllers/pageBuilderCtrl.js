@@ -179,7 +179,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 		}).
 		error(function(data, status, headers, config) {
 			console.log("BK_ERR: get text tool data - ", status);
-		});;
+		});
 	}
 
 
