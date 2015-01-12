@@ -96,7 +96,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 
 		template = angular.element("#page");
 		template = make_json(template);
-		template = template[0];
+		//template = template[0];
 
 		//create string from json obj
 		template = JSON.stringify(template);

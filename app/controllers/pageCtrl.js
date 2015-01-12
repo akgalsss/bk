@@ -14,13 +14,40 @@ function pageCtrl($scope, $http) {
 	// render page
 	var renderPage = function (data) {
 
-		for (var p in data) {
-			if( data.hasOwnProperty(p) ) {
-				console.log(p, data[p]);
+		createElem = function (pageData, parent) {
+			while (elemData = pageData.shift()) {
+				console.log("currenElemData", elemData);
+				console.log("pageArray", pageData);
+
+				var elem = document.createElement(elemData['tagName']); 
+
+				elem.setAttribute('id', elemData['id']);
+				elem.setAttribute('class', elemData['class']);
+				(elemData['dragable'] == true) ? elem.setAttribute('dragable') : "";
+
+				// add textBlock text to store
+				if (elemData['class'].indexOf("toolTextBlock") > -1) {
+					elem.appendChild(document.createTextNode(elemData['data']));
+				}
+
+				// add textBlock text to store
+				if (elemData['class'].indexOf("toolImageBlock") > -1) {
+					elem.innerHTML = elemData['data'];
+				}
+
+				console.log("elemAppend", elem);
+				parent.appendChild(elem);
+
+				if (elemData['child'].length > 0 ) {
+					console.log("go_child");
+					createElem(elem['child'], elem);
+				}
+
 			}
 		}
 
-		console.log(data);
+		document.body.innerHTML = "";
+		createElem(data, document.body);
 	}
 
 	$scope.$on('$viewContentLoaded', function(){
