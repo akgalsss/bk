@@ -16,8 +16,6 @@ function pageCtrl($scope, $http) {
 
 		createElem = function (pageData, parent) {
 			while (elemData = pageData.shift()) {
-				console.log("currenElemData", elemData);
-				console.log("pageArray", pageData);
 
 				var elem = document.createElement(elemData['tagName']); 
 
@@ -28,19 +26,23 @@ function pageCtrl($scope, $http) {
 				// add textBlock text to store
 				if (elemData['class'].indexOf("toolTextBlock") > -1) {
 					elem.appendChild(document.createTextNode(elemData['data']));
+					elem.style.width = elemData['style']['width'];
+					elem.style.height = elemData['style']['height'];
+					elem.style.backgroundColor = elemData['style']['backgroundColor'];
+					elem.style.padding = elemData['style']['padding'];
+					elem.style.border = elemData['style']['border'];
 				}
 
 				// add textBlock text to store
 				if (elemData['class'].indexOf("toolImageBlock") > -1) {
-					elem.innerHTML = elemData['data'];
+					elem = elemData['data'];
+					continue;
 				}
 
-				console.log("elemAppend", elem);
 				parent.appendChild(elem);
 
-				if (elemData['child'].length > 0 ) {
-					console.log("go_child");
-					createElem(elem['child'], elem);
+				if (elemData['child']) {
+					createElem(elemData['child'], elem);
 				}
 
 			}
