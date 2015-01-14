@@ -51,10 +51,12 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 					if (elem.class.indexOf("toolTextBlock") > -1) {
 						elem.style.padding = main[0]['style']['padding'];
 						elem.style.border = main[0]['style']['border'];
+						elem.style.top = main[0]['style']['top'];
+						elem.style.left = main[0]['style']['left'];
 						elem.data = main[0]['innerText'];
 					}
 
-					// add textBlock text to store
+					// add imageBlock data to store
 					if (elem.class.indexOf("toolImageBlock") > -1) {
 						elem.data = main[0]['outerHTML'];
 					}

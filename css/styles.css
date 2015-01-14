@@ -75,6 +75,7 @@
 
 .toolTextBlock {
 	background-color: #f00;
+	position: relative;
 }
 
 .toolImageBlock {

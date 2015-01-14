@@ -17,7 +17,30 @@ function pageCtrl($scope, $http) {
 		createElem = function (pageData, parent) {
 			while (elemData = pageData.shift()) {
 
-				var elem = document.createElement(elemData['tagName']); 
+				var elem;
+
+				// add imageBlock text to store
+				if (elemData['class'].indexOf("toolImageBlock") > -1) {
+
+					var str2DOMElement = function(html) {
+						var frame = document.createElement('iframe');
+						frame.style.display = 'none';
+						document.body.appendChild(frame);
+						frame.contentDocument.open();
+						frame.contentDocument.write(html);
+						frame.contentDocument.close();
+						var el = frame.contentDocument.body.firstChild;
+						document.body.removeChild(frame);
+						return el;
+					}
+
+					elem = str2DOMElement(elemData['data']);
+
+					parent.appendChild(elem);
+					continue;
+				}
+
+				elem = document.createElement(elemData['tagName']); 
 
 				elem.setAttribute('id', elemData['id']);
 				elem.setAttribute('class', elemData['class']);
@@ -31,12 +54,8 @@ function pageCtrl($scope, $http) {
 					elem.style.backgroundColor = elemData['style']['backgroundColor'];
 					elem.style.padding = elemData['style']['padding'];
 					elem.style.border = elemData['style']['border'];
-				}
-
-				// add textBlock text to store
-				if (elemData['class'].indexOf("toolImageBlock") > -1) {
-					elem = elemData['data'];
-					continue;
+					elem.style.top = elemData['style']['top'];
+					elem.style.left = elemData['style']['left'];
 				}
 
 				parent.appendChild(elem);
@@ -55,6 +74,5 @@ function pageCtrl($scope, $http) {
 	$scope.$on('$viewContentLoaded', function(){
 		getPageData();
 	});
-
 
 }
