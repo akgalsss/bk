@@ -98,13 +98,18 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 
 		template = angular.element("#page");
 		template = make_json(template);
-		//template = template[0];
 
 		//create string from json obj
 		template = JSON.stringify(template);
 
 		//send template to server
-		console.log('Send this template to server: ', template);
+		$http.post('save.php', {template: template}).
+			success(function(data, status, headers, config) {
+				console.log("BK_INFO: page saved ");
+			}).
+			error(function(data, status, headers, config) {
+				console.log("BK_ERR: save data - ", status);
+			});
 	}
 
 	// show panel with properties
@@ -116,16 +121,20 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 
 		console.log(activeTool);
 
+		var createPropertyRow = function (prop, val) {
+			return "<tr><td class='prop'>"+prop+":</td><td class='value'>"+val+"</td></tr>";
+		}
+
 
 		if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolTextBlock") > -1) {
-			rows = "<tr><td class='prop'>width:</td><td class='value'>"+activeTool[0]['style']['width']+"</td></tr>";
-			rows += "<tr><td class='prop'>height:</td><td class='value'>"+activeTool[0]['style']['height']+"</td></tr>";
-			rows += "<tr><td class='prop'>backgroundColor:</td><td class='value'>"+activeTool[0]['style']['background-color']+"</td></tr>";
+			rows = createPropertyRow("width",activeTool[0]['style']['width']);
+			rows += createPropertyRow("height",activeTool[0]['style']['height']);
+			rows += createPropertyRow("backgroundColor",activeTool[0]['style']['background-color']);
 		}
 
 		if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolImageBlock") > -1) {
-			rows = "<tr><td class='prop'>width:</td><td class='value'>"+activeTool[0]['width']+"</td></tr>";
-			rows += "<tr><td class='prop'>height:</td><td class='value'>"+activeTool[0]['height']+"</td></tr>";
+			rows = createPropertyRow("width",activeTool[0]['width']);
+			rows += createPropertyRow("height",activeTool[0]['height']);
 		}
 
 		angular.element(propTable).html($compile(rows)($scope));

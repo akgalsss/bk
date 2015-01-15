@@ -44,7 +44,6 @@ function pageCtrl($scope, $http) {
 
 				elem.setAttribute('id', elemData['id']);
 				elem.setAttribute('class', elemData['class']);
-				(elemData['dragable'] == true) ? elem.setAttribute('dragable') : "";
 
 				// add textBlock text to store
 				if (elemData['class'].indexOf("toolTextBlock") > -1) {
