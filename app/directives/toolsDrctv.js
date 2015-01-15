@@ -54,7 +54,24 @@ pageBuilder.directive("save", function($compile){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='toolItem save'>S</button>",
+		template: "<button class='toolItem save' title='Save results'>S</button>",
+	}
+});
+
+
+// show page directive. Use: <show-page></show-page>
+pageBuilder.directive("showPage", function($compile){
+	var linkFn = function(scope, element, attrs) {
+		
+		element.bind("click", function() {
+			scope.save();
+		});
+	};
+	
+	return {
+		link: linkFn,
+		restrict: "E",
+		template: "<a href='#/page' target='_blank'><button class='toolItem show_page' title='View result page'>V</button></a>",
 	}
 });
 
@@ -71,7 +88,7 @@ pageBuilder.directive("textTool", function($compile){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='toolItem textTool'>T</button>",
+		template: "<button class='toolItem textTool' title='Add Text Block'>T</button>",
 	}
 });
 
@@ -88,7 +105,7 @@ pageBuilder.directive("imageTool", function($compile){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='toolItem imageTool'>I</button>",
+		template: "<button class='toolItem imageTool' title='Add Image'>I</button>",
 	}
 });
 
