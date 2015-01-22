@@ -1,4 +1,4 @@
-function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
+function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ) {
 
 	// /* create json object */
 
@@ -7,21 +7,29 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 
 		// make clone obj to prevent refence links
 		function make_clone_obj(source) {
+
 			if (Object.prototype.toString.call(source) === '[object Array]') {
 				var clone = [];
+
 				for (var i=0; i<source.length; i++) {
+
 					clone[i] = make_clone_obj(source[i]);
 				}
+
 				return clone;
 			} else if (typeof(source)=="object") {
 				var clone = {};
+
 				for (var prop in source) {
+
 					if (source.hasOwnProperty(prop)) {
 						clone[prop] = make_clone_obj(source[prop]);
 					}
 				}
+
 				return clone;
 			} else {
+
 				return source;
 			}
 		}
@@ -112,49 +120,13 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 			});
 	}
 
-	// show panel with properties
-	$scope.showPropPanel = function () {
-
-		var propTable = angular.element('#propTable'), activeTool = angular.element('.activeTool'), rows;
-
-		activeTool = angular.element(activeTool).toArray();
-
-		console.log(activeTool);
-
-		var createPropertyRow = function (prop, val) {
-			return "<tr><td class='prop'>"+prop+":</td><td class='value'>"+val+"</td></tr>";
-		}
-
-
-		if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolTextBlock") > -1) {
-			rows = createPropertyRow("width",activeTool[0]['style']['width']);
-			rows += createPropertyRow("height",activeTool[0]['style']['height']);
-			rows += createPropertyRow("backgroundColor",activeTool[0]['style']['background-color']);
-		}
-
-		if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolImageBlock") > -1) {
-			rows = createPropertyRow("width",activeTool[0]['width']);
-			rows += createPropertyRow("height",activeTool[0]['height']);
-		}
-
-		angular.element(propTable).html($compile(rows)($scope));
-
-		sharedData.showPropPanel = true;
-		$scope.$apply();
-	}
-
-	// hide panel with properties
-	$scope.hidePropPanel = function () {
-		sharedData.showPropPanel = false;
-	}
-
 
 	// /* tools function */
 
 	// append rendered tool to page and display
 	var appendRenderedToolToPage = function (tool) {
-
 		var page = angular.element('#page');
+
 		angular.element(page).append($compile(tool)($scope));
 	}
 
@@ -163,7 +135,6 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 
 	// render and display tool 
 	var renderTextBlockTool = function (tool) {
-
 		var template, style, attributes;
 
 		attributes = (tool.draggable) ? " draggable" : " ";
@@ -173,6 +144,8 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 		style += " height: "+tool.style.height+"; ";
 		style += " padding:"+tool.style.padding+"; ";
 		style += " border: "+tool.style.border+"; ";
+		style += " top: 20px; ";
+		style += " left: 40px ; ";
 
 		template = "<"+tool.tagName+" class='"+tool.class+"'"+attributes;
 		template +=" style='"+style+"'>"+tool.data+"</"+tool.tagName+">";
@@ -181,7 +154,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 	}
 
 	$scope.toolTextBlock = function () {
-		var tool = {} ;
+		var tool = {};
 
 		$http.get('/data/textBlockTool.json').success(function(data) {
 			tool = data;
@@ -195,6 +168,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 
 
 	// image tool
+
 	// render and display tool 
 	var renderImageBlockTool = function (tool) {
 
@@ -202,7 +176,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, sharedData) {
 	}
 
 	$scope.toolImageBlock = function () {
-		var tool = {} ;
+		var tool = {};
 
 		$http.get('/data/imageBlockTool.json').success(function(data) {
 			tool = data;

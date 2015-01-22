@@ -1,5 +1,5 @@
 // made element draggabele. Use: <element dragable></element>
-pageBuilder.directive('draggable', ['$document', function($document) {
+pageBuilder.directive('draggable', ['$document', 'propPanelServ', function($document, propPanelServ) {
 	return function(scope, element, attr) {
 		var startX = 0, startY = 0, x = 0, y = 0;
 
@@ -35,8 +35,11 @@ pageBuilder.directive('draggable', ['$document', function($document) {
 
 		element.bind("dblclick", function() {
 			angular.element(".ng-scope").removeClass("activeTool");
+			propPanelServ.hidePropPanel();
+			scope.$apply();
 			element.addClass("activeTool");
-			scope.showPropPanel();
+			propPanelServ.showPropPanel();
+			scope.$apply();
 		});
 	};
 }]);

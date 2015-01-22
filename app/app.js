@@ -18,6 +18,20 @@ var pageBuilder = angular
 
 	}]);
 
-pageBuilder.factory('sharedData', function () {
-	return { showPropPanel : false };
+
+pageBuilder.service('propPanelServ', function () {
+	this.isActive = false;
+
+	this.hidePropPanel = function () {
+		this.isActive = false;
+	}
+
+	this.showPropPanel = function () {
+		this.isActive = true;
+	}
+
+	this.checkIsActive = function () {
+		return this.isActive;
+	}
+
 });
