@@ -50,8 +50,8 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 					elem.class = main[0]['attributes']['class']['nodeValue'];
 					elem.draggable = (main[0]['attributes']['draggable'] !== undefined) ? main[0]['attributes']['draggable']['specified'] : false;
 					elem.style = {
-						width : main[0]['style']['width'],
-						height : main[0]['style']['height'],
+						width : parseInt(main[0]['style']['width']),
+						height : parseInt(main[0]['style']['height']),
 						backgroundColor : main[0]['style']['background-color']
 					};
 

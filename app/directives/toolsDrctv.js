@@ -35,8 +35,6 @@ pageBuilder.directive('draggable', ['$document', 'propPanelServ', function($docu
 
 		element.bind("dblclick", function() {
 			angular.element(".ng-scope").removeClass("activeTool");
-			propPanelServ.hidePropPanel();
-			scope.$apply();
 			element.addClass("activeTool");
 			propPanelServ.showPropPanel();
 			scope.$apply();

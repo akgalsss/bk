@@ -17,21 +17,3 @@ var pageBuilder = angular
 		});
 
 	}]);
-
-
-pageBuilder.service('propPanelServ', function () {
-	this.isActive = false;
-
-	this.hidePropPanel = function () {
-		this.isActive = false;
-	}
-
-	this.showPropPanel = function () {
-		this.isActive = true;
-	}
-
-	this.checkIsActive = function () {
-		return this.isActive;
-	}
-
-});
