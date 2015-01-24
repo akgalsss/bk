@@ -10,6 +10,9 @@ function propPanelCtrl($scope, $compile, propPanelServ) {
 		propPanelServ.hidePropPanel();
 	}
 
+	// active tool model
+	$scope.activeToolModel = {};
+
 
 	// show panel with properties
 	$scope.showPropPanel = function () {
@@ -23,7 +26,7 @@ function propPanelCtrl($scope, $compile, propPanelServ) {
 			inputType = inputType || 'text';
 			min = (inputType == 'number') ? "min='50'" : "";
 
-			return "<tr><td class='prop'>"+prop+":</td><td class='value'><input ng-change='updatePageView(\"width\")' type='"+inputType+"' "+min+" value='"+val+"'/></td></tr>";
+			return "<tr><td class='prop'>"+prop+":</td><td class='value'><input ng-model='activeToolModel."+prop+"' ng-change='updatePageView(\""+prop+"\")' type='"+inputType+"' "+min+" value='"+val+"'/></td></tr>";
 		}
 
 
@@ -45,14 +48,22 @@ function propPanelCtrl($scope, $compile, propPanelServ) {
 		activeTool = activeTool.toArray();
 
 		if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolTextBlock") > -1) {
-			rows = createPropertyRow("width",parseInt(activeTool[0]['style']['width']), 'number');
-			rows += createPropertyRow("height",parseInt(activeTool[0]['style']['height']), 'number');
-			rows += createPropertyRow("backgroundColor",rgbStringToHex(activeTool[0]['style']['background-color']), 'color');
+			$scope.activeToolModel.width = parseInt(activeTool[0]['style']['width']);
+			rows = createPropertyRow("width",$scope.activeToolModel.width, 'number');
+
+			$scope.activeToolModel.height = parseInt(activeTool[0]['style']['height']);
+			rows += createPropertyRow("height",$scope.activeToolModel.height, 'number');
+
+			$scope.activeToolModel.backgroundColor = rgbStringToHex(activeTool[0]['style']['background-color']);
+			rows += createPropertyRow("backgroundColor",$scope.activeToolModel.backgroundColor, 'color');
 		}
 
 		if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolImageBlock") > -1) {
-			rows = createPropertyRow("width",activeTool[0]['width'], 'number');
-			rows += createPropertyRow("height",activeTool[0]['height'], 'number');
+			$scope.activeToolModel.width = parseInt(activeTool[0]['width']);
+			rows = createPropertyRow("width",$scope.activeToolModel.width, 'number');
+
+			$scope.activeToolModel.height = parseInt(activeTool[0]['height']);
+			rows += createPropertyRow("height",$scope.activeToolModel.height, 'number');
 		}
 
 		angular.element(propTable).html($compile(rows)($scope));
@@ -60,8 +71,12 @@ function propPanelCtrl($scope, $compile, propPanelServ) {
 	}
 
 	// update page when change style properth
-	$scope.updatePageView = function () {
+	$scope.updatePageView = function (propertyToUpdate) {
 		var activeTool = angular.element('.activeTool');
+
+		angular.element('.activeTool').css(propertyToUpdate, $scope.activeToolModel.propertyToUpdate);
+
+		console.log('call_update', activeTool, propertyToUpdate);
 	}
 
 
