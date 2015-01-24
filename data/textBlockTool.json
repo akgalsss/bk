@@ -6,7 +6,7 @@
   "style":{
     "width":"160px",
     "height":"120px",
-    "backgroundColor":"rgb(219, 238, 253)",
+    "backgroundColor":"#DBEEFD",
     "padding":"8px",
     "border":"1px solid"
   },
