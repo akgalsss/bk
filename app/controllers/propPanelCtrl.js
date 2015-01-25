@@ -74,9 +74,7 @@ function propPanelCtrl($scope, $compile, propPanelServ) {
 	$scope.updatePageView = function (propertyToUpdate) {
 		var activeTool = angular.element('.activeTool');
 
-		angular.element('.activeTool').css(propertyToUpdate, $scope.activeToolModel.propertyToUpdate);
-
-		console.log('call_update', activeTool, propertyToUpdate);
+			activeTool.css(propertyToUpdate, $scope.activeToolModel[propertyToUpdate]);
 	}
 
 
