@@ -48,8 +48,8 @@ function pageCtrl($scope, $http) {
 				// add textBlock text to store
 				if (elemData['class'].indexOf("toolTextBlock") > -1) {
 					elem.appendChild(document.createTextNode(elemData['data']));
-					elem.style.width = elemData['style']['width'];
-					elem.style.height = elemData['style']['height'];
+					elem.style['width'] = elemData['style']['width'] + "px";
+					elem.style.height = elemData['style']['height'] + "px";
 					elem.style.backgroundColor = elemData['style']['backgroundColor'];
 					elem.style.padding = elemData['style']['padding'];
 					elem.style.border = elemData['style']['border'];
