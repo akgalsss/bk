@@ -54,8 +54,14 @@ function propPanelCtrl($scope, $compile, propPanelServ) {
 			$scope.activeToolModel.height = parseInt(activeTool[0]['style']['height']);
 			rows += createPropertyRow("height",$scope.activeToolModel.height, 'number');
 
+			$scope.activeToolModel.color = rgbStringToHex(activeTool[0]['style']['color']);
+			rows += createPropertyRow("color",$scope.activeToolModel.color, 'color');
+
 			$scope.activeToolModel.backgroundColor = rgbStringToHex(activeTool[0]['style']['background-color']);
 			rows += createPropertyRow("backgroundColor",$scope.activeToolModel.backgroundColor, 'color');
+
+			$scope.activeToolModel.dataText = activeTool[0]['innerText'];
+			rows += createPropertyRow("dataText",$scope.activeToolModel.dataText);
 		}
 
 		if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolImageBlock") > -1) {
@@ -74,7 +80,12 @@ function propPanelCtrl($scope, $compile, propPanelServ) {
 	$scope.updatePageView = function (propertyToUpdate) {
 		var activeTool = angular.element('.activeTool');
 
+		// check if need update text - update text else update css
+		if (propertyToUpdate == "dataText") {
+			activeTool.html($scope.activeToolModel[propertyToUpdate]);
+		} else {
 			activeTool.css(propertyToUpdate, $scope.activeToolModel[propertyToUpdate]);
+		}
 	}
 
 

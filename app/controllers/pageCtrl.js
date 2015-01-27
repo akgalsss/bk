@@ -51,6 +51,7 @@ function pageCtrl($scope, $http) {
 					elem.style['width'] = elemData['style']['width'] + "px";
 					elem.style.height = elemData['style']['height'] + "px";
 					elem.style.backgroundColor = elemData['style']['backgroundColor'];
+					elem.style.color = elemData['style']['color'];
 					elem.style.padding = elemData['style']['padding'];
 					elem.style.border = elemData['style']['border'];
 					elem.style.top = elemData['style']['top'];

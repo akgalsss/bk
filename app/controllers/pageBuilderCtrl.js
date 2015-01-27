@@ -57,6 +57,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 
 					// add textBlock text to store
 					if (elem.class.indexOf("toolTextBlock") > -1) {
+						elem.style.color = main[0]['style']['color'],
 						elem.style.padding = main[0]['style']['padding'];
 						elem.style.border = main[0]['style']['border'];
 						elem.style.top = main[0]['style']['top'];
@@ -139,7 +140,8 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 
 		attributes = (tool.draggable) ? " draggable" : " ";
 
-		style = ((tool.style.backgroundColor)?"background-color: "+tool.style.backgroundColor +"; ":"");
+		style = ((tool.style.color)?"color: "+tool.style.color +"; ":"");
+		style += ((tool.style.backgroundColor)?"background-color: "+tool.style.backgroundColor +"; ":"");
 		style += " width:"+tool.style.width+"; ";
 		style += " height: "+tool.style.height+"; ";
 		style += " padding:"+tool.style.padding+"; ";
