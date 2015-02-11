@@ -81,8 +81,8 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 					// clear prev version of obj
 					elem = undefined;
 
-					if (main[0]['nextElementSibling'] != null) {
-						main = angular.element(main[0]['nextSibling']);
+					if ((main[0]['nextElementSibling'] != null )&&(main[0]['nextElementSibling']['id'].indexOf("right_panel") != 0)) {
+							main = angular.element(main[0]['nextSibling']);
 					} else { loopContinue = false;}
 
 				} while (loopContinue);
@@ -146,8 +146,6 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 		style += " height: "+tool.style.height+"; ";
 		style += " padding:"+tool.style.padding+"; ";
 		style += " border: "+tool.style.border+"; ";
-		style += " top: 20px; ";
-		style += " left: 40px ; ";
 
 		template = "<"+tool.tagName+" class='"+tool.class+"'"+attributes;
 		template +=" style='"+style+"'>"+tool.data+"</"+tool.tagName+">";

@@ -2,7 +2,6 @@
   "tagName":"DIV",
   "id":"",
   "class":"toolTextBlock ng-scope",
-  "draggable":true,
   "style":{
     "width":"160px",
     "height":"120px",

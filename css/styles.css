@@ -2,10 +2,8 @@
 #toolsPanel {
 	background: #fff;
 	border: 1px solid;
-	margin-left: 10px;
-	margin-top: 10px;
+	margin: 4px auto;
 	padding: 8px;
-	position: absolute;
 	width: 66px;
 	z-index: 100;
 }
@@ -42,11 +40,9 @@
 	border: 1px solid;
 	bottom: 0;
 	display: none;
-	margin-left: 10px;
-	margin-bottom: 10px;
+	margin: 4px auto;
 	padding: 8px;
-	position: absolute;
-	width: 254px;
+	width: 245px;
 	z-index: 100;
 }
 
@@ -54,47 +50,67 @@
 	display: block;
 }
 
-#propPanel table {
+#propPanel>table {
 	margin-bottom: 0px;
 	width: 100%;
 }
 
-#propPanel .prop {
+#propPanel>.prop {
 	color: #888;
 }
 
-#propPanel .close_button {
+#propPanel>.prop, #propPanel>.value {
+	padding: 2px;
+}
+
+#propPanel>.close_button {
 	font-weight: bold;
 	float: right;
 	cursor: pointer;
+	width: 100%;
+	text-align: right;
 }
 
-#propPanel .close_button:hover {
+#propPanel>.close_button:hover {
 	font-weight: normal;
 }
 
 input[type="text"] {
 	height: auto;
 	margin: 0;
-	width: 75px;
+	width: 100%;
 }
 
-
-
 /* Page Styles */
-.page_background {
-	background: #ccc;
+.page_wraper {
+	display: table;
 	min-height: 100%;
-	min-width: 100%;
+	overflow: hidden;
+	width: 100%;
+}
+
+#left_panel, #right_panel {
+	background-color: #375D81;
+	display: table-cell;
+	width: 14%;
+}
+
+.page_background {
+	background-color: #E1E6FA;
+	display: table-cell;
 	position: absolute;
+	width: 72%;
+}
+
+#page {
+	background: #183152;
 }
 
 .toolTextBlock {
-	background-color: #f00;
-	position: relative;
+	float:left;
 }
 
 .toolImageBlock {
-	background-color: #0000f0;
+	float:left;
 }
 

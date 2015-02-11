@@ -1,5 +1,5 @@
 // made element draggabele. Use: <element dragable></element>
-pageBuilder.directive('draggable', ['$document', 'propPanelServ', function($document, propPanelServ) {
+/*pageBuilder.directive('draggable', ['$document', 'propPanelServ', function($document, propPanelServ) {
 	return function(scope, element, attr) {
 		var startX = 0, startY = 0, x = 0, y = 0;
 
@@ -41,7 +41,7 @@ pageBuilder.directive('draggable', ['$document', 'propPanelServ', function($docu
 		});
 	};
 }]);
-
+*/
 
 // save directive functionality. Use: <save></save>
 pageBuilder.directive("save", function($compile){
