@@ -1,38 +1,36 @@
-// 3 rows template and content 2 column
-{
-  {
+[{
     "tagName":"DIV",
     "id" : "header",
-    "height" : "200px",
+    "height" : "50px",
     "width" : "100%",
-    "css" : "background-color: #f00;"
+    "css" : "background-color: #60B99A;"
   },
   {
     "tagName":"DIV",
     "id" : "content",
-    "height" : "auto",
+    "height" : "400px",
     "width" : "100%",
-    "css" : "background-color: #fff;",
+    "css" : "background-color: #F2E9E1;",
     "child" : [
       {
+        "tagName":"DIV",
         "id" : "content_left",
-        "height" : "auto",
-        "width" : "50%",
-        "css" : "background-color: #ff0;"
+        "height" : "100%",
+        "width" : "25%",
+        "css" : "background-color: #D3CE3D; float: left;"
       },
       {
         "tagName":"DIV",
         "id" : "content_right",
-        "height" : "auto",
-        "width" : "50%",
-        "css" : "background-color: #f0f;"
+        "height" : "100%",
+        "width" : "75%",
+        "css" : "background-color: #F1EFA5; float: left;"
       }]
   },
   {
     "tagName":"DIV",
     "id" : "foter",
-    "height" : "200px",
+    "height" : "75px",
     "width" : "100%",
-    "css" : "background-color: #000; margin-bottom: 0;"
-  },
-}
+    "css" : "background-color: #554236; margin-bottom: 0;"
+  }]

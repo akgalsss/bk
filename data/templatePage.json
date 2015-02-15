@@ -1,24 +1,21 @@
-// 3 rows template
-[
-  {
+[{
     "tagName":"DIV",
     "id" : "header",
-    "height" : "200px",
+    "height" : "50px",
     "width" : "100%",
-    "css" : "background-color: #f00;"
+    "css" : "background-color: #FA6900;"
   },
   {
     "tagName":"DIV",
     "id" : "content",
-    "height" : "auto",
+    "height" : "400px",
     "width" : "100%",
-    "css" : "background-color: #fff;"
+    "css" : "background-color: #E0E4CC;"
   },
   {
     "tagName":"DIV",
     "id" : "foter",
-    "height" : "200px",
+    "height" : "75px",
     "width" : "100%",
-    "css" : "background-color: #000; margin-bottom: 0;"
-  },
-]
+    "css" : "background-color: #69D2E7; margin-bottom: 0;"
+  }]

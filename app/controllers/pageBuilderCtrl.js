@@ -184,7 +184,8 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 		}).
 		error(function(data, status, headers, config) {
 			console.log("BK_ERR: get image tool data - ", status);
-		});;
+		});
+
 	}
 
 
@@ -202,17 +203,17 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 
 				var block;
 
-				block = document.createElement(blocksData['tagName']); 
+				block = document.createElement(blockData['tagName']); 
 
-				block.setAttribute('id', blocksData['id']);
-				block.setAttribute('style', blocksData['css']);
+				block.setAttribute('id', blockData['id']);
+				block.setAttribute('style', blockData['css']);
 				block.style.width = blockData['width'];
 				block.style.height = blockData['height'];
 
-				parent.appendChild(block);
+				parent.append(block);
 
-				if (blockmData['child']) {
-					createBlock(blockData['child'], block);
+				if (blockData['child']) {
+					createBlock(blockData['child'], angular.element(block));
 				}
 
 			}
@@ -242,6 +243,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 	// when page is loaded get default template
 	$scope.$on('$viewContentLoaded', function(){
 		getPageTemplate();
+		// getPageTemplate('/data/templatePage1.json');
 	});
 
 
