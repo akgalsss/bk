@@ -145,6 +145,9 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 		style += " height: "+tool.style.height+"; ";
 		style += " padding:"+tool.style.padding+"; ";
 		style += " border: "+tool.style.border+"; ";
+		style += " position: "+tool.style.position+"; ";
+		style += " top:"+tool.style.top+"; ";
+		style += " left: "+tool.style.left+"; ";
 
 		template = "<"+tool.tagName+" class='"+tool.class+"'"+attributes;
 		template +=" style='"+style+"'>"+tool.data+"</"+tool.tagName+">";
