@@ -71,6 +71,7 @@ function pageCtrl($scope, $http) {
 		createElem(data, document.body);
 	}
 
+	// when page is loaded get start rendering data
 	$scope.$on('$viewContentLoaded', function(){
 		getPageData();
 	});

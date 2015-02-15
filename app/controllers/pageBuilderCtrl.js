@@ -1,7 +1,6 @@
 function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ) {
 
-	// /* create json object */
-
+	// /* create json object from passed obj, for example #page dom elem*/
 	var make_json = function (obj) {
 		var result_obj = {};
 
