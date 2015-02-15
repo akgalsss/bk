@@ -1,6 +1,7 @@
 [{
     "tagName":"DIV",
     "id" : "header",
+    "class":"block",
     "height" : "50px",
     "width" : "100%",
     "css" : "background-color: #60B99A;"
@@ -8,6 +9,7 @@
   {
     "tagName":"DIV",
     "id" : "content",
+    "class":"block",
     "height" : "400px",
     "width" : "100%",
     "css" : "background-color: #F2E9E1;",
@@ -15,6 +17,7 @@
       {
         "tagName":"DIV",
         "id" : "content_left",
+        "class":"block",
         "height" : "100%",
         "width" : "25%",
         "css" : "background-color: #D3CE3D; float: left;"
@@ -22,6 +25,7 @@
       {
         "tagName":"DIV",
         "id" : "content_right",
+        "class":"block",
         "height" : "100%",
         "width" : "75%",
         "css" : "background-color: #F1EFA5; float: left;"
@@ -29,7 +33,8 @@
   },
   {
     "tagName":"DIV",
-    "id" : "foter",
+    "id" : "footer",
+    "class":"block",
     "height" : "75px",
     "width" : "100%",
     "css" : "background-color: #554236; margin-bottom: 0;"

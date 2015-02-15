@@ -50,8 +50,8 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 					elem.class = main[0]['attributes']['class']['nodeValue'];
 					elem.draggable = (main[0]['attributes']['draggable'] !== undefined) ? main[0]['attributes']['draggable']['specified'] : false;
 					elem.style = {
-						width : parseInt(main[0]['style']['width']),
-						height : parseInt(main[0]['style']['height']),
+						width : main[0]['style']['width'].toString(),
+						height : main[0]['style']['height'].toString(),
 						backgroundColor : main[0]['style']['background-color']
 					};
 
@@ -62,6 +62,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 						elem.style.border = main[0]['style']['border'];
 						elem.style.top = main[0]['style']['top'];
 						elem.style.left = main[0]['style']['left'];
+						elem.style.position = main[0]['style']['position'];
 						elem.data = main[0]['innerText'];
 					}
 
@@ -209,6 +210,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 				block = document.createElement(blockData['tagName']); 
 
 				block.setAttribute('id', blockData['id']);
+				block.setAttribute('class', blockData['class']);
 				block.setAttribute('style', blockData['css']);
 				block.style.width = blockData['width'];
 				block.style.height = blockData['height'];

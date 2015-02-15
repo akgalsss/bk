@@ -47,18 +47,19 @@ function pageCtrl($scope, $http) {
 
 				elem.setAttribute('id', elemData['id']);
 				elem.setAttribute('class', elemData['class']);
+				elem.style['width'] = elemData['style']['width'];
+				elem.style.height = elemData['style']['height'];
+				elem.style.backgroundColor = elemData['style']['backgroundColor'];
 
 				// add textBlock text to store
 				if (elemData['class'].indexOf("toolTextBlock") > -1) {
 					elem.appendChild(document.createTextNode(elemData['data']));
-					elem.style['width'] = elemData['style']['width'] + "px";
-					elem.style.height = elemData['style']['height'] + "px";
-					elem.style.backgroundColor = elemData['style']['backgroundColor'];
 					elem.style.color = elemData['style']['color'];
 					elem.style.padding = elemData['style']['padding'];
 					elem.style.border = elemData['style']['border'];
 					elem.style.top = elemData['style']['top'];
 					elem.style.left = elemData['style']['left'];
+					elem.style.position = elemData['style']['position'];
 				}
 
 				parent.appendChild(elem);
