@@ -1,0 +1,33 @@
+// 3 rows template and content 2 column
+{
+  {
+    "id" : "header",
+    "height" : "200px",
+    "width" : "100%",
+    "css" : "background-color: #f00;"
+  },
+  {
+    "id" : "content",
+    "height" : "auto",
+    "width" : "100%",
+    "css" : "background-color: #fff;",
+    {
+      "id" : "content_left",
+      "height" : "auto",
+      "width" : "50%",
+      "css" : "background-color: #ff0;"
+    },
+    {
+      "id" : "content_right",
+      "height" : "auto",
+      "width" : "50%",
+      "css" : "background-color: #f0f;"
+    },
+  },
+  {
+    "id" : "foter",
+    "height" : "200px",
+    "width" : "100%",
+    "css" : "background-color: #000; margin-bottom: 0;"
+  },
+}

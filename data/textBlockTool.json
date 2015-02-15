@@ -2,7 +2,7 @@
   "tagName":"DIV",
   "id":"",
   "class":"toolTextBlock ng-scope",
-  "style":{
+  "style": {
     "width":"160px",
     "height":"120px",
     "color":"#050505",
