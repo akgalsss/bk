@@ -1,6 +1,7 @@
 function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ) {
 
-	// /* create json object from passed obj, for example #page dom elem*/
+	// /* create json object from passed obj, for example #page dom elem */
+
 	var make_json = function (obj) {
 		var result_obj = {};
 
@@ -120,18 +121,17 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 			});
 	}
 
-
-	// /* tools function */
-
-	// append rendered tool to page and display
-	var appendRenderedToolToPage = function (tool) {
+	// append rendered tool or block to page and display
+	var appendRenderedToPage = function (tool) {
 		var page = angular.element('#page');
 
 		angular.element(page).append($compile(tool)($scope));
 	}
 
 
-	//text tool
+	// /* Tools Function */
+
+	// /* Text Tool */
 
 	// render and display tool 
 	var renderTextBlockTool = function (tool) {
@@ -158,7 +158,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 		$http.get('/data/textBlockTool.json').success(function(data) {
 			tool = data;
 			tool = renderTextBlockTool(tool);
-			appendRenderedToolToPage (tool);
+			appendRenderedToPage (tool);
 		}).
 		error(function(data, status, headers, config) {
 			console.log("BK_ERR: get text tool data - ", status);
@@ -166,7 +166,7 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 	}
 
 
-	// image tool
+	// /* Image Tool */
 
 	// render and display tool 
 	var renderImageBlockTool = function (tool) {
@@ -180,10 +180,69 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 		$http.get('/data/imageBlockTool.json').success(function(data) {
 			tool = data;
 			tool = renderImageBlockTool(tool);
-			appendRenderedToolToPage (tool);
+			appendRenderedToPage (tool);
 		}).
 		error(function(data, status, headers, config) {
 			console.log("BK_ERR: get image tool data - ", status);
 		});;
 	}
+
+
+	// /* Page Template*/
+
+	// render and display page template 
+	var renderPageTemplate = function (data) {
+		var page;
+
+		createBlock = function (blocksData, parent) {
+			var blockData;
+
+			// go each elem from top to bottom
+			while (blockData = blocksData.shift()) {
+
+				var block;
+
+				block = document.createElement(blocksData['tagName']); 
+
+				block.setAttribute('id', blocksData['id']);
+				block.setAttribute('style', blocksData['css']);
+				block.style.width = blockData['width'];
+				block.style.height = blockData['height'];
+
+				parent.appendChild(block);
+
+				if (blockmData['child']) {
+					createBlock(blockData['child'], block);
+				}
+
+			}
+
+		}
+
+		page = angular.element("#page");
+		createBlock(data, page);
+	}
+
+	// get template of the page
+	var getPageTemplate = function (url) {
+		var page = {};
+
+		url = typeof url !== 'undefined' ? url : '/data/templatePage.json';
+
+		$http.get(url).success(function(data) {
+			page = data;
+			page = renderPageTemplate(page);
+			appendRenderedToPage (page);
+		}).
+		error(function(data, status, headers, config) {
+			console.log("BK_ERR: get page template data - ", status);
+		});
+	}
+
+	// when page is loaded get default template
+	$scope.$on('$viewContentLoaded', function(){
+		getPageTemplate();
+	});
+
+
 }

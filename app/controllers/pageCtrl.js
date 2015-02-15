@@ -15,6 +15,9 @@ function pageCtrl($scope, $http) {
 	var renderPage = function (data) {
 
 		createElem = function (pageData, parent) {
+			//var elemData;
+
+			// go each elem from top to bottom
 			while (elemData = pageData.shift()) {
 
 				var elem;

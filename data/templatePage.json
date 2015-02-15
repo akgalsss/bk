@@ -1,21 +1,24 @@
 // 3 rows template
-{
+[
   {
+    "tagName":"DIV",
     "id" : "header",
     "height" : "200px",
     "width" : "100%",
     "css" : "background-color: #f00;"
   },
   {
+    "tagName":"DIV",
     "id" : "content",
     "height" : "auto",
     "width" : "100%",
     "css" : "background-color: #fff;"
   },
   {
+    "tagName":"DIV",
     "id" : "foter",
     "height" : "200px",
     "width" : "100%",
     "css" : "background-color: #000; margin-bottom: 0;"
   },
-}
+]
