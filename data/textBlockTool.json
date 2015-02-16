@@ -1,7 +1,7 @@
 {
   "tagName":"DIV",
   "id":"",
-  "class":"toolTextBlock ng-scope",
+  "class":"toolTextBlock fleft ng-scope",
   "style": {
     "width":"160px",
     "height":"120px",

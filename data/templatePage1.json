@@ -17,18 +17,18 @@
       {
         "tagName":"DIV",
         "id" : "content_left",
-        "class":"block",
+        "class":"block fleft",
         "height" : "100%",
         "width" : "25%",
-        "css" : "background-color: #D3CE3D; float: left;"
+        "css" : "background-color: #D3CE3D;"
       },
       {
         "tagName":"DIV",
         "id" : "content_right",
-        "class":"block",
+        "class":"block fleft",
         "height" : "100%",
         "width" : "75%",
-        "css" : "background-color: #F1EFA5; float: left;"
+        "css" : "background-color: #F1EFA5;"
       }]
   },
   {

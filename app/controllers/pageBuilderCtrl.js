@@ -247,9 +247,8 @@ function pageBuilderCtrl($scope, $compile, $templateCache, $http, propPanelServ)
 
 	// when page is loaded get default template
 	$scope.$on('$viewContentLoaded', function(){
-		getPageTemplate();
+		 getPageTemplate();
 		// getPageTemplate('/data/templatePage1.json');
 	});
-
 
 }
