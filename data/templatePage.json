@@ -1,0 +1,24 @@
+[{
+    "tagName":"DIV",
+    "id" : "header",
+    "class":"block",
+    "height" : "50px",
+    "width" : "100%",
+    "css" : "background-color: #FA6900;"
+  },
+  {
+    "tagName":"DIV",
+    "id" : "content",
+    "class":"block",
+    "height" : "400px",
+    "width" : "100%",
+    "css" : "background-color: #E0E4CC;"
+  },
+  {
+    "tagName":"DIV",
+    "id" : "footer",
+    "class":"block",
+    "height" : "75px",
+    "width" : "100%",
+    "css" : "background-color: #69D2E7; margin-bottom: 0;"
+  }]

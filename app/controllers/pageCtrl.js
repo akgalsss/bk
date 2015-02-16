@@ -15,6 +15,9 @@ function pageCtrl($scope, $http) {
 	var renderPage = function (data) {
 
 		createElem = function (pageData, parent) {
+			//var elemData;
+
+			// go each elem from top to bottom
 			while (elemData = pageData.shift()) {
 
 				var elem;
@@ -44,18 +47,19 @@ function pageCtrl($scope, $http) {
 
 				elem.setAttribute('id', elemData['id']);
 				elem.setAttribute('class', elemData['class']);
+				elem.style['width'] = elemData['style']['width'];
+				elem.style.height = elemData['style']['height'];
+				elem.style.backgroundColor = elemData['style']['backgroundColor'];
 
 				// add textBlock text to store
 				if (elemData['class'].indexOf("toolTextBlock") > -1) {
 					elem.appendChild(document.createTextNode(elemData['data']));
-					elem.style['width'] = elemData['style']['width'] + "px";
-					elem.style.height = elemData['style']['height'] + "px";
-					elem.style.backgroundColor = elemData['style']['backgroundColor'];
 					elem.style.color = elemData['style']['color'];
 					elem.style.padding = elemData['style']['padding'];
 					elem.style.border = elemData['style']['border'];
 					elem.style.top = elemData['style']['top'];
 					elem.style.left = elemData['style']['left'];
+					elem.style.position = elemData['style']['position'];
 				}
 
 				parent.appendChild(elem);
@@ -71,6 +75,7 @@ function pageCtrl($scope, $http) {
 		createElem(data, document.body);
 	}
 
+	// when page is loaded get start rendering data
 	$scope.$on('$viewContentLoaded', function(){
 		getPageData();
 	});
