@@ -1,5 +1,4 @@
-function pageCtrl($scope, $http) {
-
+pageBuilder.controller("page", ["$scope", "$http", function ($scope, $http) {
 	// get page data 
 	var getPageData = function () {
 
@@ -80,4 +79,4 @@ function pageCtrl($scope, $http) {
 		getPageData();
 	});
 
-}
+}]);

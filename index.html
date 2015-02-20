@@ -10,6 +10,7 @@
 	<link rel="icon" href="favicon.ico">
 
 	<link rel="stylesheet" href="vendor/foundation/css/foundation.css" />
+	<link rel="stylesheet" href="assets/css/styles.css">
 	<link rel="stylesheet" href="assets/css/page_styles.css">
 
 	<!--[if lt IE 9]>
@@ -18,7 +19,7 @@
 </head>
 
 <body>
-	<div ng-include="app/layouts/default.html"></div>
+	<div class="page_wraper" ng-view></div>
 
 	<script src="vendor/jquery.js"></script>
 	<script src="vendor/foundation/js/foundation.min.js"></script>
@@ -29,6 +30,15 @@
 	<script src="vendor/angularjs/angular-route.min.js"></script>
 
 	<script src="app/app.js"></script>
+
+	<script src="app/modules/page_builder/controllers/page_builder.js"></script>
+	<script src="app/modules/page_builder/directives/tools.js"></script>
+
+	<script src="app/modules/prop_panel/controllers/prop_panel.js"></script>
+	<script src="app/modules/prop_panel/directives/prop_panel.js"></script>
+	<script src="app/modules/prop_panel/services/prop_panel.js"></script>
+
+	<script src="app/modules/page/controllers/page.js"></script>
 
 
 

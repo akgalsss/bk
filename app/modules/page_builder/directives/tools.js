@@ -109,16 +109,3 @@ pageBuilder.directive("imageTool", function($compile){
 		template: "<button class='toolItem imageTool' title='Add Image'>I</button>",
 	}
 });
-
-
-// properties table directive functionality. Use: <prop-table></prop-table>
-pageBuilder.directive("propTable", function($compile){
-	var linkFn = function(scope, element, attrs) { };
-
-	return {
-		link: linkFn,
-		restrict: "E",
-		template: "<table id='propTable'></table>",
-	}
-});
-

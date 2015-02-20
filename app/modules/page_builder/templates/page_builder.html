@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="css/styles.css">
-
 <div id="left_panel">
 	<div id="toolsPanel">
 		<text-tool></text-tool>
@@ -9,18 +7,14 @@
 		<show-page></show-page>
 	</div>
 
-	<div id="propPanel" ng-controller="propPanelCtrl" ng-class="{ active: isActive()}">
+	<div id="propPanel" ng-controller="propPanel" ng-class="{ active: isActive()}">
 		<div ng-click="hidePropPanel()" class="close_button">x</div>
 		<prop-table></prop-table>
 	</div>
 </div>
 
 <div class="page_background">
-	<div  ng-controller="pageBuilderCtrl" id="page"></div>
+	<div  ng-controller="pageBuilder" id="page"></div>
 </div>
 
 <div id="right_panel"></div>
-
-<script src="app/controllers/pageBuilderCtrl.js"></script>
-<script src="app/controllers/propPanelCtrl.js"></script>
-<script src="app/directives/jqueryDragable.js"></script>
