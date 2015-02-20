@@ -1,5 +1,5 @@
-pageBuilder.controller("pageBuilderController", [ "$scope", "$compile", "$templateCache", "$http", "propPanelServ" ,
-function ($scope, $compile, $templateCache, $http, propPanelServ) {
+pageBuilder.controller("pageBuilderController", [ "$scope", "$compile", "$templateCache", "$http", "propPanelService" ,
+function ($scope, $compile, $templateCache, $http, propPanelService) {
 
 	// /* create json object from passed obj, for example #page dom elem */
 
@@ -247,9 +247,7 @@ function ($scope, $compile, $templateCache, $http, propPanelServ) {
 	}
 
 	// when page is loaded get default template
-	$scope.$on('$viewContentLoaded', function(){
 		 getPageTemplate();
 		// getPageTemplate('/data/templatePage1.json');
-	});
 
 }]);

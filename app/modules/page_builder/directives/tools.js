@@ -72,7 +72,7 @@ pageBuilder.directive("showPage", function($compile){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<a href='#/page' target='_blank'><button class='toolItem show_page' title='View result page'>V</button></a>",
+		template: "<a href='/pageViewApp/' target='_blank'><button class='toolItem show_page' title='View result page'>V</button></a>",
 	}
 });
 

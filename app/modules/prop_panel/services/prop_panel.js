@@ -1,4 +1,4 @@
-pageBuilder.service('propPanelServ', function () {
+pageBuilder.service('propPanelService', function () {
 	this.isActive = false;
 	this.needUpdate = 0;
 
