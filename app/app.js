@@ -3,12 +3,12 @@ var pageBuilder = angular
 	.config(['$routeProvider', function ($routeProvider) {
 		
 		$routeProvider.when('/', {
-			templateUrl: 'views/pageBuilderView.html',
+			templateUrl: 'app/modules/views/pageBuilderView.html',
 			controller: 'pageBuilderCtrl',
 		});
 
 		$routeProvider.when('/page', {
-			templateUrl: 'views/pageView.html',
+			templateUrl: 'app/modules/views/pageView.html',
 			controller: 'pageCtrl',
 		});
 
