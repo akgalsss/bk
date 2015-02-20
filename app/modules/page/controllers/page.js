@@ -1,4 +1,4 @@
-pageBuilder.controller("page", ["$scope", "$http", function ($scope, $http) {
+pageBuilder.controller("pageController", ["$scope", "$http", function ($scope, $http) {
 	// get page data 
 	var getPageData = function () {
 

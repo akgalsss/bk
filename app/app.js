@@ -3,12 +3,12 @@ var pageBuilder = angular.module('pageBuilder', ['ngRoute'])
 		
 		$routeProvider.when('/', {
 			templateUrl: 'app/modules/page_builder/templates/page_builder.html',
-			controller: 'pageBuilder',
+			controller: 'pageBuilderController',
 		});
 
 		$routeProvider.when('/page', {
 			templateUrl: 'app/modules/page/templates/page.html',
-			controller: 'page',
+			controller: 'pageController',
 		});
 
 		$routeProvider.otherwise({

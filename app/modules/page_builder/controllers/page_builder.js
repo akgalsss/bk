@@ -1,4 +1,4 @@
-pageBuilder.controller("pageBuilder", [ "$scope", "$compile", "$templateCache", "$http", "propPanelServ" ,
+pageBuilder.controller("pageBuilderController", [ "$scope", "$compile", "$templateCache", "$http", "propPanelServ" ,
 function ($scope, $compile, $templateCache, $http, propPanelServ) {
 
 	// /* create json object from passed obj, for example #page dom elem */
