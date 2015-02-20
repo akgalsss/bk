@@ -1,4 +1,5 @@
-function propPanelCtrl($scope, $compile, propPanelServ) {
+pageBuilder.controller("propPanel", ["$scope", "$compile", "propPanelServ",
+function ($scope, $compile, propPanelServ) {
 	// check if need show propPanel
 	$scope.isActive = function() {
 		return propPanelServ.checkIsActive();
@@ -106,4 +107,4 @@ function propPanelCtrl($scope, $compile, propPanelServ) {
 		if (newVal) { $scope.showPropPanel(); };
 	}, true);
 
-}
+}]);

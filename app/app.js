@@ -1,15 +1,14 @@
-var pageBuilder = angular
-	.module('pageBuilder', ['ngRoute'])
+var pageBuilder = angular.module('pageBuilder', ['ngRoute'])
 	.config(['$routeProvider', function ($routeProvider) {
 		
 		$routeProvider.when('/', {
-			templateUrl: 'views/pageBuilderView.html',
-			controller: 'pageBuilderCtrl',
+			templateUrl: 'app/modules/page_builder/templates/page_builder.html',
+			controller: 'pageBuilder',
 		});
 
 		$routeProvider.when('/page', {
-			templateUrl: 'views/pageView.html',
-			controller: 'pageCtrl',
+			templateUrl: 'app/modules/page/templates/page.html',
+			controller: 'page',
 		});
 
 		$routeProvider.otherwise({

@@ -1,0 +1,20 @@
+<div id="left_panel">
+	<div id="toolsPanel">
+		<text-tool></text-tool>
+		<image-tool></image-tool>
+		<hr/>
+		<save></save>
+		<show-page></show-page>
+	</div>
+
+	<div id="propPanel" ng-controller="propPanel" ng-class="{ active: isActive()}">
+		<div ng-click="hidePropPanel()" class="close_button">x</div>
+		<prop-table></prop-table>
+	</div>
+</div>
+
+<div class="page_background">
+	<div  ng-controller="pageBuilder" id="page"></div>
+</div>
+
+<div id="right_panel"></div>
