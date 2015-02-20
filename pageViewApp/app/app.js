@@ -1,4 +1,7 @@
-pageBuilder.controller("page", ["$scope", "$http", function ($scope, $http) {
+var pageView = angular.module('pageView', []);
+
+
+pageView.controller("pageController", ["$scope", "$http", function ($scope, $http) {
 	// get page data 
 	var getPageData = function () {
 
@@ -75,8 +78,6 @@ pageBuilder.controller("page", ["$scope", "$http", function ($scope, $http) {
 	}
 
 	// when page is loaded get start rendering data
-	$scope.$on('$viewContentLoaded', function(){
 		getPageData();
-	});
 
 }]);

@@ -1,6 +1,7 @@
 /* Styles for all elements common on page and pageBuilder */
 body {
   background-color: #777;
+  margin: 0;
 }
 
 .fleft {
