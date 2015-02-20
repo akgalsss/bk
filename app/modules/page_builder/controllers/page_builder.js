@@ -247,7 +247,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 	}
 
 	// when page is loaded get default template
-		 getPageTemplate();
-		// getPageTemplate('/data/templatePage1.json');
+	 getPageTemplate();
+	// getPageTemplate('/data/templatePage1.json');
 
 }]);
