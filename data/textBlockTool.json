@@ -9,7 +9,7 @@
     "backgroundColor":"#DBEEFD",
     "padding":"8px",
     "border":"1px solid",
-    "position":"absolute",
+    "position":"relative",
     "left":"25%",
     "top":"25%"
   },

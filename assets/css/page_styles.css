@@ -83,23 +83,25 @@ input[type="text"] {
 
 /* Page Styles */
 .page_wraper {
-	display: table;
-	min-height: 100%;
-	overflow: hidden;
 	width: 100%;
 }
 
 #left_panel, #right_panel {
 	background-color: #375D81;
-	display: table-cell;
+	height: 100%;
+	position: fixed;
 	width: 14%;
+}
+
+#right_panel {
+	right: 0;
 }
 
 .page_background {
 	background-color: #E1E6FA;
-	display: table-cell;
 	position: absolute;
 	width: 72%;
+	margin-left: 14%;
 }
 
 #page {

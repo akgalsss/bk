@@ -20,33 +20,14 @@
 </head>
 
 <body ng-controller="pageBuilderController">
-	<div class="page_wraper">
-		<div id="left_panel">
-	<div id="toolsPanel">
-		<text-tool></text-tool>
-		<image-tool></image-tool>
-		<hr/>
-		<save></save>
-		<show-page></show-page>
-	</div>
-
-	<div id="propPanel" ng-controller="propPanelController" ng-class="{ active: isActive()}">
-		<div ng-click="hidePropPanel()" class="close_button">x</div>
-		<prop-table></prop-table>
-	</div>
-</div>
-
-<div class="page_background">
-	<div id="page" class="ng-scope"></div>
-</div>
-
-<div id="right_panel"></div>
-
-	</div>
+	<div ng-include src="'app/layouts/default.html'" > </div>
 
 	<script src="vendor/jquery.js"></script>
 	<script src="vendor/foundation/js/foundation.min.js"></script>
 	<script> $(document).foundation(); </script>
+
+
+
 
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js" ></script> -->
 	<script src="vendor/angularjs/angular.min.js"></script>
@@ -55,6 +36,8 @@
 
 	<script src="app/modules/page_builder/controllers/page_builder.js"></script>
 	<script src="app/modules/page_builder/directives/tools.js"></script>
+	<script src="app/modules/page_builder/directives/page.js"></script>
+
 
 	<script src="app/modules/prop_panel/controllers/prop_panel.js"></script>
 	<script src="app/modules/prop_panel/directives/prop_panel.js"></script>
