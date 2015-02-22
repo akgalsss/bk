@@ -107,3 +107,15 @@ input[type="text"] {
 #page {
 	background: #183152;
 }
+
+
+/* mockups for sortable test */
+
+.sortable_test {
+	color: #f0f0f0;
+}
+
+.sortable-ghost {
+	background-color: #f0f0f0;
+	color: #0f0f0f;
+}

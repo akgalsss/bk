@@ -220,6 +220,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 				block.setAttribute('id', blockData['id']);
 				block.setAttribute('class', blockData['class']);
 				block.setAttribute('style', blockData['css']);
+				if (blockData['isSortable']) { block.setAttribute('ng-sortable', '');};
 				block.style.width = blockData['width'];
 				block.style.height = blockData['height'];
 
