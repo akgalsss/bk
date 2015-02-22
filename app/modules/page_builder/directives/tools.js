@@ -1,10 +1,9 @@
 // made element draggabele. Use: <element dragable></element>
-/*pageBuilder.directive('draggable', ['$document', 'propPanelServ', function($document, propPanelServ) {
+pageBuilder.directive('draggable', ['$document', 'propPanelService', function($document, propPanelService) {
 	return function(scope, element, attr) {
 		var startX = 0, startY = 0, x = 0, y = 0;
 
 		element.css({
-		 position: 'relative',
 		 cursor: 'pointer'
 		});
 
@@ -36,12 +35,12 @@
 		element.bind("dblclick", function() {
 			angular.element(".ng-scope").removeClass("activeTool");
 			element.addClass("activeTool");
-			propPanelServ.showPropPanel();
+			propPanelService.showPropPanel();
 			scope.$apply();
 		});
 	};
 }]);
-*/
+
 
 // save directive functionality. Use: <save></save>
 pageBuilder.directive("save", function(){

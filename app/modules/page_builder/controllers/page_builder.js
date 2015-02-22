@@ -49,7 +49,6 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 					elem.tagName = main[0]['nodeName'];
 					elem.id = main[0]['id'];
 					elem.class = main[0]['attributes']['class']['nodeValue'];
-					elem.draggable = (main[0]['attributes']['draggable'] !== undefined) ? main[0]['attributes']['draggable']['specified'] : false;
 					elem.style = {
 						width : main[0]['style']['width'].toString(),
 						height : main[0]['style']['height'].toString(),
@@ -171,7 +170,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 		$http.get('/data/textBlockTool.json').success(function(data) {
 			tool = data;
 			tool = renderTextBlockTool(tool);
-			appendRenderedToPage (tool);
+			appendRenderedToPage(tool);
 		}).
 		error(function(data, status, headers, config) {
 			console.log("BK_ERR: get text tool data - ", status);
@@ -193,7 +192,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 		$http.get('/data/imageBlockTool.json').success(function(data) {
 			tool = data;
 			tool = renderImageBlockTool(tool);
-			appendRenderedToPage (tool);
+			appendRenderedToPage(tool);
 		}).
 		error(function(data, status, headers, config) {
 			console.log("BK_ERR: get image tool data - ", status);
