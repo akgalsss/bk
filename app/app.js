@@ -1,1 +1,1 @@
-var pageBuilder = angular.module('pageBuilder', []);
+var pageBuilder = angular.module('pageBuilder', ['ng-sortable']);

@@ -127,6 +127,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 	var appendRenderedToPage = function (tool) {
 		var page = angular.element('#page');
 
+		// compile tool and append to page
 		page.append($compile(tool)($scope));
 	}
 
@@ -220,10 +221,12 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 				block.setAttribute('id', blockData['id']);
 				block.setAttribute('class', blockData['class']);
 				block.setAttribute('style', blockData['css']);
+				if (blockData['isSortable']) { block.setAttribute('ng-sortable', '');};
 				block.style.width = blockData['width'];
 				block.style.height = blockData['height'];
 
-				parent.append(block);
+				// compille block and append to parent element
+				parent.append($compile(block)($scope));
 
 				if (blockData['child']) {
 					createBlock(blockData['child'], angular.element(block));

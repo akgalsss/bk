@@ -23,14 +23,12 @@
 	 * @property  {number}        newIndex   after sort
 	 */
 
-console.log("->ng-sortable.js:26", "ng-sort loaded");
+
 	angular.module('ng-sortable', [])
 		.constant('$version', '0.3.5')
 		.directive('ngSortable', ['$parse', function ($parse) {
 			var removed,
 				nextSibling;
-
-				console.log("->ng-sortable.js:33", "insortable");
 
 			function getSource(el) {
 				var scope = angular.element(el).scope();
@@ -133,7 +131,6 @@ console.log("->ng-sortable.js:26", "ng-sort loaded");
 							nextSibling = evt.item.nextSibling;
 							_emitEvent(evt);
 							scope.$apply();
-							console.log("->ng-sortable.js:136", "start");
 						},
 						onEnd: function (/**Event*/evt) {
 							_emitEvent(evt, removed);
@@ -143,7 +140,6 @@ console.log("->ng-sortable.js:26", "ng-sort loaded");
 							_sync(evt);
 							_emitEvent(evt, removed);
 							scope.$apply();
-							console.log("->ng-sortable.js:146", "on add");
 						},
 						onUpdate: function (/**Event*/evt) {
 							_sync(evt);
@@ -177,10 +173,3 @@ console.log("->ng-sortable.js:26", "ng-sort loaded");
 			};
 		}]);
 });
-
-
-// var el = document.getElementById('test');
-// var sortable = Sortable.create(el);
-
-var el1 = document.getElementById('content');
-var sortable = Sortable.create(el1, {draggable: ".block"});
