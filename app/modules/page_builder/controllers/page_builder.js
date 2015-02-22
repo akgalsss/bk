@@ -127,7 +127,14 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 	var appendRenderedToPage = function (tool) {
 		var page = angular.element('#page');
 
-		angular.element(page).append($compile(tool)($scope));
+		page.append($compile(tool)($scope));
+	}
+
+	// clear page view (templates, tools, etc)
+	var clearRenderedPage = function () {
+		var page = angular.element('#page');
+
+		page.html("");
 	}
 
 
@@ -231,12 +238,15 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 	}
 
 	// get template of the page
-	var getPageTemplate = function (url) {
+	$scope.getPageTemplate = function (url) {
 		var page = {};
 
 		url = typeof url !== 'undefined' ? url : '/data/templatePage.json';
 
 		$http.get(url).success(function(data) {
+			// clear prev template beroge append new one
+			clearRenderedPage();
+
 			page = data;
 			page = renderPageTemplate(page);
 			appendRenderedToPage (page);
@@ -245,9 +255,5 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 			console.log("BK_ERR: get page template data - ", status);
 		});
 	}
-
-	// when page is loaded get default template
-	//getPageTemplate();
-	// getPageTemplate('/data/templatePage1.json');
 
 }]);
