@@ -44,7 +44,7 @@
 */
 
 // save directive functionality. Use: <save></save>
-pageBuilder.directive("save", function($compile){
+pageBuilder.directive("save", function(){
 	var linkFn = function(scope, element, attrs) {
 		
 		element.bind("click", function() {
@@ -61,7 +61,7 @@ pageBuilder.directive("save", function($compile){
 
 
 // show page directive. Use: <show-page></show-page>
-pageBuilder.directive("showPage", function($compile){
+pageBuilder.directive("showPage", function(){
 	var linkFn = function(scope, element, attrs) {
 		
 		element.bind("click", function() {
@@ -78,7 +78,7 @@ pageBuilder.directive("showPage", function($compile){
 
 
 // text tool directive functionality. Use: <text-tool></text-tool>
-pageBuilder.directive("textTool", function($compile){
+pageBuilder.directive("textTool", function(){
 	var linkFn = function(scope, element, attrs) {
 		
 		element.bind("click", function() {
@@ -95,7 +95,7 @@ pageBuilder.directive("textTool", function($compile){
 
 
 // image tool directive functionality. Use: <image-tool></image-tool>
-pageBuilder.directive("imageTool", function($compile){
+pageBuilder.directive("imageTool", function(){
 	var linkFn = function(scope, element, attrs) {
 		
 		element.bind("click", function() {
