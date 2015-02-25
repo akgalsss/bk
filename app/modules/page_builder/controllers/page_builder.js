@@ -59,7 +59,6 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 					if (elem.class.indexOf("toolTextBlock") > -1) {
 						elem.style.color = main[0]['style']['color'],
 						elem.style.padding = main[0]['style']['padding'];
-						elem.style.border = main[0]['style']['border'];
 						elem.style.top = main[0]['style']['top'];
 						elem.style.left = main[0]['style']['left'];
 						elem.style.position = main[0]['style']['position'];
@@ -153,7 +152,6 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 		style += " width:"+tool.style.width+"; ";
 		style += " height: "+tool.style.height+"; ";
 		style += " padding:"+tool.style.padding+"; ";
-		style += " border: "+tool.style.border+"; ";
 		style += " position: "+tool.style.position+"; ";
 		style += " top:"+tool.style.top+"; ";
 		style += " left: "+tool.style.left+"; ";

@@ -33,6 +33,13 @@
 	color: #000;
 }
 
+.toolTextBlock {
+	border: 1px solid;
+}
+
+.activeTool {
+	border: 1px dashed;
+}
 
 /* Properties Panel */
 #propPanel {
