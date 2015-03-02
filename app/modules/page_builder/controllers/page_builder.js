@@ -1,8 +1,10 @@
-pageBuilder.controller("pageBuilderController", [ "$scope", "$compile", "$templateCache", "$http", "propPanelService" ,
-function ($scope, $compile, $templateCache, $http, propPanelService) {
+pageBuilder.controller("pageBuilderController", [
+	"$scope", "$compile", "$templateCache", "$http", "pageService",
+	function ($scope, $compile, $templateCache, $http, pageService) {
+
 
 	// /* create json object from passed obj, for example #page dom elem */
-
+/*
 	var make_json = function (obj) {
 		var result_obj = {};
 
@@ -98,18 +100,18 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 		result_obj = itarate_object(angular.element(obj).toArray());
 
 		return result_obj;
-	}
+	}*/
 
 
 	// save page template
 	$scope.save = function () {
 		var template;
 
-		template = angular.element("#page");
-		template = make_json(template);
+		//template = angular.element("#page");
+		//template = make_json(template);
 
 		//create string from json obj
-		template = JSON.stringify(template);
+		template = JSON.stringify(pageService.getPageJSON());
 
 		//send template to server
 		$http.post('save.php', {template: template}).
@@ -133,6 +135,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 	var clearRenderedPage = function () {
 		var page = angular.element('#page');
 
+		pageService.clearPage();
 		page.html("");
 	}
 
@@ -141,7 +144,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 
 	// /* Text Tool */
 
-	// render and display tool 
+	// render and display tool
 	var renderTextBlockTool = function (tool) {
 		var template, style, attributes;
 
@@ -168,6 +171,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 		$http.get('/data/textBlockTool.json').success(function(data) {
 			tool = data;
 			tool = renderTextBlockTool(tool);
+			pageService.appendToPage(data);
 			appendRenderedToPage(tool);
 		}).
 		error(function(data, status, headers, config) {
@@ -178,7 +182,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 
 	// /* Image Tool */
 
-	// render and display tool 
+	// render and display tool
 	var renderImageBlockTool = function (tool) {
 
 		return tool.data;
@@ -190,6 +194,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 		$http.get('/data/imageBlockTool.json').success(function(data) {
 			tool = data;
 			tool = renderImageBlockTool(tool);
+			pageService.appendToPage(data);
 			appendRenderedToPage(tool);
 		}).
 		error(function(data, status, headers, config) {
@@ -201,7 +206,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 
 	// /* Page Template*/
 
-	// render and display page template 
+	// render and display page template
 	var renderPageTemplate = function (data) {
 		var page;
 
@@ -213,7 +218,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 
 				var block;
 
-				block = document.createElement(blockData['tagName']); 
+				block = document.createElement(blockData['tagName']);
 
 				block.setAttribute('id', blockData['id']);
 				block.setAttribute('class', blockData['class']);
@@ -224,6 +229,8 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 
 				// compille block and append to parent element
 				parent.append($compile(block)($scope));
+				// push block to page stuct
+				pageService.appendChild(blockData, parent[0].id);
 
 				if (blockData['child']) {
 					createBlock(blockData['child'], angular.element(block));

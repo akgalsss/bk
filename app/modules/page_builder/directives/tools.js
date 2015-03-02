@@ -1,3 +1,20 @@
+// save directive functionality. Use: <save></save>
+pageBuilder.directive("save", function(){
+	var linkFn = function(scope, element, attrs) {
+		
+		element.bind("click", function() {
+			scope.save();
+		});
+	};
+	
+	return {
+		link: linkFn,
+		restrict: "E",
+		template: "<button class='toolItem save' title='Save results'>S</button>",
+	}
+});
+
+
 // show page directive. Use: <show-page></show-page>
 pageBuilder.directive("showPage", function(){
 	var linkFn = function(scope, element, attrs) {
