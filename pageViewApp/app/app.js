@@ -2,7 +2,7 @@ var pageView = angular.module('pageView', []);
 
 
 pageView.controller("pageController", ["$scope", "$http", function ($scope, $http) {
-	// get page data 
+	// get page data
 	var getPageData = function () {
 
 		$http.get('/data/page.json').success(function(data) {
@@ -45,23 +45,23 @@ pageView.controller("pageController", ["$scope", "$http", function ($scope, $htt
 					continue;
 				}
 
-				elem = document.createElement(elemData['tagName']); 
+				elem = document.createElement(elemData['tagName']);
 
 				elem.setAttribute('id', elemData['id']);
 				elem.setAttribute('class', elemData['class']);
-				elem.style['width'] = elemData['style']['width'];
-				elem.style.height = elemData['style']['height'];
-				elem.style.backgroundColor = elemData['style']['backgroundColor'];
+				elem.style['width'] = elemData['css']['width'];
+				elem.style.height = elemData['css']['height'];
+				elem.style.backgroundColor = elemData['css']['backgroundColor'];
 
 				// add textBlock text to store
 				if (elemData['class'].indexOf("toolTextBlock") > -1) {
 					elem.appendChild(document.createTextNode(elemData['data']));
-					elem.style.color = elemData['style']['color'];
-					elem.style.padding = elemData['style']['padding'];
-					elem.style.border = elemData['style']['border'];
-					elem.style.top = elemData['style']['top'];
-					elem.style.left = elemData['style']['left'];
-					elem.style.position = elemData['style']['position'];
+					elem.style.color = elemData['css']['color'];
+					elem.style.padding = elemData['css']['padding'];
+					elem.style.border = elemData['css']['border'];
+					elem.style.top = elemData['css']['top'];
+					elem.style.left = elemData['css']['left'];
+					elem.style.position = elemData['css']['position'];
 				}
 
 				parent.appendChild(elem);

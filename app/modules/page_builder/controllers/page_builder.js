@@ -222,10 +222,10 @@ pageBuilder.controller("pageBuilderController", [
 
 				block.setAttribute('id', blockData['id']);
 				block.setAttribute('class', blockData['class']);
-				block.setAttribute('style', blockData['css']);
-				if (blockData['isSortable']) { block.setAttribute('ng-sortable', '');};
-				block.style.width = blockData['width'];
-				block.style.height = blockData['height'];
+				block.setAttribute('style', blockData['cssString']);
+				block.style.width = blockData['css']['width'];
+				block.style.height = blockData['css']['height'];
+				block.style.backgroundColor = blockData['css']['backgroundColor'];
 
 				// compille block and append to parent element
 				parent.append($compile(block)($scope));

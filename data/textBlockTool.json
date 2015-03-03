@@ -1,9 +1,8 @@
 {
   "tagName":"DIV",
   "id":"",
-  "draggable": true,
   "class":"toolTextBlock fleft ng-scope",
-  "style": {
+  "css": {
     "width":"160px",
     "height":"120px",
     "color":"#050505",
@@ -13,5 +12,5 @@
     "left":"25%",
     "top":"25%"
   },
-  "data":"Lorem ipsum."
+  "content":"Lorem ipsum."
 }

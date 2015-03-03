@@ -1,5 +1,5 @@
 pageBuilder.service('pageService', function () {
-	var page = [{ tagName:"DIV",id:"page",class:"ng-scope",style:{width:"",height:"",backgroundColor:""}, child : []}];
+	var page = [{ tagName:"DIV",id:"page",class:"",css:{width:"",height:"",backgroundColor:""}, child : []}];
 
 	this.getPageJSON = function () {
 		return page;
@@ -15,7 +15,7 @@ pageBuilder.service('pageService', function () {
 	}
 
 	this.clearPage = function (obj) {
-		page = [{ tagName:"DIV",id:"page",class:"ng-scope",style:{width:"",height:"",backgroundColor:""}, child : []}];
+		page = [{ tagName:"DIV",id:"page",class:"",css:{width:"",height:"",backgroundColor:""}, child : []}];
 	}
 
 });

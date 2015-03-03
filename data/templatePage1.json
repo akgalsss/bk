@@ -2,41 +2,50 @@
     "tagName":"DIV",
     "id" : "header",
     "class":"block",
-    "height" : "50px",
-    "width" : "100%",
-    "css" : "background-color: #60B99A;"
+     "css" : {
+      "height" : "50px",
+      "width" : "100%",
+      "backgroundColor": "#60B99A"
+    }
   },
   {
     "tagName":"DIV",
     "id" : "content",
     "class":"block",
-    "height" : "400px",
-    "width" : "100%",
-    "css" : "background-color: #F2E9E1;",
-    "isSortable" : true,
+    "css" : {
+      "height" : "400px",
+      "width" : "100%",
+      "backgroundColor": "#F2E9E1"
+    },
     "child" : [
       {
         "tagName":"DIV",
         "id" : "content_left",
         "class":"block fleft",
-        "height" : "100%",
-        "width" : "25%",
-        "css" : "background-color: #D3CE3D;"
+        "css" : {
+          "height" : "100%",
+          "width" : "25%",
+          "backgroundColor": "#D3CE3D"
+        }
       },
       {
         "tagName":"DIV",
         "id" : "content_right",
         "class":"block fleft",
-        "height" : "100%",
-        "width" : "75%",
-        "css" : "background-color: #F1EFA5;"
+        "css" : {
+          "height" : "100%",
+          "width" : "75%",
+          "backgroundColor": "#F1EFA5"
+        }
       }]
   },
   {
     "tagName":"DIV",
     "id" : "footer",
     "class":"block",
-    "height" : "75px",
-    "width" : "100%",
-    "css" : "background-color: #554236; margin-bottom: 0;"
+    "css" : {
+      "height" : "75px",
+      "width" : "100%",
+      "backgroundColor": "#554236"
+    }
   }]
