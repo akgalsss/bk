@@ -2,16 +2,15 @@
   "tagName":"DIV",
   "id":"",
   "class":"toolTextBlock fleft ng-scope",
-  "style": {
+  "css": {
     "width":"160px",
     "height":"120px",
     "color":"#050505",
     "backgroundColor":"#DBEEFD",
     "padding":"8px",
-    "border":"1px solid",
     "position":"absolute",
     "left":"25%",
     "top":"25%"
   },
-  "data":"Lorem ipsum dolor sit amet."
+  "content":"Lorem ipsum."
 }

@@ -2,23 +2,30 @@
     "tagName":"DIV",
     "id" : "header",
     "class":"block",
-    "height" : "50px",
-    "width" : "100%",
-    "css" : "background-color: #FA6900;"
+    "css" : {
+      "height" : "50px",
+      "width" : "100%",
+      "backgroundColor" : "#FA6900"
+    }
   },
   {
     "tagName":"DIV",
     "id" : "content",
     "class":"block",
-    "height" : "400px",
-    "width" : "100%",
-    "css" : "background-color: #E0E4CC;"
+    "css" : {
+      "backgroundColor" : "#E0E4CC",
+      "height" : "400px",
+      "width" : "100%"
+    }
   },
   {
     "tagName":"DIV",
     "id" : "footer",
     "class":"block",
-    "height" : "75px",
-    "width" : "100%",
-    "css" : "background-color: #69D2E7; margin-bottom: 0;"
+    "css" : {
+      "cssString" : "margin-bottom: 0;",
+      "height" : "75px",
+      "width" : "100%",
+      "backgroundColor" : "#69D2E7"
+    }
   }]

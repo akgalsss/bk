@@ -1,117 +1,13 @@
-pageBuilder.controller("pageBuilderController", [ "$scope", "$compile", "$templateCache", "$http", "propPanelService" ,
-function ($scope, $compile, $templateCache, $http, propPanelService) {
-
-	// /* create json object from passed obj, for example #page dom elem */
-
-	var make_json = function (obj) {
-		var result_obj = {};
-
-		// make clone obj to prevent refence links
-		function make_clone_obj(source) {
-
-			if (Object.prototype.toString.call(source) === '[object Array]') {
-				var clone = [];
-
-				for (var i=0; i<source.length; i++) {
-
-					clone[i] = make_clone_obj(source[i]);
-				}
-
-				return clone;
-			} else if (typeof(source)=="object") {
-				var clone = {};
-
-				for (var prop in source) {
-
-					if (source.hasOwnProperty(prop)) {
-						clone[prop] = make_clone_obj(source[prop]);
-					}
-				}
-
-				return clone;
-			} else {
-
-				return source;
-			}
-		}
-
-		// iterate through object and create it struct
-		function itarate_object(main) {
-			var result = {}, loop;
-
-			loop = function(main) {
-				var elempush, rslt = [], loopContinue = true;
-
-				do {
-					var elem = {};
-
-					// set needed values of obj
-					elem.tagName = main[0]['nodeName'];
-					elem.id = main[0]['id'];
-					elem.class = main[0]['attributes']['class']['nodeValue'];
-					elem.draggable = (main[0]['attributes']['draggable'] !== undefined) ? main[0]['attributes']['draggable']['specified'] : false;
-					elem.style = {
-						width : main[0]['style']['width'].toString(),
-						height : main[0]['style']['height'].toString(),
-						backgroundColor : main[0]['style']['background-color']
-					};
-
-					// add textBlock text to store
-					if (elem.class.indexOf("toolTextBlock") > -1) {
-						elem.style.color = main[0]['style']['color'],
-						elem.style.padding = main[0]['style']['padding'];
-						elem.style.border = main[0]['style']['border'];
-						elem.style.top = main[0]['style']['top'];
-						elem.style.left = main[0]['style']['left'];
-						elem.style.position = main[0]['style']['position'];
-						elem.data = main[0]['innerText'];
-					}
-
-					// add imageBlock data to store
-					if (elem.class.indexOf("toolImageBlock") > -1) {
-						elem.data = main[0]['outerHTML'];
-					}
-
-					// if have children - create it struct
-					if(main[0]['childElementCount']) {
-						elem.child = loop(angular.element(main[0].firstElementChild).toArray());
-					}
-
-					elempush = make_clone_obj(elem);
-					rslt.push(elempush);
-
-					// clear prev version of obj
-					elem = undefined;
-
-					if ((main[0]['nextElementSibling'] != null )&&(main[0]['nextElementSibling']['id'].indexOf("right_panel") != 0)) {
-							main = angular.element(main[0]['nextSibling']);
-					} else { loopContinue = false;}
-
-				} while (loopContinue);
-
-				return rslt;
-			}
-
-			result = loop(main);
-
-			return result;
-		}
-
-		result_obj = itarate_object(angular.element(obj).toArray());
-
-		return result_obj;
-	}
-
+pageBuilder.controller("pageBuilderController", [
+	"$scope", "$compile", "$templateCache", "$http", "pageService",
+	function ($scope, $compile, $templateCache, $http, pageService) {
 
 	// save page template
 	$scope.save = function () {
 		var template;
 
-		template = angular.element("#page");
-		template = make_json(template);
-
 		//create string from json obj
-		template = JSON.stringify(template);
+		template = JSON.stringify(pageService.getPageJSON());
 
 		//send template to server
 		$http.post('save.php', {template: template}).
@@ -135,6 +31,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 	var clearRenderedPage = function () {
 		var page = angular.element('#page');
 
+		pageService.clearPage();
 		page.html("");
 	}
 
@@ -142,25 +39,21 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 	// /* Tools Function */
 
 	// /* Text Tool */
-
-	// render and display tool 
+	// render and display tool
 	var renderTextBlockTool = function (tool) {
 		var template, style, attributes;
 
-		attributes = (tool.draggable) ? " draggable" : " ";
-
-		style = ((tool.style.color)?"color: "+tool.style.color +"; ":"");
-		style += ((tool.style.backgroundColor)?"background-color: "+tool.style.backgroundColor +"; ":"");
-		style += " width:"+tool.style.width+"; ";
-		style += " height: "+tool.style.height+"; ";
-		style += " padding:"+tool.style.padding+"; ";
-		style += " border: "+tool.style.border+"; ";
-		style += " position: "+tool.style.position+"; ";
-		style += " top:"+tool.style.top+"; ";
-		style += " left: "+tool.style.left+"; ";
+		style = ((tool.css.color)?"color: "+tool.css.color +"; ":"");
+		style += ((tool.css.backgroundColor)?"background-color: "+tool.css.backgroundColor +"; ":"");
+		style += " width:"+tool.css.width+"; ";
+		style += " height: "+tool.css.height+"; ";
+		style += " padding:"+tool.css.padding+"; ";
+		style += " position: "+tool.css.position+"; ";
+		style += " top:"+tool.css.top+"; ";
+		style += " left: "+tool.css.left+"; ";
 
 		template = "<"+tool.tagName+" class='"+tool.class+"'"+attributes;
-		template +=" style='"+style+"'>"+tool.data+"</"+tool.tagName+">";
+		template +=" style='"+style+"'>"+tool.content+"</"+tool.tagName+">";
 
 		return template;
 	}
@@ -171,7 +64,8 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 		$http.get('/data/textBlockTool.json').success(function(data) {
 			tool = data;
 			tool = renderTextBlockTool(tool);
-			appendRenderedToPage (tool);
+			pageService.appendToPage(data);
+			appendRenderedToPage(tool);
 		}).
 		error(function(data, status, headers, config) {
 			console.log("BK_ERR: get text tool data - ", status);
@@ -180,11 +74,9 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 
 
 	// /* Image Tool */
-
-	// render and display tool 
+	// render and display tool
 	var renderImageBlockTool = function (tool) {
-
-		return tool.data;
+		return tool.content;
 	}
 
 	$scope.toolImageBlock = function () {
@@ -193,7 +85,8 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 		$http.get('/data/imageBlockTool.json').success(function(data) {
 			tool = data;
 			tool = renderImageBlockTool(tool);
-			appendRenderedToPage (tool);
+			pageService.appendToPage(data);
+			appendRenderedToPage(tool);
 		}).
 		error(function(data, status, headers, config) {
 			console.log("BK_ERR: get image tool data - ", status);
@@ -203,8 +96,7 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 
 
 	// /* Page Template*/
-
-	// render and display page template 
+	// render and display page template
 	var renderPageTemplate = function (data) {
 		var page;
 
@@ -213,27 +105,26 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 
 			// go each elem from top to bottom
 			while (blockData = blocksData.shift()) {
-
 				var block;
 
-				block = document.createElement(blockData['tagName']); 
+				block = document.createElement(blockData['tagName']);
 
 				block.setAttribute('id', blockData['id']);
 				block.setAttribute('class', blockData['class']);
-				block.setAttribute('style', blockData['css']);
-				if (blockData['isSortable']) { block.setAttribute('ng-sortable', '');};
-				block.style.width = blockData['width'];
-				block.style.height = blockData['height'];
+				block.setAttribute('style', blockData['cssString']);
+				block.style.width = blockData['css']['width'];
+				block.style.height = blockData['css']['height'];
+				block.style.backgroundColor = blockData['css']['backgroundColor'];
 
 				// compille block and append to parent element
 				parent.append($compile(block)($scope));
+				// push block to page stuct
+				pageService.appendChild(blockData, parent[0].id);
 
 				if (blockData['child']) {
 					createBlock(blockData['child'], angular.element(block));
 				}
-
 			}
-
 		}
 
 		page = angular.element("#page");
@@ -258,5 +149,4 @@ function ($scope, $compile, $templateCache, $http, propPanelService) {
 			console.log("BK_ERR: get page template data - ", status);
 		});
 	}
-
 }]);
