@@ -148,19 +148,17 @@ pageBuilder.controller("pageBuilderController", [
 	var renderTextBlockTool = function (tool) {
 		var template, style, attributes;
 
-		attributes = (tool.draggable) ? " draggable" : " ";
-
-		style = ((tool.style.color)?"color: "+tool.style.color +"; ":"");
-		style += ((tool.style.backgroundColor)?"background-color: "+tool.style.backgroundColor +"; ":"");
-		style += " width:"+tool.style.width+"; ";
-		style += " height: "+tool.style.height+"; ";
-		style += " padding:"+tool.style.padding+"; ";
-		style += " position: "+tool.style.position+"; ";
-		style += " top:"+tool.style.top+"; ";
-		style += " left: "+tool.style.left+"; ";
+		style = ((tool.css.color)?"color: "+tool.css.color +"; ":"");
+		style += ((tool.css.backgroundColor)?"background-color: "+tool.css.backgroundColor +"; ":"");
+		style += " width:"+tool.css.width+"; ";
+		style += " height: "+tool.css.height+"; ";
+		style += " padding:"+tool.css.padding+"; ";
+		style += " position: "+tool.css.position+"; ";
+		style += " top:"+tool.css.top+"; ";
+		style += " left: "+tool.css.left+"; ";
 
 		template = "<"+tool.tagName+" class='"+tool.class+"'"+attributes;
-		template +=" style='"+style+"'>"+tool.data+"</"+tool.tagName+">";
+		template +=" style='"+style+"'>"+tool.content+"</"+tool.tagName+">";
 
 		return template;
 	}
@@ -185,7 +183,7 @@ pageBuilder.controller("pageBuilderController", [
 	// render and display tool
 	var renderImageBlockTool = function (tool) {
 
-		return tool.data;
+		return tool.content;
 	}
 
 	$scope.toolImageBlock = function () {

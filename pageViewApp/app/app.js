@@ -39,7 +39,7 @@ pageView.controller("pageController", ["$scope", "$http", function ($scope, $htt
 						return el;
 					}
 
-					elem = str2DOMElement(elemData['data']);
+					elem = str2DOMElement(elemData['content']);
 
 					parent.appendChild(elem);
 					continue;
@@ -55,7 +55,7 @@ pageView.controller("pageController", ["$scope", "$http", function ($scope, $htt
 
 				// add textBlock text to store
 				if (elemData['class'].indexOf("toolTextBlock") > -1) {
-					elem.appendChild(document.createTextNode(elemData['data']));
+					elem.appendChild(document.createTextNode(elemData['content']));
 					elem.style.color = elemData['css']['color'];
 					elem.style.padding = elemData['css']['padding'];
 					elem.style.border = elemData['css']['border'];
