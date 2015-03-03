@@ -1,10 +1,9 @@
 var pageView = angular.module('pageView', []);
 
-
-pageView.controller("pageController", ["$scope", "$http", function ($scope, $http) {
+pageView.controller("pageController", ["$scope", "$http",
+	function ($scope, $http) {
 	// get page data
 	var getPageData = function () {
-
 		$http.get('/data/page.json').success(function(data) {
 			renderPage(data);
 		}).
@@ -15,13 +14,11 @@ pageView.controller("pageController", ["$scope", "$http", function ($scope, $htt
 
 	// render page
 	var renderPage = function (data) {
-
 		createElem = function (pageData, parent) {
-			//var elemData;
+			var elemData;
 
 			// go each elem from top to bottom
 			while (elemData = pageData.shift()) {
-
 				var elem;
 
 				// add imageBlock text to store
@@ -46,7 +43,6 @@ pageView.controller("pageController", ["$scope", "$http", function ($scope, $htt
 				}
 
 				elem = document.createElement(elemData['tagName']);
-
 				elem.setAttribute('id', elemData['id']);
 				elem.setAttribute('class', elemData['class']);
 				elem.style['width'] = elemData['css']['width'];
@@ -69,7 +65,6 @@ pageView.controller("pageController", ["$scope", "$http", function ($scope, $htt
 				if (elemData['child']) {
 					createElem(elemData['child'], elem);
 				}
-
 			}
 		}
 

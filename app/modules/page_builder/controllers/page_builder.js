@@ -2,113 +2,9 @@ pageBuilder.controller("pageBuilderController", [
 	"$scope", "$compile", "$templateCache", "$http", "pageService",
 	function ($scope, $compile, $templateCache, $http, pageService) {
 
-
-	// /* create json object from passed obj, for example #page dom elem */
-/*
-	var make_json = function (obj) {
-		var result_obj = {};
-
-		// make clone obj to prevent refence links
-		function make_clone_obj(source) {
-
-			if (Object.prototype.toString.call(source) === '[object Array]') {
-				var clone = [];
-
-				for (var i=0; i<source.length; i++) {
-
-					clone[i] = make_clone_obj(source[i]);
-				}
-
-				return clone;
-			} else if (typeof(source)=="object") {
-				var clone = {};
-
-				for (var prop in source) {
-
-					if (source.hasOwnProperty(prop)) {
-						clone[prop] = make_clone_obj(source[prop]);
-					}
-				}
-
-				return clone;
-			} else {
-
-				return source;
-			}
-		}
-
-		// iterate through object and create it struct
-		function itarate_object(main) {
-			var result = {}, loop;
-
-			loop = function(main) {
-				var elempush, rslt = [], loopContinue = true;
-
-				do {
-					var elem = {};
-
-					// set needed values of obj
-					elem.tagName = main[0]['nodeName'];
-					elem.id = main[0]['id'];
-					elem.class = main[0]['attributes']['class']['nodeValue'];
-					elem.style = {
-						width : main[0]['style']['width'].toString(),
-						height : main[0]['style']['height'].toString(),
-						backgroundColor : main[0]['style']['background-color']
-					};
-
-					// add textBlock text to store
-					if (elem.class.indexOf("toolTextBlock") > -1) {
-						elem.style.color = main[0]['style']['color'],
-						elem.style.padding = main[0]['style']['padding'];
-						elem.style.top = main[0]['style']['top'];
-						elem.style.left = main[0]['style']['left'];
-						elem.style.position = main[0]['style']['position'];
-						elem.data = main[0]['innerText'];
-					}
-
-					// add imageBlock data to store
-					if (elem.class.indexOf("toolImageBlock") > -1) {
-						elem.data = main[0]['outerHTML'];
-					}
-
-					// if have children - create it struct
-					if(main[0]['childElementCount']) {
-						elem.child = loop(angular.element(main[0].firstElementChild).toArray());
-					}
-
-					elempush = make_clone_obj(elem);
-					rslt.push(elempush);
-
-					// clear prev version of obj
-					elem = undefined;
-
-					if ((main[0]['nextElementSibling'] != null )&&(main[0]['nextElementSibling']['id'].indexOf("right_panel") != 0)) {
-							main = angular.element(main[0]['nextSibling']);
-					} else { loopContinue = false;}
-
-				} while (loopContinue);
-
-				return rslt;
-			}
-
-			result = loop(main);
-
-			return result;
-		}
-
-		result_obj = itarate_object(angular.element(obj).toArray());
-
-		return result_obj;
-	}*/
-
-
 	// save page template
 	$scope.save = function () {
 		var template;
-
-		//template = angular.element("#page");
-		//template = make_json(template);
 
 		//create string from json obj
 		template = JSON.stringify(pageService.getPageJSON());
@@ -143,7 +39,6 @@ pageBuilder.controller("pageBuilderController", [
 	// /* Tools Function */
 
 	// /* Text Tool */
-
 	// render and display tool
 	var renderTextBlockTool = function (tool) {
 		var template, style, attributes;
@@ -179,10 +74,8 @@ pageBuilder.controller("pageBuilderController", [
 
 
 	// /* Image Tool */
-
 	// render and display tool
 	var renderImageBlockTool = function (tool) {
-
 		return tool.content;
 	}
 
@@ -203,7 +96,6 @@ pageBuilder.controller("pageBuilderController", [
 
 
 	// /* Page Template*/
-
 	// render and display page template
 	var renderPageTemplate = function (data) {
 		var page;
@@ -213,7 +105,6 @@ pageBuilder.controller("pageBuilderController", [
 
 			// go each elem from top to bottom
 			while (blockData = blocksData.shift()) {
-
 				var block;
 
 				block = document.createElement(blockData['tagName']);
@@ -233,9 +124,7 @@ pageBuilder.controller("pageBuilderController", [
 				if (blockData['child']) {
 					createBlock(blockData['child'], angular.element(block));
 				}
-
 			}
-
 		}
 
 		page = angular.element("#page");
@@ -260,5 +149,4 @@ pageBuilder.controller("pageBuilderController", [
 			console.log("BK_ERR: get page template data - ", status);
 		});
 	}
-
 }]);
