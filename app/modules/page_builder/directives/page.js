@@ -2,7 +2,7 @@
 pageBuilder.directive("leftPanel", function(){
 	return {
 		restrict: "E",
-		template: "<div id='left_panel'><tools-panel></tools-panel><prop-panel></prop-panel></div>",
+		templateUrl: "app/modules/page_builder/templates/left_panel.html",
 	}
 });
 
@@ -10,7 +10,7 @@ pageBuilder.directive("leftPanel", function(){
 pageBuilder.directive("toolsPanel", function(){
 	return {
 		restrict: "E",
-		template: "<div id='toolsPanel'><text-tool></text-tool><image-tool></image-tool><hr/><templates></templates><hr/><save></save><show-page></show-page></div>",
+		templateUrl: "app/modules/page_builder/templates/tools_panel.html",
 	}
 });
 
@@ -18,7 +18,7 @@ pageBuilder.directive("toolsPanel", function(){
 pageBuilder.directive("propPanel", function(){
 	return {
 		restrict: "E",
-		template: "<div id='propPanel' ng-controller='propPanelController' ng-class='{ active: isActive()}'><div ng-click='hidePropPanel()' class='close_button'>x</div><prop-table></prop-table></div>",
+		templateUrl: "app/modules/page_builder/templates/prop_panel.html",
 	}
 });
 
@@ -26,7 +26,7 @@ pageBuilder.directive("propPanel", function(){
 pageBuilder.directive("page", function(){
 	return {
 		restrict: "E",
-		template: "<div class='page_background'><div id='page' class='ng-scope'></div></div>",
+		templateUrl: "app/modules/page_builder/templates/page.html",
 	}
 });
 
