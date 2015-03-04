@@ -1,1 +1,1 @@
-var pageBuilder = angular.module('pageBuilder', ['ngDraggable']);
+var bkApp = angular.module("bkApp", ["ngDraggable", "bkPageBuilder"]);

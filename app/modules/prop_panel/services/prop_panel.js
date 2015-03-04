@@ -1,4 +1,4 @@
-pageBuilder.service('propPanelService', function () {
+bkPageBuilder.service('propPanelService', function () {
 	this.isActive = false;
 	this.needUpdate = 0;
 

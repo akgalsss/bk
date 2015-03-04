@@ -1,4 +1,4 @@
-pageBuilder.controller("propPanelController", ["$scope", "$compile", "propPanelService",
+bkPageBuilder.controller("propPanelController", ["$scope", "$compile", "propPanelService",
 function ($scope, $compile, propPanelService) {
 	// check if need show propPanel
 	$scope.isActive = function() {

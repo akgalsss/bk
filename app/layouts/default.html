@@ -1,26 +1,11 @@
 <div class="page_wraper">
-	<div id="left_panel">
-		<div id="toolsPanel">
-			<text-tool></text-tool>
-			<image-tool></image-tool>
-			<hr/>
-			<templates></templates>
-			<hr/>
-			<save></save>
-			<show-page></show-page>
-		</div>
 
+	<left-panel></left-panel>
 
-		<div id="propPanel" ng-controller="propPanelController" ng-class="{ active: isActive()}">
-			<div ng-click="hidePropPanel()" class="close_button">x</div>
-			<prop-table></prop-table>
-		</div>
-	</div>
 
 	<page></page>
 
-	<div id="right_panel">
 
-	</div>
+	<right-panel></right-panel>
 
 </div>

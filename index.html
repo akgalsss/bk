@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-US" ng-app="pageBuilder">
+<html lang="en-US" ng-app="bkApp">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
 	<![endif]-->
 </head>
 
-<body ng-controller="pageBuilderController">
+<body ng-controller="bkPageBuilderController">
 	<div ng-include src="'app/layouts/default.html'" > </div>
 
 	<script src="vendor/jquery.js"></script>
@@ -35,9 +35,8 @@
 	<script src="app/app.js"></script>
 
 	<script src="app/modules/page_builder/controllers/page_builder.js"></script>
-	<script src="app/modules/page_builder/directives/tools.js"></script>
-	<script src="app/modules/page_builder/directives/page.js"></script>
-	<script src="app/modules/page_builder/directives/templates.js"></script>
+	<script src="app/modules/page_builder/directives/tools_collection.js"></script>
+	<script src="app/modules/page_builder/directives/page_stuct.js"></script>
 	<script src="app/modules/page_builder/services/page.js"></script>
 
 
