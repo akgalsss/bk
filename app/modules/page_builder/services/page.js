@@ -1,4 +1,4 @@
-pageBuilder.service('pageService', function () {
+bkPageBuilder.service('bkPageService', function () {
 	var page = [{ tagName:"DIV",id:"page",class:"",css:{width:"",height:"",backgroundColor:""}, child : []}];
 
 	this.getPageJSON = function () {

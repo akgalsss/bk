@@ -1,5 +1,5 @@
 // properties table directive functionality. Use: <prop-table></prop-table>
-pageBuilder.directive("propTable", function($compile){
+bkPageBuilder.directive("propTable", function($compile){
 	var linkFn = function(scope, element, attrs) { };
 
 	return {

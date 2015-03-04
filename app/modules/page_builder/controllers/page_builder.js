@@ -1,13 +1,15 @@
-pageBuilder.controller("pageBuilderController", [
-	"$scope", "$compile", "$templateCache", "$http", "pageService",
-	function ($scope, $compile, $templateCache, $http, pageService) {
+var bkPageBuilder = angular.module("bkPageBuilder", []);
+
+bkPageBuilder.controller("bkPageBuilderController", [
+	"$scope", "$compile", "$templateCache", "$http", "bkPageService",
+	function ($scope, $compile, $templateCache, $http, bkPageService) {
 
 	// save page template
 	$scope.save = function () {
 		var template;
 
 		//create string from json obj
-		template = JSON.stringify(pageService.getPageJSON());
+		template = JSON.stringify(bkPageService.getPageJSON());
 
 		//send template to server
 		$http.post('save.php', {template: template}).
@@ -31,7 +33,7 @@ pageBuilder.controller("pageBuilderController", [
 	var clearRenderedPage = function () {
 		var page = angular.element('#page');
 
-		pageService.clearPage();
+		bkPageService.clearPage();
 		page.html("");
 	}
 
@@ -64,7 +66,7 @@ pageBuilder.controller("pageBuilderController", [
 		$http.get('/data/textBlockTool.json').success(function(data) {
 			tool = data;
 			tool = renderTextBlockTool(tool);
-			pageService.appendToPage(data);
+			bkPageService.appendToPage(data);
 			appendRenderedToPage(tool);
 		}).
 		error(function(data, status, headers, config) {
@@ -85,7 +87,7 @@ pageBuilder.controller("pageBuilderController", [
 		$http.get('/data/imageBlockTool.json').success(function(data) {
 			tool = data;
 			tool = renderImageBlockTool(tool);
-			pageService.appendToPage(data);
+			bkPageService.appendToPage(data);
 			appendRenderedToPage(tool);
 		}).
 		error(function(data, status, headers, config) {
@@ -119,7 +121,7 @@ pageBuilder.controller("pageBuilderController", [
 				// compille block and append to parent element
 				parent.append($compile(block)($scope));
 				// push block to page stuct
-				pageService.appendChild(blockData, parent[0].id);
+				bkPageService.appendChild(blockData, parent[0].id);
 
 				if (blockData['child']) {
 					createBlock(blockData['child'], angular.element(block));

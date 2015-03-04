@@ -1,5 +1,5 @@
 // left panel directive functionality. Use: <page></page>
-pageBuilder.directive("leftPanel", function(){
+bkPageBuilder.directive("leftPanel", function(){
 	return {
 		restrict: "E",
 		templateUrl: "app/modules/page_builder/templates/left_panel.html",
@@ -7,7 +7,7 @@ pageBuilder.directive("leftPanel", function(){
 });
 
 // tools panel directive functionality. Use: <tools-panel></tools-panel>
-pageBuilder.directive("toolsPanel", function(){
+bkPageBuilder.directive("toolsPanel", function(){
 	return {
 		restrict: "E",
 		templateUrl: "app/modules/page_builder/templates/tools_panel.html",
@@ -15,7 +15,7 @@ pageBuilder.directive("toolsPanel", function(){
 });
 
 // prop panel directive functionality. Use: <prop-panel></prop-panel>
-pageBuilder.directive("propPanel", function(){
+bkPageBuilder.directive("propPanel", function(){
 	return {
 		restrict: "E",
 		templateUrl: "app/modules/page_builder/templates/prop_panel.html",
@@ -23,7 +23,7 @@ pageBuilder.directive("propPanel", function(){
 });
 
 // page directive functionality. Use: <page></page>
-pageBuilder.directive("page", function(){
+bkPageBuilder.directive("page", function(){
 	return {
 		restrict: "E",
 		templateUrl: "app/modules/page_builder/templates/page.html",
@@ -32,7 +32,7 @@ pageBuilder.directive("page", function(){
 
 
 // right panel directive functionality. Use: <right-panel></right-panel>
-pageBuilder.directive("rightPanel", function(){
+bkPageBuilder.directive("rightPanel", function(){
 	return {
 		restrict: "E",
 		template: "<div id='right_panel'></div>",
