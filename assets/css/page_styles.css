@@ -1,5 +1,5 @@
 /* Tools panel styles */
-#toolsPanel {
+.toolsPanel {
 	background: #fff;
 	border: 1px solid;
 	margin: 4px auto;
@@ -18,7 +18,7 @@
 	width: 50px;
 }
 
-#toolsPanel>hr {
+.toolsPanel>hr {
 	margin:0;
 	margin-bottom: 8px;
 }
@@ -125,13 +125,13 @@ input[type="text"] {
 }
 
 
-/* mockups for sortable test */
-
-.sortable_test {
-	color: #f0f0f0;
+/* styles for draggable tools panels */
+.over, #left_panel.over, #right_panel.over {
+  background-color: #E1E6FA;
+  border: 1px solid #ff0000;
 }
 
-.sortable-ghost {
-	background-color: #f0f0f0;
-	color: #0f0f0f;
+.drag, #left_panel.drag, #right_panel.drag {
+  opacity: 0.5;
+  border: 1px solid #ff0000;
 }
