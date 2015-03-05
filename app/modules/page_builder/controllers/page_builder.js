@@ -151,4 +151,14 @@ bkPageBuilder.controller("bkPageBuilderController", [
 			console.log("BK_ERR: get page template data - ", status);
 		});
 	}
+
+
+	$scope.rightPanelDrop = function () {
+		console.log("->page_builder.js:157 right drop");
+	}
+
+
+	$scope.leftPanelDrop = function () {
+		console.log("->page_builder.js:157 left drop");
+	}
 }]);

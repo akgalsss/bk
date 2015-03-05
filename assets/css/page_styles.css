@@ -124,14 +124,9 @@ input[type="text"] {
 	background: #183152;
 }
 
-
-/* mockups for sortable test */
-
-.sortable_test {
-	color: #f0f0f0;
+.over {
+  background: red;
 }
-
-.sortable-ghost {
-	background-color: #f0f0f0;
-	color: #0f0f0f;
+.drag {
+  opacity: 0.5;
 }
