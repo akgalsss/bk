@@ -45,6 +45,7 @@ bkPageBuilder.controller("bkPageBuilderController", [
 	var renderTextBlockTool = function (tool) {
 		var template, style, attributes;
 
+		if (tool.draggable) { attributes = " draggable"; }
 		style = ((tool.css.color)?"color: "+tool.css.color +"; ":"");
 		style += ((tool.css.backgroundColor)?"background-color: "+tool.css.backgroundColor +"; ":"");
 		style += " width:"+tool.css.width+"; ";
@@ -111,6 +112,12 @@ bkPageBuilder.controller("bkPageBuilderController", [
 
 				block = document.createElement(blockData['tagName']);
 
+				if (blockData['draggable']) { block.setAttribute('draggable', ''); }
+				if (blockData['droppable']) {
+					block.setAttribute('droppable', '');
+					block.setAttribute('drop', blockData['droppable']);
+				 }
+
 				block.setAttribute('id', blockData['id']);
 				block.setAttribute('class', blockData['class']);
 				block.setAttribute('style', blockData['cssString']);
@@ -153,12 +160,18 @@ bkPageBuilder.controller("bkPageBuilderController", [
 	}
 
 
-	$scope.rightPanelDrop = function () {
-		console.log("->page_builder.js:157 right drop");
+	// event handler for dropped element in left panel
+	$scope.rowInsert = function () {
+		console.log("rowInsert");
 	}
 
+	// event handler for dropped element in right panel
+	$scope.rightPanelDrop = function () {
+		console.log("->page_builder.js:157 element in RIGHT panel. implement Save state");
+	}
 
+	// event handler for dropped element in left panel
 	$scope.leftPanelDrop = function () {
-		console.log("->page_builder.js:157 left drop");
+		console.log("->page_builder.js:157 element in LEFT panel. implement Save state");
 	}
 }]);

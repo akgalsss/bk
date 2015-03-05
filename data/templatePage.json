@@ -2,6 +2,8 @@
     "tagName":"DIV",
     "id" : "header",
     "class":"block",
+    "draggable":"true",
+    "droppable":"rowInsert()",
     "css" : {
       "height" : "50px",
       "width" : "100%",
@@ -12,6 +14,8 @@
     "tagName":"DIV",
     "id" : "content",
     "class":"block",
+    "draggable":"true",
+    "droppable":"rowInsert()",
     "css" : {
       "backgroundColor" : "#E0E4CC",
       "height" : "400px",
@@ -22,6 +26,8 @@
     "tagName":"DIV",
     "id" : "footer",
     "class":"block",
+    "draggable":"true",
+    "droppable":"rowInsert()",
     "css" : {
       "cssString" : "margin-bottom: 0;",
       "height" : "75px",

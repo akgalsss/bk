@@ -39,6 +39,8 @@ bkPageBuilder.directive("rightPanel", function(){
 	}
 });
 
+
+// draggable directive
 bkPageBuilder.directive('draggable', function() {
   return function(scope, element) {
       var el = element[0];
@@ -60,6 +62,8 @@ bkPageBuilder.directive('draggable', function() {
     }
 });
 
+
+// droppable directive
 bkPageBuilder.directive('droppable', function() {
   return {
     scope: {
@@ -89,6 +93,7 @@ bkPageBuilder.directive('droppable', function() {
         this.classList.remove('over');
 
         var item = document.getElementById(e.dataTransfer.getData('Text'));
+        console.log("->page_stuct.js:96", item);
         this.appendChild(item);
 
         scope.$apply('drop()');
