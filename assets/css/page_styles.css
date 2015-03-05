@@ -1,5 +1,5 @@
 /* Tools panel styles */
-#toolsPanel {
+.toolsPanel {
 	background: #fff;
 	border: 1px solid;
 	margin: 4px auto;
@@ -18,7 +18,7 @@
 	width: 50px;
 }
 
-#toolsPanel>hr {
+.toolsPanel>hr {
 	margin:0;
 	margin-bottom: 8px;
 }
@@ -124,9 +124,14 @@ input[type="text"] {
 	background: #183152;
 }
 
-.over {
-  background: red;
+
+/* styles for draggable tools panels */
+.over, #left_panel.over, #right_panel.over {
+  background-color: #E1E6FA;
+  border: 1px solid #ff0000;
 }
-.drag {
+
+.drag, #left_panel.drag, #right_panel.drag {
   opacity: 0.5;
+  border: 1px solid #ff0000;
 }
