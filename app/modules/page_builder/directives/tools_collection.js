@@ -66,6 +66,22 @@ bkPageBuilder.directive("imageTool", function(){
 });
 
 
+// image with text directive functionality. Use: <image-text-tool></image-text-tool>
+bkPageBuilder.directive("imageTextTool", function(){
+	var linkFn = function(scope, element, attrs) {
+
+		element.bind("click", function() {
+			scope.toolImageTextBlock();
+		});
+	};
+
+	return {
+		link: linkFn,
+		restrict: "E",
+		template: "<button class='toolItem imageTextTool' title='Add Image with Text'>IT</button>",
+	}
+});
+
 // get template directive functionality. Use: <templates></templates>
 bkPageBuilder.directive("templates", function(){
 	var linkFn = function(scope, element) {
