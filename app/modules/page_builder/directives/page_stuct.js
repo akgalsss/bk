@@ -103,3 +103,50 @@ bkPageBuilder.directive('droppable', function() {
     }
   }
 });
+
+
+// movable directive
+bkPageBuilder.directive('movable',[ "$document", function($document) {
+  return function(scope, element, attr) {
+      var startX, startY, x=0, y=0, maxX, maxY, parent = element.parent();
+
+      element.css({
+       position: 'absolute',
+       cursor: 'pointer',
+       display: 'block',
+      });
+
+      element.on('mousedown', function(event) {
+        // Prevent default dragging of selected content
+        event.preventDefault();
+        startX = event.screenX - x;
+        startY = event.screenY - y;
+        maxX   = parent.width() - element.width();
+        maxY   = parent.height() - element.height();
+
+        $document.on('mousemove', mousemove);
+        $document.on('mouseup', mouseup);
+      });
+
+      function mousemove(event) {
+        y = event.screenY - startY;
+        x = event.screenX - startX;
+
+        // prevent moving text abroad image container
+        if (x<0) { x = 0; }
+        if (x>maxX) { x = maxX; }
+        if (y<0) { y = 0; }
+        if (y>maxY) { y = maxY; }
+
+        element.css({
+          top: y + 'px',
+          left:  x + 'px'
+        });
+      }
+
+      function mouseup() {
+        $document.off('mousemove', mousemove);
+        $document.off('mouseup', mouseup);
+      }
+    };
+}]);
