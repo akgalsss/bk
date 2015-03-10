@@ -1,0 +1,19 @@
+{
+  "tagName":"DIV",
+  "id":"",
+  "class":"toolImageText fleft ng-scope",
+  "draggable":"true",
+  "movable":"true",
+  "css": {
+    "width":"240px",
+    "height":"60px",
+    "color":"#f5f5f5",
+    "backgroundColor":"#FAF4A3",
+    "backgroundImage":"http://lorempixel.com/240/60/",
+    "padding":"8px",
+    "position":"absolute",
+    "left":"10%",
+    "top":"10%"
+  },
+  "content":"Lorem ipsum."
+}

@@ -98,6 +98,47 @@ bkPageBuilder.controller("bkPageBuilderController", [
 	}
 
 
+	// /* Image wit Text Tool */
+	// render and display tool
+	var renderImageTextBlockTool = function (tool) {
+		var template, style, attributes, textAttributes;
+
+		if (tool.draggable) { attributes = " draggable"; }
+		style = ((tool.css.color)?"color: "+tool.css.color +"; ":"");
+		style += ((tool.css.backgroundColor)?"background-color: "+tool.css.backgroundColor +"; ":"");
+		style += ((tool.css.backgroundImage)?"background-image: url("+tool.css.backgroundImage +"); ":"");
+		style += " width:"+tool.css.width+"; ";
+		style += " height: "+tool.css.height+"; ";
+		style += " padding:"+tool.css.padding+"; ";
+		style += " position: "+tool.css.position+"; ";
+		style += " top:"+tool.css.top+"; ";
+		style += " left: "+tool.css.left+"; ";
+
+		if (tool.movable) { textAttributes = " movable"; }
+
+		template = "<"+tool.tagName+" class='"+tool.class+"'"+attributes;
+		template +=" style='"+style+"'><span"+textAttributes+">";
+		template +=tool.content+"</span></"+tool.tagName+">";
+
+		return template;
+	}
+
+	$scope.toolImageTextBlock = function () {
+		var tool = {};
+
+		$http.get('/data/imageTextBlockTool.json').success(function(data) {
+			tool = data;
+			tool = renderImageTextBlockTool(tool);
+			bkPageService.appendToPage(data);
+			appendRenderedToPage(tool);
+		}).
+		error(function(data, status, headers, config) {
+			console.log("BK_ERR: get image with text tool data - ", status);
+		});
+
+	}
+
+
 	// /* Page Template*/
 	// render and display page template
 	var renderPageTemplate = function (data) {
