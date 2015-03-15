@@ -2,6 +2,8 @@
   "tagName":"IMG",
   "id":"",
   "class":"toolImageBlock ng-scope fleft",
-  "draggable":"true",
+  "attributes": {
+    "draggable":"true"
+  },
   "content":"<img draggable src='http://lorempixel.com/140/140/' class='toolImageBlock ng-scope' width='140' height='140' alt='Lorem Pixel Image' style='position: absolute; top: 25%; left: 25%; cursor: pointer;'>"
 }

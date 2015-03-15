@@ -2,8 +2,9 @@
   "tagName":"DIV",
   "id":"",
   "class":"toolImageText fleft ng-scope",
-  "draggable":"true",
-  "movable":"true",
+  "attributes": {
+    "draggable":"true"
+  },
   "css": {
     "width":"480px",
     "height":"120px",
@@ -15,5 +16,11 @@
     "left":"10%",
     "top":"10%"
   },
-  "content":"Lorem ipsum."
+  "appendChild" : {
+    "tagName":"SPAN",
+    "attributes": {
+      "movable":"true"
+    },
+    "content":"Lorem ipsum."
+  }
 }
