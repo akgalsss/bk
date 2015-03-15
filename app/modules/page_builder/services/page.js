@@ -1,21 +1,28 @@
 bkPageBuilder.service('bkPageService', function () {
-	var page = [{ tagName:"DIV",id:"page",class:"",css:{width:"",height:"",backgroundColor:""}, child : []}];
+  var page = [{ tagName:"DIV",id:"page",class:"",css:{width:"",height:"",backgroundColor:""}, child : []}];
 
-	this.getPageJSON = function () {
-		return page;
-	}
+  function getPageJSON() {
+    return page;
+  }
 
-	this.appendChild = function (obj, parentId) {
-		// TODO: create finding method by parent id
-		if (page[0].id == parentId) page[0].child.push(obj);
-	}
+  function appendChild(obj, parentId) {
+    // TODO: create finding method by parent id
+    if (page[0].id == parentId) page[0].child.push(obj);
+  }
 
-	this.appendToPage = function (obj) {
-		page[0].child.push(obj);
-	}
+  function appendToPage(obj) {
+    page[0].child.push(obj);
+  }
 
-	this.clearPage = function (obj) {
-		page = [{ tagName:"DIV",id:"page",class:"",css:{width:"",height:"",backgroundColor:""}, child : []}];
-	}
+  function clearPage(obj) {
+    page = [{ tagName:"DIV",id:"page",class:"",css:{width:"",height:"",backgroundColor:""}, child : []}];
+  }
+
+  return {
+    getPageJSON  : getPageJSON,
+    appendChild  : appendChild,
+    appendToPage : appendToPage,
+    clearPage    : clearPage
+  }
 
 });
