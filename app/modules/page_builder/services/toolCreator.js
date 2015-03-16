@@ -1,14 +1,16 @@
 bkPageBuilder.service('bkCreateToolService', function () {
-  var toolTempalte, toolData;
+  var toolTempalte, toolData, idNum=0;
 
   function createTool(contentToAppend) {
     var attributes="", styles ="",
         content = ((contentToAppend)?contentToAppend:toolData.content);
 
+    idNum++;
+
     if (toolData.attributes) attributes = getAttributes();
     if (toolData.css) styles = getStyles();
 
-    toolTempalte = "<"+toolData.tagName+" "+toolData.class+" "+attributes;
+    toolTempalte = "<"+toolData.tagName+" id='bkTool_"+idNum+"' "+toolData.class+" "+attributes;
     toolTempalte +=styles+">"+content+"</"+toolData.tagName+">";
 
     return toolTempalte;
