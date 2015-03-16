@@ -93,7 +93,6 @@ bkPageBuilder.directive('droppable', function() {
         this.classList.remove('over');
 
         var item = document.getElementById(e.dataTransfer.getData('Text'));
-        console.log("->page_stuct.js:96", item);
         this.appendChild(item);
 
         scope.$apply('drop()');
