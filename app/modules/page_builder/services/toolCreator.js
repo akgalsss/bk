@@ -2,22 +2,28 @@ bkPageBuilder.service('bkCreateToolService', function () {
   var toolTempalte, toolData, idNum=0;
 
   function createTool(contentToAppend) {
-    var attributes="", styles ="",
+    var attributes="", styles ="", id="", classes="",
         content = ((contentToAppend)?contentToAppend:toolData.content);
 
-    idNum++;
-
+    if (toolData.id) id = getId();
     if (toolData.attributes) attributes = getAttributes();
     if (toolData.css) styles = getStyles();
+    if (toolData.class) classes="class='"+toolData.class+"'";
 
-    toolTempalte = "<"+toolData.tagName+" id='bkTool_"+idNum+"' "+toolData.class+" "+attributes;
+    toolTempalte  = "<"+toolData.tagName+" "+id+" "+classes+" "+attributes;
     toolTempalte +=styles+">"+content+"</"+toolData.tagName+">";
 
     return toolTempalte;
   }
 
+  function getId() {
+
+    idNum++;
+    return "id='"+toolData.id+idNum+"'";
+  }
+
   function getAttributes() {
-    var attr;
+    var attr="";
 
     if (toolData.attributes.draggable) { attr  = " draggable"; }
     if (toolData.attributes.movable) {   attr += " movable"; }
@@ -48,7 +54,19 @@ bkPageBuilder.service('bkCreateToolService', function () {
   }
 
   function createImageBlockTool (toolJson) {
-    return toolJson.content;
+    var attributes="", id="";
+
+    toolData = toolJson;
+
+    if (toolData.id) id = getId();
+    if (toolData.attributes) attributes = getAttributes();
+
+    toolTempalte  = "<img "+id+" class='"+toolData.class+"' "+attributes;
+    toolTempalte +=" style='"+toolData.style+" alt='"+toolData.alt;
+    toolTempalte +=" width='"+toolData.width+" height='"+toolData.height;
+    toolTempalte +=" src='"+toolData.src+"'/>";
+
+    return toolTempalte;
   }
 
   function createImageTextBlockTool (toolJson) {
