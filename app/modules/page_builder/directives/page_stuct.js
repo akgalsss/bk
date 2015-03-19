@@ -64,7 +64,7 @@ bkPageBuilder.directive('draggable', function() {
 
 
 // droppable directive
-bkPageBuilder.directive('droppable', function() {
+bkPageBuilder.directive('droppable', ['bkPageService', function(bkPageService) {
   return {
     scope: {
       drop: '&',
@@ -93,15 +93,16 @@ bkPageBuilder.directive('droppable', function() {
         this.classList.remove('over');
 
         var item = document.getElementById(e.dataTransfer.getData('Text'));
-        this.appendChild(item);
 
-        scope.$apply('drop()');
+        if (bkPageService.canDropIn(e.dataTransfer.getData('Text'), this.id)) {
+           this.appendChild(item);
+        }
 
         return false;
       }, false);
     }
   }
-});
+}]);
 
 
 // movable directive

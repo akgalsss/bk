@@ -107,7 +107,6 @@ bkPageBuilder.controller("bkPageBuilderController", [
         if (blockData['draggable']) { block.setAttribute('draggable', ''); }
         if (blockData['droppable']) {
           block.setAttribute('droppable', '');
-          block.setAttribute('drop', blockData['droppable']);
          }
 
         block.setAttribute('id', blockData['id']);
@@ -149,21 +148,5 @@ bkPageBuilder.controller("bkPageBuilderController", [
     error(function(data, status, headers, config) {
       console.log("BK_ERR: get page template data - ", status);
     });
-  }
-
-
-  // event handler for dropped element in left panel
-  $scope.rowInsert = function () {
-    console.log("rowInsert");
-  }
-
-  // event handler for dropped element in right panel
-  $scope.rightPanelDrop = function () {
-    console.log("->page_builder.js:157 element in RIGHT panel. implement Save state");
-  }
-
-  // event handler for dropped element in left panel
-  $scope.leftPanelDrop = function () {
-    console.log("->page_builder.js:157 element in LEFT panel. implement Save state");
   }
 }]);

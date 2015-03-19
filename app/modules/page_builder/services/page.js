@@ -18,11 +18,17 @@ bkPageBuilder.service('bkPageService', function () {
     page = [{ tagName:"DIV",id:"page",class:"",css:{width:"",height:"",backgroundColor:""}, child : []}];
   }
 
+  function canDropIn(child, parent){
+    console.log("->page.js:22 child, parent:", child, parent);
+    return true;
+  }
+
   return {
     getPageJSON  : getPageJSON,
     appendChild  : appendChild,
     appendToPage : appendToPage,
-    clearPage    : clearPage
+    clearPage    : clearPage,
+    dropDone     : dropDone
   }
 
 });
