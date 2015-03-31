@@ -105,9 +105,7 @@ bkPageBuilder.controller("bkPageBuilderController", [
         block = document.createElement(blockData['tagName']);
 
         if (blockData['draggable']) { block.setAttribute('draggable', ''); }
-        if (blockData['droppable']) {
-          block.setAttribute('droppable', '');
-         }
+        if (blockData['droppable']) { block.setAttribute('droppable', ''); }
 
         block.setAttribute('id', blockData['id']);
         block.setAttribute('class', blockData['class']);
@@ -118,8 +116,6 @@ bkPageBuilder.controller("bkPageBuilderController", [
 
         // compille block and append to parent element
         parent.append($compile(block)($scope));
-        // push block to page stuct
-        bkPageService.appendChild(blockData, parent[0].id);
 
         if (blockData['child']) {
           createBlock(blockData['child'], angular.element(block));
@@ -127,6 +123,7 @@ bkPageBuilder.controller("bkPageBuilderController", [
       }
     }
 
+    bkPageService.appendToPage(data);
     page = angular.element("#page");
     createBlock(data, page);
   }
