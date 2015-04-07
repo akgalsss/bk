@@ -35,7 +35,7 @@ bkPageBuilder.directive("page", function(){
 bkPageBuilder.directive("rightPanel", function(){
 	return {
 		restrict: "E",
-		template: "<div id='right_panel' droppable drop='rightPanelDrop()'></div>",
+		template: "<div id='right_panel' droppable drop'></div>",
 	}
 });
 
