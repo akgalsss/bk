@@ -3,7 +3,7 @@
     "id" : "header",
     "class":"block",
     "draggable":"true",
-    "droppable":"rowInsert()",
+    "canDropIn" : ["toolTextBlock"],
     "css" : {
       "height" : "50px",
       "width" : "100%",
@@ -15,7 +15,7 @@
     "id" : "content",
     "class":"block",
     "draggable":"true",
-    "droppable":"rowInsert()",
+    "canDropIn" : ["toolTextBlock"],
     "css" : {
       "backgroundColor" : "#E0E4CC",
       "height" : "400px",
@@ -27,7 +27,7 @@
     "id" : "footer",
     "class":"block",
     "draggable":"true",
-    "droppable":"rowInsert()",
+    "canDropIn" : ["toolTextBlock"],
     "css" : {
       "cssString" : "margin-bottom: 0;",
       "height" : "75px",

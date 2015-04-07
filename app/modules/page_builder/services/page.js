@@ -38,6 +38,7 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   function canDropIn(child, parent){
+    console.log("->page.js:41 child,parent:", child,parent);
     console.log(getPageJSON());
     return true;
   }
