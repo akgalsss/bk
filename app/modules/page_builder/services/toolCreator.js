@@ -17,9 +17,9 @@ bkPageBuilder.service('bkCreateToolService', function () {
   }
 
   function getId() {
-
     idNum++;
-    return "id='"+toolData.id+idNum+"'";
+    toolData.id = toolData.id+idNum;
+    return "id='"+toolData.id+"'";
   }
 
   function getAttributes() {

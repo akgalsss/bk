@@ -42,13 +42,13 @@ bkPageBuilder.controller("bkPageBuilderController", [
 
   // /* Text Tool */
   $scope.toolTextBlock = function () {
-    var tool = {};
+    var tool = {}, toolRendered;
 
     $http.get('/data/textBlockTool.json').success(function(data) {
       tool = data;
-      tool = bkCreateToolService.createTextBlockTool(tool);
-      bkPageService.appendToPage(data);
-      appendRenderedToPage(tool);
+      toolRendered = bkCreateToolService.createTextBlockTool(tool);
+      bkPageService.appendToPage(tool);
+      appendRenderedToPage(toolRendered);
     }).
     error(function(data, status, headers, config) {
       console.log("BK_ERR: get text tool data - ", status);
@@ -58,13 +58,13 @@ bkPageBuilder.controller("bkPageBuilderController", [
 
   // /* Image Tool */
   $scope.toolImageBlock = function () {
-    var tool = {};
+    var tool = {}, toolRendered;
 
     $http.get('/data/imageBlockTool.json').success(function(data) {
       tool = data;
-      tool = bkCreateToolService.createImageBlockTool(tool);
-      bkPageService.appendToPage(data);
-      appendRenderedToPage(tool);
+      toolRendered = bkCreateToolService.createImageBlockTool(tool);
+      bkPageService.appendToPage(tool);
+      appendRenderedToPage(toolRendered);
     }).
     error(function(data, status, headers, config) {
       console.log("BK_ERR: get image tool data - ", status);
@@ -75,13 +75,13 @@ bkPageBuilder.controller("bkPageBuilderController", [
 
   // /* Image wit Text Tool */
   $scope.toolImageTextBlock = function () {
-    var tool = {};
+    var tool = {}, toolRendered;
 
     $http.get('/data/imageTextBlockTool.json').success(function(data) {
       tool = data;
-      tool = bkCreateToolService.createImageTextBlockTool(tool);
-      bkPageService.appendToPage(data);
-      appendRenderedToPage(tool);
+      toolRendered = bkCreateToolService.createImageTextBlockTool(tool);
+      bkPageService.appendToPage(tool);
+      appendRenderedToPage(toolRendered);
     }).
     error(function(data, status, headers, config) {
       console.log("BK_ERR: get image with text tool data - ", status);
