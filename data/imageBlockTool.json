@@ -1,7 +1,7 @@
 {
   "tagName":"IMG",
   "id":"bk_it_",
-  "class":"toolImageBlock ng-scope fleft",
+  "class":"toolImageBlock ng-scope fleft initToolStyles",
   "attributes": {
     "draggable":"true"
   },
@@ -9,5 +9,5 @@
   "src":"http://lorempixel.com/140/140/",
   "height":"140",
   "width":"140",
-  "style":"position: absolute; top: 25%; left: 25%; cursor: pointer;"
+  "style":""
 }

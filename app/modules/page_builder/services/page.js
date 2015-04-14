@@ -31,7 +31,7 @@ bkPageBuilder.service('bkPageService', function () {
       page[0].child = obj;
     }
 
-    console.log("+ tool:",getPageJSON());
+    console.log("Append To Page: Success",getPageJSON());
   }
 
 
@@ -85,6 +85,22 @@ bkPageBuilder.service('bkPageService', function () {
     return false;
   }
 
+  function deleteClass(classList,objKey) {
+    var obj = bkEval(objKey), objClassArr = obj.class;
+
+    classArr = classList.split(" ");
+    objClassArr = objClassArr.split(" ");
+    classArr.map(function(delClass){
+      objClassArr.map(function(objClass,j){
+        if (delClass === objClass ) {
+          objClassArr.splice(j,1);
+        }
+      });
+    });
+    obj.class = objClassArr.join(" ");
+    angular.element("#"+obj.id).removeClass(classList);
+  }
+
 
   function canDropIn(child, parent) {
     childKey = findObjKey(child,page);
@@ -93,12 +109,13 @@ bkPageBuilder.service('bkPageService', function () {
     parentObj = bkEval(parentKey);
 
     if (checkCanDropIn(childObj.class, parentObj.canDropIn)) {
+      deleteClass("initToolStyles", childKey);
       appendChild(childKey, parentKey);
       removeChild(child,page);
-      console.log("+:",getPageJSON());
+      console.log("Drop: Success",getPageJSON());
       return true; }
     else {
-      console.log("-:");
+      console.log("Drop: Can't drop this tool here");
       return false; }
   }
 

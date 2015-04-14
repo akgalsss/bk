@@ -6,3 +6,10 @@ body {
 .fleft {
   float: left;
 }
+
+.initToolStyles {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  cursor: pointer;
+}

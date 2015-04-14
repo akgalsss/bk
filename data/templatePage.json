@@ -3,7 +3,7 @@
     "id" : "header",
     "class":"block",
     "draggable":"true",
-    "canDropIn" : ["toolTextBlock"],
+    "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText"],
     "css" : {
       "height" : "50px",
       "width" : "100%",
@@ -15,7 +15,7 @@
     "id" : "content",
     "class":"block",
     "draggable":"true",
-    "canDropIn" : ["toolTextBlock"],
+    "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText"],
     "css" : {
       "backgroundColor" : "#E0E4CC",
       "height" : "400px",

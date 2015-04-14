@@ -1,7 +1,7 @@
 {
   "tagName":"DIV",
   "id":"bk_tt_",
-  "class":"toolTextBlock fleft ng-scope",
+  "class":"toolTextBlock fleft ng-scope initToolStyles",
   "attributes": {
     "draggable" : "true"
   },
@@ -10,10 +10,7 @@
     "height":"120px",
     "color":"#050505",
     "backgroundColor":"#DBEEFD",
-    "padding":"8px",
-    "position":"absolute",
-    "left":"25%",
-    "top":"25%"
+    "padding":"8px"
   },
   "content":"Lorem ipsum."
 }

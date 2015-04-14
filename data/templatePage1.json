@@ -2,6 +2,7 @@
     "tagName":"DIV",
     "id" : "header",
     "class":"block",
+    "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText"],
      "css" : {
       "height" : "50px",
       "width" : "100%",
@@ -22,6 +23,7 @@
         "tagName":"DIV",
         "id" : "content_left",
         "class":"block fleft",
+        "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText"],
         "css" : {
           "height" : "100%",
           "width" : "25%",
@@ -32,6 +34,7 @@
         "tagName":"DIV",
         "id" : "content_right",
         "class":"block fleft",
+        "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText"],
         "css" : {
           "height" : "100%",
           "width" : "75%",
@@ -43,6 +46,7 @@
     "tagName":"DIV",
     "id" : "footer",
     "class":"block",
+    "canDropIn" : ["toolTextBlock"],
     "css" : {
       "height" : "75px",
       "width" : "100%",
