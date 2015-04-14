@@ -13,12 +13,11 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
-  function appendChild(objData, parentId) {
-    // make copy of objData to prevent obj reference linking
-    var obj = JSON.parse(JSON.stringify(objData)),
-        parentId = page[0].child;
-
-    parentId.push(obj);
+  function appendChild(childKey, parentKey) {
+    parent = bkEval(parentKey);
+    child = bkEval(childKey);
+    if (parent.child) { parent.child.push(child); }
+      else { parent.child = [child];}
   }
 
 
@@ -31,12 +30,28 @@ bkPageBuilder.service('bkPageService', function () {
     } else {
       page[0].child = obj;
     }
+
+    console.log("+ tool:",getPageJSON());
+  }
+
+
+  function removeChild(objId,findTree) {
+    for (var i = findTree.length - 1; i >= 0; i--) {
+      if (findTree[i]['id'] === objId ) {
+        findTree.splice(i,1);
+        return true;
+      }
+
+      if (findTree[i]['child']) {
+        removeChild(objId, findTree[i]['child']);}
+    };
   }
 
 
   function clearPage(obj) {
     page = new getPageTemplate();
   }
+
 
   function findObjKey(objId, findTree) {
     var key="",i;
@@ -57,20 +72,38 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
-  function canDropIn(child, parent){
-    console.log("->page.js:41 child,parent:", child,parent);
-    var childKey, parentKey;
+  function checkCanDropIn(classList,parent) {
+    var i,j;
+    classArr = classList.split(" ");
+    for (i = classArr.length - 1; i >= 0; i--)
+      for (j = parent.length - 1; j>=0; j--) {
+        if (classArr[i] === parent[j] ) {
+          return true;
+        }
+      }
 
+    return false;
+  }
+
+
+  function canDropIn(child, parent) {
     childKey = findObjKey(child,page);
-    childKey = this[childKey];
+    childObj = bkEval(childKey);
     parentKey = findObjKey(parent,page);
-    //parentKey = JSON.parse(parentKey);
+    parentObj = bkEval(parentKey);
 
-    console.log("->page.js:60 : keys", childKey,parentKey);
+    if (checkCanDropIn(childObj.class, parentObj.canDropIn)) {
+      appendChild(childKey, parentKey);
+      removeChild(child,page);
+      console.log("+:",getPageJSON());
+      return true; }
+    else {
+      console.log("-:");
+      return false; }
+  }
 
-
-    console.log(getPageJSON());
-    return true;
+  function bkEval(key) {
+    return eval(key);
   }
 
 
