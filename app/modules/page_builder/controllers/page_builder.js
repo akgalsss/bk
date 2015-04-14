@@ -105,7 +105,10 @@ bkPageBuilder.controller("bkPageBuilderController", [
         block = document.createElement(blockData['tagName']);
 
         if (blockData['draggable']) { block.setAttribute('draggable', ''); }
-        if (blockData['droppable']) { block.setAttribute('droppable', ''); }
+        if (blockData['canDropIn']) {
+          block.setAttribute('droppable', '');
+          block.setAttribute('drop', '');
+        }
 
         block.setAttribute('id', blockData['id']);
         block.setAttribute('class', blockData['class']);

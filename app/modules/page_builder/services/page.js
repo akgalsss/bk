@@ -1,5 +1,6 @@
 bkPageBuilder.service('bkPageService', function () {
-  var pageTemplate = new getPageTemplate();
+  var pageTemplate = new getPageTemplate(),
+      page;
 
 
   function getPageTemplate() {
@@ -12,9 +13,12 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
-  function appendChild(obj, parentId) {
-    // TODO: create finding method by parent id
-    if (page[0].id == parentId) page[0].child.push(obj);
+  function appendChild(objData, parentId) {
+    // make copy of objData to prevent obj reference linking
+    var obj = JSON.parse(JSON.stringify(objData)),
+        parentId = page[0].child;
+
+    parentId.push(obj);
   }
 
 
@@ -27,8 +31,6 @@ bkPageBuilder.service('bkPageService', function () {
     } else {
       page[0].child = obj;
     }
-
-    console.log("->page.js:31 page:", getPageJSON());
   }
 
 
@@ -36,9 +38,37 @@ bkPageBuilder.service('bkPageService', function () {
     page = new getPageTemplate();
   }
 
+  function findObjKey(objId, findTree) {
+    var key="",i;
+
+    for (i = findTree.length - 1; i >= 0; i--) {
+      if (findTree[i]['id'] === objId ) {
+        key += ".child["+i+"]";
+        break;
+      }
+
+      if (findTree[i]['child']) {
+        if (findTree[i]['id'] === 'page' ) {
+          key = "page["+i+"]" } else { key += ".child["+i+"]" }
+        key += findObjKey(objId, findTree[i]['child']);}
+    };
+
+    return key;
+  }
+
 
   function canDropIn(child, parent){
     console.log("->page.js:41 child,parent:", child,parent);
+    var childKey, parentKey;
+
+    childKey = findObjKey(child,page);
+    childKey = this[childKey];
+    parentKey = findObjKey(parent,page);
+    //parentKey = JSON.parse(parentKey);
+
+    console.log("->page.js:60 : keys", childKey,parentKey);
+
+
     console.log(getPageJSON());
     return true;
   }
