@@ -21,30 +21,17 @@ pageView.controller("pageController", ["$scope", "$http",
 			while (elemData = pageData.shift()) {
 				var elem;
 
+				elem = document.createElement(elemData['tagName']);
+				elem.setAttribute('id', elemData['id']);
+				elem.setAttribute('class', elemData['class']);
+
 				// add imageBlock text to store
 				if (elemData['class'].indexOf("toolImageBlock") > -1) {
-
-					var str2DOMElement = function(html) {
-						var frame = document.createElement('iframe');
-						frame.style.display = 'none';
-						document.body.appendChild(frame);
-						frame.contentDocument.open();
-						frame.contentDocument.write(html);
-						frame.contentDocument.close();
-						var el = frame.contentDocument.body.firstChild;
-						document.body.removeChild(frame);
-						return el;
-					}
-
-					elem = str2DOMElement(elemData['content']);
-
+					elem.setAttribute('src', elemData['src']);
 					parent.appendChild(elem);
 					continue;
 				}
 
-				elem = document.createElement(elemData['tagName']);
-				elem.setAttribute('id', elemData['id']);
-				elem.setAttribute('class', elemData['class']);
 				elem.style['width'] = elemData['css']['width'];
 				elem.style.height = elemData['css']['height'];
 				elem.style.backgroundColor = elemData['css']['backgroundColor'];
