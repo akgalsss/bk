@@ -18,6 +18,8 @@ bkPageBuilder.service('bkPageService', function () {
     child = bkEval(childKey);
     if (parent.child) { parent.child.push(child); }
       else { parent.child = [child];}
+
+    console.log("BK :: Append : Success", getPageJSON());
   }
 
 
@@ -31,7 +33,7 @@ bkPageBuilder.service('bkPageService', function () {
       page[0].child = obj;
     }
 
-    console.log("Append To Page: Success",getPageJSON());
+    console.log("BK :: Append To Page: Success",getPageJSON());
   }
 
 
@@ -45,6 +47,8 @@ bkPageBuilder.service('bkPageService', function () {
       if (findTree[i]['child']) {
         removeChild(objId, findTree[i]['child']);}
     };
+
+    return false;
   }
 
 
@@ -53,22 +57,29 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
-  function findObjKey(objId, findTree) {
-    var key="",i;
+  function findObjKey(objId, findTree, keyBegin) {
+    var key= (keyBegin) ? keyBegin: "", i,
+        found=false;
 
     for (i = findTree.length - 1; i >= 0; i--) {
       if (findTree[i]['id'] === objId ) {
         key += ".child["+i+"]";
-        break;
+        found = true;
+        return key;
       }
+    }
 
-      if (findTree[i]['child']) {
-        if (findTree[i]['id'] === 'page' ) {
-          key = "page["+i+"]" } else { key += ".child["+i+"]" }
-        key += findObjKey(objId, findTree[i]['child']);}
-    };
+    if (!found) {
+      for (i = findTree.length - 1; i >= 0; i--) {
+        if (findTree[i].child.length >= 0) {
+          if (findTree[i]['id'] === 'page' ) {
+            key = "page["+i+"]" } else { key += ".child["+i+"]" }
+          return key = arguments.callee(objId, findTree[i]['child'], key);
+        }
+      }
+    }
 
-    return key;
+    return found?key:false;
   }
 
 
@@ -107,15 +118,18 @@ bkPageBuilder.service('bkPageService', function () {
     childObj = bkEval(childKey);
     parentKey = findObjKey(parent,page);
     parentObj = bkEval(parentKey);
+    console.log("BK_DEV :: Child - Id, Key :", child, childKey);
+    console.log("BK_DEV :: Parent - Id, Key :", parent, parentKey);
 
-    if (checkCanDropIn(childObj.class, parentObj.canDropIn)) {
+
+    if (parentObj.canDropIn&&checkCanDropIn(childObj.class, parentObj.canDropIn)) {
       deleteClass("initToolStyles", childKey);
       appendChild(childKey, parentKey);
       removeChild(child,page);
-      console.log("Drop: Success",getPageJSON());
+      console.log("BK :: Drop: Success",getPageJSON());
       return true; }
     else {
-      console.log("Drop: Can't drop this tool here");
+      console.log("BK :: Drop: Can't drop this tool here",getPageJSON());
       return false; }
   }
 
