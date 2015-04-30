@@ -14,6 +14,7 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   function appendChild(childKey, parentKey) {
+// console.log("->page.js:34 apend:" );
     parent = bkEval(parentKey);
     child = bkEval(childKey);
     if (parent.child) { parent.child.push(child); }
@@ -37,15 +38,26 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
-  function removeChild(objId,findTree) {
-    for (var i = findTree.length - 1; i >= 0; i--) {
-      if (findTree[i]['id'] === objId ) {
-        findTree.splice(i,1);
+  function removeChild(objKey) {
+    var i;
+    obj = bkEval(objKey);
+    parent = bkEval(objKey);
+    parentChild = parent.child;
+    // console.log("->page.js:59 remove:", obj, parent, parentChild.length);
+
+    for (i= parentChild.length-1; i >= 0; i--) {
+      if (parentChild[i]['id'] === obj['id'] ) {
+        parentChild.splice(i,1);
+        // console.log("->page.js:62 findTree FOUND:", parentChild.length);
+
+        if (!parentChild.length) {
+          // console.log("->page.js:71 need delete:" );
+          delete parent.child;
+          // console.log("->page.js:74 parent:", parent);
+        }
+        // console.log("->page.js:62 findTree:", parent);
         return true;
       }
-
-      if (findTree[i]['child']) {
-        removeChild(objId, findTree[i]['child']);}
     };
 
     return false;
@@ -57,29 +69,35 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
-  function findObjKey(objId, findTree, keyBegin) {
-    var key= (keyBegin) ? keyBegin: "", i,
-        found=false;
-
-    for (i = findTree.length - 1; i >= 0; i--) {
-      if (findTree[i]['id'] === objId ) {
-        key += ".child["+i+"]";
-        found = true;
-        return key;
-      }
-    }
-
-    if (!found) {
+  function findObjKey(objId, findTree) {
+    var key;
+    function objKeyIterator(objId, findTree, keyBegin) {
+      var key= (keyBegin) ? keyBegin: "", i,
+          found=false;
+      console.log("->page.js: key:", objId, findTree);
       for (i = findTree.length - 1; i >= 0; i--) {
-        if (findTree[i].child.length >= 0) {
-          if (findTree[i]['id'] === 'page' ) {
-            key = "page["+i+"]" } else { key += ".child["+i+"]" }
-          return key = arguments.callee(objId, findTree[i]['child'], key);
+        if (findTree[i]['id'] === objId ) {
+          key += ".child["+i+"]";
+          found = true;
+          return key;
         }
       }
+
+      if (!found) {
+        for (i = findTree.length - 1; i >= 0; i--) {
+          if ((findTree[i].child)&&(findTree[i].child.length >= 0)) {
+            if (findTree[i]['id'] === 'page' ) {
+              key = "["+i+"]" } else { key += ".child["+i+"]" }
+              console.log("->page.js:106 i:", i);
+            return key = arguments.callee(objId, findTree[i]['child'], key);
+          }
+        }
+      }
+      console.log("->page.js:109 key:", key, objId, findTree);
+      return found?key:false;
     }
 
-    return found?key:false;
+    return objKeyIterator(objId, findTree);
   }
 
 
@@ -97,6 +115,7 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
   function deleteClass(classList,objKey) {
+    // console.log("->page.js:120 delete class in:" );
     var obj = bkEval(objKey), objClassArr = obj.class;
 
     classArr = classList.split(" ");
@@ -114,6 +133,7 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   function canDropIn(child, parent) {
+    // console.log("->page.js:137 ================================:" );
     childKey = findObjKey(child,page);
     childObj = bkEval(childKey);
     parentKey = findObjKey(parent,page);
@@ -121,12 +141,11 @@ bkPageBuilder.service('bkPageService', function () {
     console.log("BK_DEV :: Child - Id, Key :", child, childKey);
     console.log("BK_DEV :: Parent - Id, Key :", parent, parentKey);
 
-
     if (parentObj.canDropIn&&checkCanDropIn(childObj.class, parentObj.canDropIn)) {
       deleteClass("initToolStyles", childKey);
       appendChild(childKey, parentKey);
-      removeChild(child,page);
-      console.log("BK :: Drop: Success",getPageJSON());
+      removeChild(childKey);
+      // console.log("->page.js:153 getPageJSON():", getPageJSON());
       return true; }
     else {
       console.log("BK :: Drop: Can't drop this tool here",getPageJSON());
@@ -136,7 +155,6 @@ bkPageBuilder.service('bkPageService', function () {
   function bkEval(key) {
     return eval(key);
   }
-
 
   return {
     getPageJSON  : getPageJSON,
