@@ -14,7 +14,6 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   function appendChild(childKey, parentKey) {
-// console.log("->page.js:34 apend:" );
     parent = bkEval(parentKey);
     child = bkEval(childKey);
     if (parent.child) { parent.child.push(child); }
@@ -39,23 +38,19 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   function removeChild(objKey) {
-    var i;
-    obj = bkEval(objKey);
-    parent = bkEval(objKey);
-    parentChild = parent.child;
-    // console.log("->page.js:59 remove:", obj, parent, parentChild.length);
+    var i,
+        child = bkEval(objKey),
+        parentKey = objKey.replace(/\.child\[\d+\]$/, ''),
+        parent = bkEval(parentKey),
+        parentChild = parent.child;
 
-    for (i= parentChild.length-1; i >= 0; i--) {
-      if (parentChild[i]['id'] === obj['id'] ) {
+    for (i= parentChild.length-1; i >= 0; --i) {
+      if (parentChild[i]['id'] === child['id'] ) {
         parentChild.splice(i,1);
-        // console.log("->page.js:62 findTree FOUND:", parentChild.length);
 
         if (!parentChild.length) {
-          // console.log("->page.js:71 need delete:" );
           delete parent.child;
-          // console.log("->page.js:74 parent:", parent);
         }
-        // console.log("->page.js:62 findTree:", parent);
         return true;
       }
     };
@@ -69,13 +64,12 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
-  function findObjKey(objId, findTree) {
-    var key;
+  function findObjKey(objId) {
     function objKeyIterator(objId, findTree, keyBegin) {
       var key= (keyBegin) ? keyBegin: "", i,
           found=false;
-      console.log("->page.js: key:", objId, findTree);
-      for (i = findTree.length - 1; i >= 0; i--) {
+
+      for (i = findTree.length - 1; i >= 0; --i) {
         if (findTree[i]['id'] === objId ) {
           key += ".child["+i+"]";
           found = true;
@@ -84,28 +78,27 @@ bkPageBuilder.service('bkPageService', function () {
       }
 
       if (!found) {
-        for (i = findTree.length - 1; i >= 0; i--) {
+        for (i = findTree.length - 1; i >= 0; --i) {
           if ((findTree[i].child)&&(findTree[i].child.length >= 0)) {
             if (findTree[i]['id'] === 'page' ) {
-              key = "["+i+"]" } else { key += ".child["+i+"]" }
-              console.log("->page.js:106 i:", i);
-            return key = arguments.callee(objId, findTree[i]['child'], key);
+              key = "page["+i+"]" } else { key += ".child["+i+"]" }
+            return key = objKeyIterator(objId, findTree[i]['child'], key);
           }
         }
       }
-      console.log("->page.js:109 key:", key, objId, findTree);
+
       return found?key:false;
     }
 
-    return objKeyIterator(objId, findTree);
+    return objKeyIterator(objId, page);
   }
 
 
   function checkCanDropIn(classList,parent) {
     var i,j;
     classArr = classList.split(" ");
-    for (i = classArr.length - 1; i >= 0; i--)
-      for (j = parent.length - 1; j>=0; j--) {
+    for (i = classArr.length - 1; i >= 0; --i)
+      for (j = parent.length - 1; j >= 0; --j) {
         if (classArr[i] === parent[j] ) {
           return true;
         }
@@ -115,7 +108,6 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
   function deleteClass(classList,objKey) {
-    // console.log("->page.js:120 delete class in:" );
     var obj = bkEval(objKey), objClassArr = obj.class;
 
     classArr = classList.split(" ");
@@ -133,11 +125,11 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   function canDropIn(child, parent) {
-    // console.log("->page.js:137 ================================:" );
-    childKey = findObjKey(child,page);
-    childObj = bkEval(childKey);
-    parentKey = findObjKey(parent,page);
-    parentObj = bkEval(parentKey);
+    var childKey = findObjKey(child,page),
+        childObj = bkEval(childKey),
+        parentKey = findObjKey(parent,page),
+        parentObj = bkEval(parentKey);
+
     console.log("BK_DEV :: Child - Id, Key :", child, childKey);
     console.log("BK_DEV :: Parent - Id, Key :", parent, parentKey);
 
@@ -145,7 +137,7 @@ bkPageBuilder.service('bkPageService', function () {
       deleteClass("initToolStyles", childKey);
       appendChild(childKey, parentKey);
       removeChild(childKey);
-      // console.log("->page.js:153 getPageJSON():", getPageJSON());
+      console.log("BK :: Drop: Success",getPageJSON());
       return true; }
     else {
       console.log("BK :: Drop: Can't drop this tool here",getPageJSON());
