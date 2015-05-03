@@ -25,7 +25,7 @@ bkPageBuilder.service('bkPageService', function () {
 
   function appendToPage(objData) {
     // make copy of objData to prevent obj reference linking
-    var obj = JSON.parse(JSON.stringify(objData))
+    var obj = bkCloneObj(objData)
 
     if (page[0].child.length) {
       page[0].child.push(obj);
@@ -65,32 +65,39 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   function findObjKey(objId) {
-    function objKeyIterator(objId, findTree, keyBegin) {
-      var key= (keyBegin) ? keyBegin: "", i,
-          found=false;
+    var key = '', found = false;
+
+    function objKeyIterator(objId, keyBegin) {
+          key = (keyBegin) ? keyBegin: '';
+          found = false;
+      var i,
+          findTree = (keyBegin) ? bkEval(keyBegin):'';
+          findTree = (keyBegin) ? findTree.child : page;
+
 
       for (i = findTree.length - 1; i >= 0; --i) {
         if (findTree[i]['id'] === objId ) {
           key += ".child["+i+"]";
           found = true;
-          return key;
+          break;
         }
       }
 
       if (!found) {
         for (i = findTree.length - 1; i >= 0; --i) {
-          if ((findTree[i].child)&&(findTree[i].child.length >= 0)) {
+          if ((!found)&&(findTree[i].child)&&(findTree[i].child.length >= 0)) {
             if (findTree[i]['id'] === 'page' ) {
-              key = "page["+i+"]" } else { key += ".child["+i+"]" }
-            return key = objKeyIterator(objId, findTree[i]['child'], key);
+              key = "page["+i+"]" } else { key = keyBegin + ".child["+i+"]" }
+            arguments.callee(objId, key);
           }
         }
       }
 
-      return found?key:false;
     }
 
-    return objKeyIterator(objId, page);
+    objKeyIterator(objId);
+
+    return found ? key : false;
   }
 
 
@@ -106,6 +113,7 @@ bkPageBuilder.service('bkPageService', function () {
 
     return false;
   }
+
 
   function deleteClass(classList,objKey) {
     var obj = bkEval(objKey), objClassArr = obj.class;
@@ -130,9 +138,6 @@ bkPageBuilder.service('bkPageService', function () {
         parentKey = findObjKey(parent,page),
         parentObj = bkEval(parentKey);
 
-    console.log("BK_DEV :: Child - Id, Key :", child, childKey);
-    console.log("BK_DEV :: Parent - Id, Key :", parent, parentKey);
-
     if (parentObj.canDropIn&&checkCanDropIn(childObj.class, parentObj.canDropIn)) {
       deleteClass("initToolStyles", childKey);
       appendChild(childKey, parentKey);
@@ -144,9 +149,16 @@ bkPageBuilder.service('bkPageService', function () {
       return false; }
   }
 
+
   function bkEval(key) {
     return eval(key);
   }
+
+
+  function bkCloneObj(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
 
   return {
     getPageJSON  : getPageJSON,
