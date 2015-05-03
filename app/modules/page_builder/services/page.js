@@ -83,13 +83,12 @@ bkPageBuilder.service('bkPageService', function () {
         }
       }
 
-      if (!found) {
-        for (i = findTree.length - 1; i >= 0; --i) {
-          if ((!found)&&(findTree[i].child)&&(findTree[i].child.length >= 0)) {
-            if (findTree[i]['id'] === 'page' ) {
-              key = "page["+i+"]" } else { key = keyBegin + ".child["+i+"]" }
-            arguments.callee(objId, key);
-          }
+      // if child iterate it
+      for (i = findTree.length - 1; i >= 0; --i) {
+        if ((!found)&&(findTree[i].child)&&(findTree[i].child.length >= 0)) {
+          if (findTree[i]['id'] === 'page' ) {
+            key = "page["+i+"]" } else { key = keyBegin + ".child["+i+"]" }
+          arguments.callee(objId, key);
         }
       }
 
