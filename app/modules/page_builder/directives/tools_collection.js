@@ -10,7 +10,7 @@ bkPageBuilder.directive("save", function(){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='toolItem save' title='Save results'>S</button>",
+		template: "<button class='btn btn-warning toolItem save' title='Save results'>S</button>",
 	}
 });
 
@@ -27,7 +27,7 @@ bkPageBuilder.directive("showPage", function(){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<a href='/pageViewApp/' target='_blank'><button class='toolItem show_page' title='View result page'>V</button></a>",
+		template: "<a href='/pageViewApp/' target='_blank'><button class='btn btn-success toolItem show_page' title='View result page'>V</button></a>",
 	}
 });
 
@@ -44,7 +44,7 @@ bkPageBuilder.directive("textTool", function(){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='toolItem textTool' title='Add Text Block'>T</button>",
+		template: "<button class='btn btn-info toolItem textTool' title='Add Text Block'>T</button>",
 	}
 });
 
@@ -61,7 +61,7 @@ bkPageBuilder.directive("imageTool", function(){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='toolItem imageTool' title='Add Image'>I</button>",
+		template: "<button class='btn btn-info toolItem imageTool' title='Add Image'>I</button>",
 	}
 });
 
@@ -78,7 +78,7 @@ bkPageBuilder.directive("imageTextTool", function(){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='toolItem imageTextTool' title='Add Image with Text'>IT</button>",
+		template: "<button class='btn btn-info toolItem imageTextTool' title='Add Image with Text'>IT</button>",
 	}
 });
 
@@ -102,7 +102,7 @@ bkPageBuilder.directive("templates", function(){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='toolItem getTemplate' title='Get Template'>Tpls</button>",
+		template: "<button class='btn btn-primary toolItem getTemplate' title='Get Template'>Tpls</button>",
 	}
 });
 
