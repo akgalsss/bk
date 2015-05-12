@@ -1,9 +1,24 @@
 /* Styles for all elements common on page and pageBuilder */
 body {
-  background-color: #777;
   margin: 0;
 }
 
+#page {
+  background: #f0f0f0;
+}
+
+
 .fleft {
   float: left;
+}
+
+.initToolStyles {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  cursor: pointer;
+}
+
+.block {
+  width: 100%;
 }

@@ -135,7 +135,7 @@ bkPageBuilder.controller("bkPageBuilderController", [
   $scope.getPageTemplate = function (url) {
     var page = {};
 
-    url = typeof url !== 'undefined' ? url : '/data/templatePage.json';
+    url = typeof url !== 'undefined' ? url : '/data/templatePageBootstrap.json';
 
     $http.get(url).success(function(data) {
       // clear prev template beroge append new one

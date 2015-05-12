@@ -7,7 +7,7 @@
   },
   "css": {
     "width":"160px",
-    "height":"120px",
+    "height":"40px",
     "color":"#050505",
     "backgroundColor":"#DBEEFD",
     "padding":"8px"

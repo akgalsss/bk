@@ -1,0 +1,34 @@
+[{
+    "tagName":"DIV",
+    "id" : "header",
+    "class":"block",
+    "draggable":"true",
+    "canDropIn" : ["toolTextBlock"],
+    "css" : {
+      "height" : "50px",
+      "width" : "100%"
+    }
+  },
+  {
+    "tagName":"DIV",
+    "id" : "content",
+    "class":"block",
+    "draggable":"true",
+    "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText"],
+    "css" : {
+      "height" : "400px",
+      "width" : "100%"
+    }
+  },
+  {
+    "tagName":"DIV",
+    "id" : "footer",
+    "class":"block",
+    "draggable":"true",
+    "canDropIn" : ["toolTextBlock"],
+    "css" : {
+      "cssString" : "margin-bottom: 0;",
+      "height" : "75px",
+      "width" : "100%"
+    }
+  }]

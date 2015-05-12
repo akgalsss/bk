@@ -109,11 +109,6 @@ input[type="text"] {
 	margin-left: 14%;
 }
 
-#page {
-	background: #183152;
-}
-
-
 /* styles for draggable tools panels */
 .over, #left_panel.over, #right_panel.over {
   background-color: #E1E6FA;

@@ -90,7 +90,7 @@ bkPageBuilder.directive("templates", function(){
 		element.bind("click", function() {
 			// mockup for quick change template
 			if (what) {
-				scope.getPageTemplate('/data/templatePage1.json');
+				scope.getPageTemplate('/data/templatePage.json');
 				what--;
 			} else {
 				scope.getPageTemplate();
