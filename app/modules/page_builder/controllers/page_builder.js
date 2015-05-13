@@ -113,10 +113,8 @@ bkPageBuilder.controller("bkPageBuilderController", [
 
         block.setAttribute('id', blockData['id']);
         block.setAttribute('class', blockData['class']);
-        block.setAttribute('style', blockData['cssString']);
-        //block.style.width = blockData['css']['width'];
-        block.style.minHeight = blockData['css']['height'];
-        //block.style.backgroundColor = blockData['css']['backgroundColor'];
+        if (blockData['cssString']) block.setAttribute('style', blockData['cssString']);
+
 
         // compille block and append to parent element
         parent.append($compile(block)($scope));

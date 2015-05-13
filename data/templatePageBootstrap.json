@@ -3,31 +3,22 @@
 "template" : [{
     "tagName":"DIV",
     "id" : "header",
-    "class":"block header",
+    "class":"block row",
     "draggable":"true",
-    "canDropIn" : ["toolTextBlock"],
-    "css" : {
-      "height" : "50px"
-    }
+    "canDropIn" : ["toolTextBlock"]
   },
   {
     "tagName":"DIV",
     "id" : "content",
     "class":"block row",
     "draggable":"true",
-    "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText"],
-    "css" : {
-      "height" : "400px"
-    }
+    "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText"]
   },
   {
     "tagName":"DIV",
     "id" : "footer",
     "class":"block row",
     "draggable":"true",
-    "canDropIn" : ["toolTextBlock"],
-    "css" : {
-      "height" : "50px"
-    }
+    "canDropIn" : ["toolTextBlock"]
   }]
 }

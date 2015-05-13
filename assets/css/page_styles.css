@@ -106,12 +106,12 @@ input[type="text"] {
 	position: absolute;
 	width: 72%;
 	margin-left: 14%;
+	overflow: auto;
 }
 
 /* styles for draggable tools panels */
 .over, #left_panel.over, #right_panel.over {
-  background-color: #E1E6FA;
-  border: 1px solid #ff0000;
+  background-color: #FFB3B3;
 }
 
 .drag, #left_panel.drag, #right_panel.drag {

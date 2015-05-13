@@ -32,9 +32,9 @@ pageView.controller("pageController", ["$scope", "$http",
 					continue;
 				}
 
-				elem.style['width'] = elemData['css']['width'];
-				elem.style.minHeight = elemData['css']['height'];
-				elem.style.backgroundColor = elemData['css']['backgroundColor'];
+				if ((elemData['css'])&&(elemData['css']['width'])) elem.style['width'] = elemData['css']['width'];
+				if ((elemData['css'])&&(elemData['css']['height'])) elem.style.minHeight = elemData['css']['height'];
+				if ((elemData['css'])&&(elemData['css']['backgroundColor'])) elem.style.backgroundColor = elemData['css']['backgroundColor'];
 
 				// add textBlock text to store
 				if (elemData['class'].indexOf("toolTextBlock") > -1) {
