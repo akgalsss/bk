@@ -4,7 +4,7 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   function getPageTemplate() {
-    return [{ tagName:"DIV",id:"page",class:"",css:{width:"",height:"",backgroundColor:""}, child : []}];
+    return [{ tagName:"DIV",id:"page",class:"container",css:{width:"",height:"",backgroundColor:""}, child : []}];
   }
 
 
