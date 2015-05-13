@@ -1,4 +1,6 @@
-[{
+{
+"cssUrl" : "",
+"template" :[{
     "tagName":"DIV",
     "id" : "header",
     "class":"block",
@@ -35,3 +37,4 @@
       "backgroundColor" : "#69D2E7"
     }
   }]
+}

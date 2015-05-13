@@ -33,7 +33,7 @@ pageView.controller("pageController", ["$scope", "$http",
 				}
 
 				elem.style['width'] = elemData['css']['width'];
-				elem.style.height = elemData['css']['height'];
+				elem.style.minHeight = elemData['css']['height'];
 				elem.style.backgroundColor = elemData['css']['backgroundColor'];
 
 				// add textBlock text to store
@@ -56,7 +56,11 @@ pageView.controller("pageController", ["$scope", "$http",
 		}
 
 		document.body.innerHTML = "";
-		createElem(data, document.body);
+		var css = document.createElement('link');
+		css.setAttribute('rel', 'stylesheet');
+		css.setAttribute('href', data.cssUrl);
+		document.getElementsByTagName('head')[0].appendChild(css);
+		createElem(JSON.parse(data.template), document.body);
 	}
 
 	// when page is loaded get start rendering data

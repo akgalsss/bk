@@ -1,12 +1,11 @@
 {
   "tagName":"DIV",
   "id":"bk_tt_",
-  "class":"toolTextBlock fleft ng-scope initToolStyles",
+  "class":"toolTextBlock fleft ng-scope initToolStyles col-md-6",
   "attributes": {
     "draggable" : "true"
   },
   "css": {
-    "width":"160px",
     "height":"40px",
     "color":"#050505",
     "backgroundColor":"#DBEEFD",

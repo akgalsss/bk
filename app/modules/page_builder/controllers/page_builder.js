@@ -6,13 +6,14 @@ bkPageBuilder.controller("bkPageBuilderController", [
 
   // save page template
   $scope.save = function () {
-    var template;
+    var theme = {};
 
     //create string from json obj
-    template = JSON.stringify(bkPageService.getPageJSON());
+    theme.template = JSON.stringify(bkPageService.getPageJSON());
+    theme.cssUrl = bkPageService.getPageStyleCss();
 
     //send template to server
-    $http.post('save.php', {template: template}).
+    $http.post('save.php', {theme: theme}).
       success(function(data, status, headers, config) {
         console.log("BK_INFO: page saved ");
       }).
@@ -113,9 +114,9 @@ bkPageBuilder.controller("bkPageBuilderController", [
         block.setAttribute('id', blockData['id']);
         block.setAttribute('class', blockData['class']);
         block.setAttribute('style', blockData['cssString']);
-        block.style.width = blockData['css']['width'];
-        block.style.height = blockData['css']['height'];
-        block.style.backgroundColor = blockData['css']['backgroundColor'];
+        //block.style.width = blockData['css']['width'];
+        block.style.minHeight = blockData['css']['height'];
+        //block.style.backgroundColor = blockData['css']['backgroundColor'];
 
         // compille block and append to parent element
         parent.append($compile(block)($scope));
@@ -133,17 +134,20 @@ bkPageBuilder.controller("bkPageBuilderController", [
 
   // get template of the page
   $scope.getPageTemplate = function (url) {
-    var page = {};
+    var page = {}, cssFile;
 
     url = typeof url !== 'undefined' ? url : '/data/templatePageBootstrap.json';
 
     $http.get(url).success(function(data) {
       // clear prev template beroge append new one
       clearRenderedPage();
-
-      page = data;
+      cssFile = data.cssUrl;
+      page = data.template;
       page = renderPageTemplate(page);
-      appendRenderedToPage (page);
+      bkPageService.setPageStyleCss(cssFile);
+      appendRenderedToPage("<link rel='stylesheet' href='"+cssFile+"'>");
+      appendRenderedToPage(page);
+
     }).
     error(function(data, status, headers, config) {
       console.log("BK_ERR: get page template data - ", status);

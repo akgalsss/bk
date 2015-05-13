@@ -1,34 +1,33 @@
-[{
+{
+"cssUrl" : "/data/bootstrap.css",
+"template" : [{
     "tagName":"DIV",
     "id" : "header",
-    "class":"block",
+    "class":"block header",
     "draggable":"true",
     "canDropIn" : ["toolTextBlock"],
     "css" : {
-      "height" : "50px",
-      "width" : "100%"
+      "height" : "50px"
     }
   },
   {
     "tagName":"DIV",
     "id" : "content",
-    "class":"block",
+    "class":"block row",
     "draggable":"true",
     "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText"],
     "css" : {
-      "height" : "400px",
-      "width" : "100%"
+      "height" : "400px"
     }
   },
   {
     "tagName":"DIV",
     "id" : "footer",
-    "class":"block",
+    "class":"block row",
     "draggable":"true",
     "canDropIn" : ["toolTextBlock"],
     "css" : {
-      "cssString" : "margin-bottom: 0;",
-      "height" : "75px",
-      "width" : "100%"
+      "height" : "50px"
     }
   }]
+}

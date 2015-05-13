@@ -1,6 +1,5 @@
 bkPageBuilder.service('bkPageService', function () {
-  var pageTemplate = new getPageTemplate(),
-      page;
+  var pageStyleCssFile, page;
 
 
   function getPageTemplate() {
@@ -158,12 +157,22 @@ bkPageBuilder.service('bkPageService', function () {
     return JSON.parse(JSON.stringify(obj));
   }
 
+  function setPageStyleCss(url) {
+    pageStyleCssFile = url;
+  }
+
+  function getPageStyleCss() {
+    return pageStyleCssFile;
+  }
+
 
   return {
-    getPageJSON  : getPageJSON,
-    appendChild  : appendChild,
-    appendToPage : appendToPage,
-    clearPage    : clearPage,
-    canDropIn    : canDropIn
+    getPageJSON     : getPageJSON,
+    appendChild     : appendChild,
+    appendToPage    : appendToPage,
+    clearPage       : clearPage,
+    canDropIn       : canDropIn,
+    setPageStyleCss : setPageStyleCss,
+    getPageStyleCss : getPageStyleCss
   }
 });
