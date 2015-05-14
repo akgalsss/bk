@@ -41,7 +41,7 @@ bkPageBuilder.directive("rightPanel", function(){
 
 
 // draggable directive
-bkPageBuilder.directive('draggable', function() {
+bkPageBuilder.directive('draggable', ['bkPropPanelService', function(bkPropPanelService) {
   return function(scope, element) {
     var el = element[0];
     el.draggable = true;
@@ -62,12 +62,15 @@ bkPageBuilder.directive('draggable', function() {
     // add possibility to show prop panel on all draggabe tools
     el.addEventListener("dblclick", function(e) {
       if (e.stopPropagation) e.stopPropagation();
-      angular.element(".toolTextBlock ").removeClass("activeTool");
-      this.classList.add('activeTool');
+      if (this.classList.contains("toolTextBlock")) {
+        angular.element(".toolTextBlock ").removeClass("activeTool");
+        this.classList.add('activeTool');
+        bkPropPanelService.showPropPanel();
+      }
       return false;
     }, false);
   }
-});
+}]);
 
 
 // droppable directive

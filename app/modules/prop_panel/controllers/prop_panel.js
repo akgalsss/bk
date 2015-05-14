@@ -1,14 +1,14 @@
-bkPageBuilder.controller("propPanelController", ["$scope", "$compile", "propPanelService",
-function ($scope, $compile, propPanelService) {
+bkPageBuilder.controller("propPanelController", ["$scope", "$compile", "bkPropPanelService",
+function ($scope, $compile, bkPropPanelService) {
 	// check if need show propPanel
 	$scope.isActive = function() {
-		return propPanelService.checkIsActive();
+		return bkPropPanelService.checkIsActive();
 	}
 
 
 	// hide panel with properties
 	$scope.hidePropPanel = function () {
-		propPanelService.hidePropPanel();
+		bkPropPanelService.hidePropPanel();
 	}
 
 	// active tool model
@@ -90,21 +90,6 @@ function ($scope, $compile, propPanelService) {
 	}
 
 
-	// show prop panel when set active tool
-	$scope.$watch(function () {
-		return propPanelService.checkIsActive();
-	},
-	function(newVal, oldVal) {
-		if (newVal) { $scope.showPropPanel(); };
-	}, true);
-
-
-	// show updated prop panel when set anouther active tool
-	$scope.$watch(function () {
-		return propPanelService.checkNeedUpdate();
-	},
-	function(newVal, oldVal) {
-		if (newVal) { $scope.showPropPanel(); };
-	}, true);
+	bkPropPanelService.registerObserverCallback($scope.showPropPanel);
 
 }]);
