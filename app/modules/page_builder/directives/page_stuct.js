@@ -58,6 +58,14 @@ bkPageBuilder.directive('draggable', function() {
       this.classList.remove('drag');
       return false;
     }, false);
+
+    // add possibility to show prop panel on all draggabe tools
+    el.addEventListener("dblclick", function(e) {
+      if (e.stopPropagation) e.stopPropagation();
+      angular.element(".toolTextBlock ").removeClass("activeTool");
+      this.classList.add('activeTool');
+      return false;
+    }, false);
   }
 });
 

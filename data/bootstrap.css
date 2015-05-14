@@ -35,6 +35,7 @@
 @media (min-width: 768px) {
   #content {
     max-width: 730px;
+    margin: 0 auto;
   }
 }
 
