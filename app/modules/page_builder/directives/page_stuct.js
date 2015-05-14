@@ -62,8 +62,8 @@ bkPageBuilder.directive('draggable', ['bkPropPanelService', function(bkPropPanel
     // add possibility to show prop panel on all draggabe tools
     el.addEventListener("dblclick", function(e) {
       if (e.stopPropagation) e.stopPropagation();
-      if (this.classList.contains("toolTextBlock")) {
-        angular.element(".toolTextBlock ").removeClass("activeTool");
+      if ((this.classList.contains("toolTextBlock"))||(this.classList.contains("toolImageBlock"))) {
+        angular.element(".toolTextBlock, .toolImageBlock ").removeClass("activeTool");
         this.classList.add('activeTool');
         bkPropPanelService.showPropPanel();
       }
