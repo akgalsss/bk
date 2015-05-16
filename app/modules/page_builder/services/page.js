@@ -130,7 +130,31 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
+  function canDropInTools(child, parent) {
+    switch (child) {
+      case 'toolsPanel':
+      case 'propPanel':
+            switch (parent) {
+              case 'right_panel':
+              case 'left_panel':
+                    return true;
+              default:
+                    return false;
+            }
+      default:
+            return false;
+    }
+  }
+
+
   function canDropIn(child, parent) {
+    switch (child) {
+      case 'toolsPanel':
+      case 'propPanel':
+            console.log("BK :: Drop: Can't drop Page tools to Page markup",getPageJSON());
+            return false;
+    }
+
     var childKey = findObjKey(child,page),
         childObj = bkEval(childKey),
         parentKey = findObjKey(parent,page),
@@ -172,6 +196,7 @@ bkPageBuilder.service('bkPageService', function () {
     appendToPage    : appendToPage,
     clearPage       : clearPage,
     canDropIn       : canDropIn,
+    canDropInTools  : canDropInTools,
     setPageStyleCss : setPageStyleCss,
     getPageStyleCss : getPageStyleCss
   }

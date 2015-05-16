@@ -104,6 +104,11 @@ bkPageBuilder.directive('droppable', ['bkPageService', function(bkPageService) {
 
         var item = document.getElementById(e.dataTransfer.getData('Text'));
 
+        if (bkPageService.canDropInTools(e.dataTransfer.getData('Text'), this.id)) {
+           this.appendChild(item);
+           return false;
+        }
+
         if (bkPageService.canDropIn(e.dataTransfer.getData('Text'), this.id)) {
            this.appendChild(item);
         }
