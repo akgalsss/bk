@@ -1,5 +1,5 @@
 bkPageBuilder.service('bkPageService', function () {
-  var pageStyleCssFile, page;
+  var pageStyleCssFile, page, currentDragElement = "";
 
 
   function getPageTemplate() {
@@ -12,7 +12,7 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
-  function appendChild(childKey, parentKey) {
+  function appendChild(parentKey, childKey) {
     parent = bkEval(parentKey);
     child = bkEval(childKey);
     if (parent.child) { parent.child.push(child); }
@@ -63,53 +63,24 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
-  function findObjKey(objId) {
-    var key = '', found = false;
-
-    function objKeyIterator(objId, keyBegin) {
-          key = (keyBegin) ? keyBegin: '';
-          found = false;
-      var i,
-          findTree = (keyBegin) ? bkEval(keyBegin):'';
-          findTree = (keyBegin) ? findTree.child : page;
-
-
-      for (i = findTree.length - 1; i >= 0; --i) {
-        if (findTree[i]['id'] === objId ) {
-          key += ".child["+i+"]";
-          found = true;
-          break;
-        }
-      }
-
-      // if child iterate it
-      for (i = findTree.length - 1; i >= 0; --i) {
-        if ((!found)&&(findTree[i].child)&&(findTree[i].child.length >= 0)) {
-          if (findTree[i]['id'] === 'page' ) {
-            key = "page["+i+"]" } else { key = keyBegin + ".child["+i+"]" }
-          arguments.callee(objId, key);
-        }
-      }
-
-    }
-
-    objKeyIterator(objId);
-
-    return found ? key : false;
+  function bkEval(key) {
+    return eval(key);
   }
 
 
-  function checkCanDropIn(classList,parent) {
-    var i,j;
-    classArr = classList.split(" ");
-    for (i = classArr.length - 1; i >= 0; --i)
-      for (j = parent.length - 1; j >= 0; --j) {
-        if (classArr[i] === parent[j] ) {
-          return true;
-        }
-      }
+  function bkCloneObj(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
 
-    return false;
+
+  /* -- Page Styles -- */
+  function setPageStyleCss(url) {
+    pageStyleCssFile = url;
+  }
+
+
+  function getPageStyleCss() {
+    return pageStyleCssFile;
   }
 
 
@@ -128,9 +99,85 @@ bkPageBuilder.service('bkPageService', function () {
     obj.class = objClassArr.join(" ");
     angular.element("#"+obj.id).removeClass(classList);
   }
+  /* ---- */
 
 
-  function canDropInTools(child, parent) {
+  /* -- Drag Element -- */
+  function setCurrentDragElement(id) {
+    currentDragElement = id;
+  }
+
+
+  function getCurrentDragElement() {
+    return currentDragElement;
+  }
+
+
+  function clearCurrentDragElement() {
+    currentDragElement = '';
+  }
+
+
+  function findObjKey(objId) {
+    var key = '', found = false;
+
+    function objKeyIterator(objId, keyBegin) {
+          key = (keyBegin) ? keyBegin: '';
+          found = false;
+      var i,
+          findTree = (keyBegin) ? bkEval(keyBegin):'';
+          findTree = (keyBegin) ? findTree.child : page;
+
+      for (i = findTree.length - 1; i >= 0; --i) {
+        if (findTree[i]['id'] === objId ) {
+          key += ".child["+i+"]";
+          found = true;
+          break;
+        }
+      }
+
+      // if child iterate it
+      for (i = findTree.length - 1; i >= 0; --i) {
+        if ((!found)&&(findTree[i].child)&&(findTree[i].child.length >= 0)) {
+          if (findTree[i]['id'] === 'page' ) {
+            key = "page["+i+"]" } else { key = keyBegin + ".child["+i+"]" }
+          arguments.callee(objId, key);
+        }
+      }
+    }
+
+    objKeyIterator(objId);
+
+    return found ? key : false;
+  }
+
+
+  function canDrop(parent_id) {
+    var childKey = findObjKey(currentDragElement,page),
+        childObj = bkEval(childKey),
+        parentKey = findObjKey(parent_id,page),
+        parentObj = bkEval(parentKey);
+
+    if (parentObj.canDropIn) return canDropIn(parentObj.canDropIn, childObj.class);
+
+    return false;
+  }
+
+
+  function canDropIn(parent, classList) {
+    var i,j, classArr = classList.split(" ");
+
+    for (i = classArr.length - 1; i >= 0; --i)
+      for (j = parent.length - 1; j >= 0; --j) {
+        if (classArr[i] === parent[j] ) { return true; }
+    }
+    return false;
+  }
+
+
+  function makeDropTools(parent, child) {
+    var child = (child) ? child: currentDragElement;
+
     switch (child) {
       case 'toolsPanel':
       case 'propPanel':
@@ -147,7 +194,9 @@ bkPageBuilder.service('bkPageService', function () {
   }
 
 
-  function canDropIn(child, parent) {
+  function makeDrop(parent, child) {
+    var child = (child) ? child : currentDragElement;
+
     switch (child) {
       case 'toolsPanel':
       case 'propPanel':
@@ -160,44 +209,33 @@ bkPageBuilder.service('bkPageService', function () {
         parentKey = findObjKey(parent,page),
         parentObj = bkEval(parentKey);
 
-    if (parentObj.canDropIn&&checkCanDropIn(childObj.class, parentObj.canDropIn)) {
-      deleteClass("initToolStyles", childKey);
-      appendChild(childKey, parentKey);
+    if (parentObj.canDropIn&&canDropIn(parentObj.canDropIn, childObj.class)) {
+      deleteClass("initToolStyles", childObj);
+      appendChild(parentKey, childKey);
       removeChild(childKey);
       console.log("BK :: Drop: Success",getPageJSON());
-      return true; }
-    else {
+      return true;
+    } else {
       console.log("BK :: Drop: Can't drop this tool here",getPageJSON());
-      return false; }
+      return false;
+    }
   }
 
-
-  function bkEval(key) {
-    return eval(key);
-  }
-
-
-  function bkCloneObj(obj) {
-    return JSON.parse(JSON.stringify(obj));
-  }
-
-  function setPageStyleCss(url) {
-    pageStyleCssFile = url;
-  }
-
-  function getPageStyleCss() {
-    return pageStyleCssFile;
-  }
+  /* ---- */
 
 
   return {
-    getPageJSON     : getPageJSON,
-    appendChild     : appendChild,
-    appendToPage    : appendToPage,
-    clearPage       : clearPage,
-    canDropIn       : canDropIn,
-    canDropInTools  : canDropInTools,
-    setPageStyleCss : setPageStyleCss,
-    getPageStyleCss : getPageStyleCss
+    getPageJSON             : getPageJSON,
+    appendChild             : appendChild,
+    appendToPage            : appendToPage,
+    clearPage               : clearPage,
+    setPageStyleCss         : setPageStyleCss,
+    getPageStyleCss         : getPageStyleCss,
+    makeDropTools           : makeDropTools,
+    makeDrop                : makeDrop,
+    canDrop                 : canDrop,
+    setCurrentDragElement   : setCurrentDragElement,
+    getCurrentDragElement   : getCurrentDragElement,
+    clearCurrentDragElement : clearCurrentDragElement
   }
 });

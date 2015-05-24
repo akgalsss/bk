@@ -41,15 +41,14 @@ bkPageBuilder.directive("rightPanel", function(){
 
 
 // draggable directive
-bkPageBuilder.directive('draggable', ['bkPropPanelService', function(bkPropPanelService) {
+bkPageBuilder.directive('draggable', ['bkPropPanelService', 'bkPageService', function(bkPropPanelService, bkPageService) {
   return function(scope, element) {
     var el = element[0];
     el.draggable = true;
     el.addEventListener('dragstart', function(e) {
       e.stopPropagation();
       e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.clearData('Text');
-      e.dataTransfer.setData('Text', this.id);
+      bkPageService.setCurrentDragElement(this.id);
       this.classList.add('drag');
       return false;
     }, false);
@@ -62,6 +61,7 @@ bkPageBuilder.directive('draggable', ['bkPropPanelService', function(bkPropPanel
     // add possibility to show prop panel on all draggabe tools
     el.addEventListener("dblclick", function(e) {
       if (e.stopPropagation) e.stopPropagation();
+      // TODO: need put in seperate method
       if ((this.classList.contains("toolTextBlock"))||(this.classList.contains("toolImageBlock"))) {
         angular.element(".toolTextBlock, .toolImageBlock ").removeClass("activeTool");
         this.classList.add('activeTool');
@@ -81,10 +81,12 @@ bkPageBuilder.directive('droppable', ['bkPageService', function(bkPageService) {
     },
     link: function(scope, element, attributes) {
       var el = element[0];
+
       el.addEventListener('dragover', function(e) {
         e.dataTransfer.dropEffect = 'move';
         if (e.preventDefault) e.preventDefault(); // allows us to drop
         this.classList.add('over');
+        if (bkPageService.canDrop(this.id)) { this.classList.add('can_drop'); }
         return false;
       }, false);
 
@@ -95,23 +97,25 @@ bkPageBuilder.directive('droppable', ['bkPageService', function(bkPageService) {
 
       el.addEventListener('dragleave', function(e) {
         this.classList.remove('over');
+        this.classList.remove('can_drop');
         return false;
       }, false);
 
       el.addEventListener('drop', function(e) {
         if (e.stopPropagation) e.stopPropagation(); // Stops some browsers from redirecting.
         this.classList.remove('over');
+        this.classList.remove('can_drop');
 
-        var item = document.getElementById(e.dataTransfer.getData('Text'));
+        var item = document.getElementById(bkPageService.getCurrentDragElement());
 
-        if (bkPageService.canDropInTools(e.dataTransfer.getData('Text'), this.id)) {
+        if (bkPageService.makeDropTools(this.id)) {
            this.appendChild(item);
            return false;
         }
 
-        if (bkPageService.canDropIn(e.dataTransfer.getData('Text'), this.id)) {
-           this.appendChild(item);
-        }
+        if (bkPageService.makeDrop(this.id)) { this.appendChild(item); }
+
+        bkPageService.clearCurrentDragElement();
 
         return false;
       }, false);
