@@ -86,6 +86,10 @@ bkPageBuilder.directive('droppable', ['bkPageService', function(bkPageService) {
         e.dataTransfer.dropEffect = 'move';
         if (e.preventDefault) e.preventDefault(); // allows us to drop
         this.classList.add('over');
+        if (bkPageService.makeDropTools(this.id)) {
+           this.classList.add('can_drop');
+           return false;
+        }
         if (bkPageService.canDrop(this.id)) { this.classList.add('can_drop'); }
         return false;
       }, false);

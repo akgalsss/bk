@@ -151,10 +151,12 @@ bkPageBuilder.service('bkPageService', function () {
     return found ? key : false;
   }
 
-
   function canDrop(parent_id) {
-    var childKey = findObjKey(currentDragElement,page),
-        childObj = bkEval(childKey),
+    var childKey = findObjKey(currentDragElement,page);
+
+    if (!childKey) return false;
+
+    var childObj = bkEval(childKey),
         parentKey = findObjKey(parent_id,page),
         parentObj = bkEval(parentKey);
 
