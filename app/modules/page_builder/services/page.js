@@ -74,6 +74,26 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   /* -- Page Styles -- */
+  function setToolData(objId, value) {
+    if ((value == undefined)||(value === "")) return;
+
+    var activeTool = findObjKey(objId,page),
+
+    activeTool = bkEval(activeTool);
+    activeTool.content = value;
+    console.log("BK :: Data: Set new data to id", objId, getPageJSON());
+  }
+
+  function setCssRule(objId, rule, value) {
+    if ((value == undefined)||(value === "")) return;
+
+    var activeTool = findObjKey(objId,page),
+
+    activeTool = bkEval(activeTool);
+    activeTool.css[rule] = value;
+    console.log("BK :: CSS: Apply css rule to id", objId, getPageJSON());
+  }
+
   function setPageStyleCss(url) {
     pageStyleCssFile = url;
   }
@@ -231,6 +251,8 @@ bkPageBuilder.service('bkPageService', function () {
     appendChild             : appendChild,
     appendToPage            : appendToPage,
     clearPage               : clearPage,
+    setToolData             : setToolData,
+    setCssRule              : setCssRule,
     setPageStyleCss         : setPageStyleCss,
     getPageStyleCss         : getPageStyleCss,
     makeDropTools           : makeDropTools,
