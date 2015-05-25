@@ -50,13 +50,13 @@ function ($scope, $compile, bkPropPanelService, bkPageService) {
     $scope.activeToolModel.id = activeTool[0]['id'];
 
     function cssPropWidth() {
-      $scope.activeToolModel.width = parseInt(activeTool[0]['width']);
-      rows = createInputPropertyRow("width",$scope.activeToolModel.width, 'number');
+      $scope.activeToolModel.width = activeTool[0]['width'];
+      rows = createInputPropertyRow("width",$scope.activeToolModel.width);
     }
 
     function cssPropHeight() {
-      $scope.activeToolModel.height = parseInt(activeTool[0]['height']);
-      rows += createInputPropertyRow("height",$scope.activeToolModel.height, 'number');
+      $scope.activeToolModel.height = activeTool[0]['height'];
+      rows += createInputPropertyRow("height",$scope.activeToolModel.height);
     }
 
     function cssPropColor() {
