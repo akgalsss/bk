@@ -7,7 +7,8 @@
   },
   "alt":"Lorem Pixel Image",
   "src":"http://lorempixel.com/140/140/",
-  "height":"140",
-  "width":"140",
-  "style":""
+  "css": {
+    "height":"140",
+    "width":"140"
+   }
 }

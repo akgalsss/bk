@@ -25,6 +25,9 @@ pageView.controller("pageController", ["$scope", "$http",
 				elem.setAttribute('id', elemData['id']);
 				elem.setAttribute('class', elemData['class']);
 
+				if ((elemData['css'])&&(elemData['css']['width'])) elem.style['width'] = elemData['css']['width'];
+				if ((elemData['css'])&&(elemData['css']['height'])) elem.style.minHeight = elemData['css']['height'];
+
 				// add imageBlock text to store
 				if (elemData['class'].indexOf("toolImageBlock") > -1) {
 					elem.setAttribute('src', elemData['src']);
@@ -32,8 +35,6 @@ pageView.controller("pageController", ["$scope", "$http",
 					continue;
 				}
 
-				if ((elemData['css'])&&(elemData['css']['width'])) elem.style['width'] = elemData['css']['width'];
-				if ((elemData['css'])&&(elemData['css']['height'])) elem.style.minHeight = elemData['css']['height'];
 				if ((elemData['css'])&&(elemData['css']['backgroundColor'])) elem.style.backgroundColor = elemData['css']['backgroundColor'];
 
 				// add textBlock text to store
