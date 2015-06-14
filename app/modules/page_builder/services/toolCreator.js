@@ -7,6 +7,7 @@ bkPageBuilder.service('bkCreateToolService', function () {
 
     if (toolData.id) id = getId();
     if (toolData.attributes) attributes = getAttributes();
+    if (toolData['canDropIn']) { attributes += " droppable drop"; }
     if (toolData.css) styles = getStyles();
     if (toolData.class) classes="class='"+toolData.class+"'";
 
@@ -79,10 +80,26 @@ bkPageBuilder.service('bkCreateToolService', function () {
     return createTool(child);
   }
 
+  function createColumnsBlockTool (toolJson) {
+    var left, right;
+
+    toolData = toolJson.child[0];
+    left = createTool();
+
+    toolData = toolJson.child[1];
+    right = createTool();
+
+    left = left + right;
+
+    toolData = toolJson;
+    return createTool(left);
+  }
+
   return {
     createTextBlockTool : createTextBlockTool,
     createImageBlockTool : createImageBlockTool,
-    createImageTextBlockTool : createImageTextBlockTool
+    createImageTextBlockTool : createImageTextBlockTool,
+    createColumnsBlockTool : createColumnsBlockTool
   }
 
 });

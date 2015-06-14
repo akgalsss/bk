@@ -91,6 +91,23 @@ bkPageBuilder.controller("bkPageBuilderController", [
   }
 
 
+  // /* Columns Block Tool */
+  $scope.columnsBlock = function () {
+    var tool = {}, toolRendered;
+
+    $http.get('/data/columnsBlock.json').success(function(data) {
+      tool = data;
+      toolRendered = bkCreateToolService.createColumnsBlockTool(tool);
+      bkPageService.appendToPage(tool);
+      appendRenderedToPage(toolRendered);
+    }).
+    error(function(data, status, headers, config) {
+      console.log("BK_ERR: get columns block tool data - ", status);
+    });
+
+  }
+
+
   // /* Page Template*/
   // render and display page template
   var renderPageTemplate = function (data) {

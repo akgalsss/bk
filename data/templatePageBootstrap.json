@@ -5,20 +5,20 @@
     "id" : "header",
     "class":"block row",
     "draggable":"true",
-    "canDropIn" : ["toolTextBlock"]
+    "canDropIn" : ["toolTextBlock", "toolColumns"]
   },
   {
     "tagName":"DIV",
     "id" : "content",
     "class":"block row",
     "draggable":"true",
-    "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText"]
+    "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText", "toolColumns"]
   },
   {
     "tagName":"DIV",
     "id" : "footer",
     "class":"block row",
     "draggable":"true",
-    "canDropIn" : ["toolTextBlock"]
+    "canDropIn" : ["toolTextBlock", "toolColumns"]
   }]
 }

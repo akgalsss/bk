@@ -62,8 +62,9 @@ bkPageBuilder.directive('draggable', ['bkPropPanelService', 'bkPageService', fun
     el.addEventListener("dblclick", function(e) {
       if (e.stopPropagation) e.stopPropagation();
       // TODO: need put in seperate method
-      if ((this.classList.contains("toolTextBlock"))||(this.classList.contains("toolImageBlock"))) {
-        angular.element(".toolTextBlock, .toolImageBlock ").removeClass("activeTool");
+      if ((this.classList.contains("toolColumns"))||(this.classList.contains("toolTextBlock"))||(this.classList.contains("toolImageBlock"))) {
+        angular.element(".toolTextBlock, .toolImageBlock, .toolColumns").removeClass("activeTool");
+
         this.classList.add('activeTool');
         bkPropPanelService.showPropPanel();
       }
@@ -107,8 +108,8 @@ bkPageBuilder.directive('droppable', ['bkPageService', function(bkPageService) {
 
       el.addEventListener('drop', function(e) {
         if (e.stopPropagation) e.stopPropagation(); // Stops some browsers from redirecting.
-        this.classList.remove('over');
-        this.classList.remove('can_drop');
+        angular.element(".over").removeClass("over");
+        angular.element(".can_drop").removeClass("can_drop");
 
         var item = document.getElementById(bkPageService.getCurrentDragElement());
 

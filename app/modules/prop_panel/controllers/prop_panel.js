@@ -20,7 +20,7 @@ function ($scope, $compile, bkPropPanelService, bkPageService) {
 
     var propTable = angular.element('#propTable'),
       activeTool = angular.element('.activeTool'),
-      rows;
+      rows = "";
 
 
     var createInputPropertyRow = function (prop, val, inputType) {
@@ -90,6 +90,10 @@ function ($scope, $compile, bkPropPanelService, bkPageService) {
       cssPropHeight();
     }
 
+    function toolColumnsProp() {
+      cssPropBackgroundColor();
+    }
+
 
     // case tools prop
     if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolTextBlock") > -1) {
@@ -98,6 +102,10 @@ function ($scope, $compile, bkPropPanelService, bkPageService) {
 
     if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolImageBlock") > -1) {
       toolImageBlockProp();
+    }
+
+    if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolColumns") > -1) {
+      toolColumnsProp();
     }
 
     angular.element(propTable).html($compile(rows)($scope));

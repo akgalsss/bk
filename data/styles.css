@@ -17,8 +17,13 @@ body {
   top: 25%;
   left: 25%;
   cursor: pointer;
+  max-width: 400px;
 }
 
 .block {
   width: 100%;
+}
+
+.toolColumns, .minHeight {
+  min-height: 400px;
 }

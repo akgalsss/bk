@@ -19,7 +19,7 @@ bkPageBuilder.service('bkPropPanelService', function () {
   this.hidePropPanel = function () {
     this.isActive = false;
     this.needUpdate = 0;
-    angular.element(".toolTextBlock, .toolImageBlock ").removeClass("activeTool");
+    angular.element(".activeTool").removeClass("activeTool");
   }
 
   this.showPropPanel = function () {

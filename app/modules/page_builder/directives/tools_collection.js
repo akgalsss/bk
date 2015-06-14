@@ -82,6 +82,7 @@ bkPageBuilder.directive("imageTextTool", function(){
 	}
 });
 
+
 // get template directive functionality. Use: <templates></templates>
 bkPageBuilder.directive("templates", function(){
 	var linkFn = function(scope, element) {
@@ -106,4 +107,20 @@ bkPageBuilder.directive("templates", function(){
 	}
 });
 
+
+// tool columns block directive functionality. Use: <columns></columns>
+bkPageBuilder.directive("columns", function(){
+	var linkFn = function(scope, element, attrs) {
+
+		element.bind("click", function() {
+			scope.columnsBlock();
+		});
+	};
+
+	return {
+		link: linkFn,
+		restrict: "E",
+		template: "<button class='btn btn-primary toolItem columnsBlock' title='Add Columns Block'>Cols</button>",
+	}
+});
 

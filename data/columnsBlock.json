@@ -1,0 +1,27 @@
+{
+  "tagName":"DIV",
+  "id":"bk_ct_",
+  "class":"toolColumns ng-scope initToolStyles col-sm-12",
+  "attributes": {
+    "draggable":"true"
+  },
+  "css": {
+    "height":"120px",
+    "backgroundColor":"#F7F7F7"
+  },
+  "child" : [{
+      "tagName":"DIV",
+      "id":"bk_ct_c_",
+      "class":"col-sm-6 minHeight",
+      "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText", "toolColumns"],
+      "content":""
+    },
+    {
+      "tagName":"DIV",
+      "id":"bk_ct_c_",
+      "class":"col-sm-6 minHeight",
+      "canDropIn" : ["toolTextBlock","toolImageBlock","toolImageText", "toolColumns"],
+      "content":""
+    }
+  ]
+}
