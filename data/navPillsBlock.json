@@ -1,0 +1,28 @@
+{
+  "tagName":"UL",
+  "id":"bk_np_",
+  "class":"navPillsBlock ng-scope fleft initToolStyles",
+  "attributes": {
+    "draggable":"true"
+  },
+  "child" : [{
+      "tagName":"LI",
+      "id":"bk_np_i_",
+      "class":"nav-pills-item active",
+      "content":"Home"
+    },
+    {
+      "tagName":"LI",
+      "id":"bk_np_i_",
+      "class":"nav-pills-item",
+      "content":"About"
+    },
+    {
+      "tagName":"LI",
+      "id":"bk_np_i_",
+      "class":"nav-pills-item",
+      "content":"Contact"
+    }
+  ]
+
+}

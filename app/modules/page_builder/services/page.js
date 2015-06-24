@@ -1,9 +1,13 @@
 bkPageBuilder.service('bkPageService', function () {
-  var pageStyleCssFile, page, currentDragElement = "";
+  var pageStyleCssFile, page, pageData, currentDragElement = "";
 
 
   function getPageTemplate() {
     return [{ tagName:"DIV",id:"page",class:"container-fluid",css:{width:"",height:"",backgroundColor:""}, child : []}];
+  }
+
+  function getPageDataTemplate() {
+    return {};
   }
 
 
@@ -11,12 +15,22 @@ bkPageBuilder.service('bkPageService', function () {
     return page;
   }
 
+  function getPageDataJSON() {
+    return pageData;
+  }
+
 
   function appendChild(parentKey, childKey) {
+    console.log("->page.js:24 childKey:", childKey);
     parent = bkEval(parentKey);
     child = bkEval(childKey);
-    if (parent.child) { parent.child.push(child); }
-      else { parent.child = [child];}
+    if (parent.child) {
+      pageData[""+parentKey+".child["+parent.child.length+"]"] = (child.content) ? child.content : undefined;
+      parent.child.push(child);
+    } else {
+      pageData[""+parentKey+".child[0]"] = (child.content) ? child.content : undefined;
+      parent.child = [child];
+    }
 
     console.log("BK :: Append : Success", getPageJSON());
   }
@@ -27,8 +41,10 @@ bkPageBuilder.service('bkPageService', function () {
     var obj = bkCloneObj(objData)
 
     if (page[0].child.length) {
+      pageData["page[0].child["+page[0].child.length+"]"] = (objData.content) ? objData.content : undefined;
       page[0].child.push(obj);
     } else {
+      pageData["page[0].child[0]"] = (objData.content) ? objData.content : undefined;
       page[0].child = obj;
     }
 
@@ -45,6 +61,7 @@ bkPageBuilder.service('bkPageService', function () {
 
     for (i= parentChild.length-1; i >= 0; --i) {
       if (parentChild[i]['id'] === child['id'] ) {
+        pageData[objKey] = undefined;
         parentChild.splice(i,1);
 
         if (!parentChild.length) {
@@ -59,7 +76,8 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   function clearPage(obj) {
-    page = new getPageTemplate();
+    page     = new getPageTemplate();
+    pageData = new getPageDataTemplate();
   }
 
 
@@ -248,6 +266,7 @@ bkPageBuilder.service('bkPageService', function () {
 
   return {
     getPageJSON             : getPageJSON,
+    getPageDataJSON         : getPageDataJSON,
     appendChild             : appendChild,
     appendToPage            : appendToPage,
     clearPage               : clearPage,

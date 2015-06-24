@@ -124,3 +124,18 @@ bkPageBuilder.directive("columns", function(){
 	}
 });
 
+// tool navPills block directive functionality. Use: <nav-pills></nav-pills>
+bkPageBuilder.directive("navPills", function(){
+	var linkFn = function(scope, element, attrs) {
+
+		element.bind("click", function() {
+			scope.navPillsBlock();
+		});
+	};
+
+	return {
+		link: linkFn,
+		restrict: "E",
+		template: "<button class='btn btn-primary toolItem navPillsBlock' title='Add Nav Pills Block'>NP</button>",
+	}
+});

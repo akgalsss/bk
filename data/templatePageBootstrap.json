@@ -5,7 +5,7 @@
     "id" : "header",
     "class":"block row",
     "draggable":"true",
-    "canDropIn" : ["toolTextBlock", "toolColumns"]
+    "canDropIn" : ["toolTextBlock", "toolColumns", "navPillsBlock"]
   },
   {
     "tagName":"DIV",

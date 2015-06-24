@@ -95,11 +95,17 @@ bkPageBuilder.service('bkCreateToolService', function () {
     return createTool(left);
   }
 
+  function createNavPillsBlockTool (toolJson) {
+    console.log("->toolCreator.js:99 create tool:");
+    return "<span class='navPillsBlock ng-scope fleft initToolStyles'>test</span>";
+  }
+
   return {
-    createTextBlockTool : createTextBlockTool,
-    createImageBlockTool : createImageBlockTool,
+    createTextBlockTool      : createTextBlockTool,
+    createImageBlockTool     : createImageBlockTool,
     createImageTextBlockTool : createImageTextBlockTool,
-    createColumnsBlockTool : createColumnsBlockTool
+    createColumnsBlockTool   : createColumnsBlockTool,
+    createNavPillsBlockTool  : createNavPillsBlockTool
   }
 
 });

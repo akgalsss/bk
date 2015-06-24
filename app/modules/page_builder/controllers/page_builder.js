@@ -12,6 +12,8 @@ bkPageBuilder.controller("bkPageBuilderController", [
     theme.template = JSON.stringify(bkPageService.getPageJSON());
     theme.cssUrl = bkPageService.getPageStyleCss();
 
+    console.log("->page_builder.js:15 bkPageService.getPageDataJSON():", bkPageService.getPageDataJSON());
+
     //send template to server
     $http.post('save.php', {theme: theme}).
       success(function(data, status, headers, config) {
@@ -103,6 +105,23 @@ bkPageBuilder.controller("bkPageBuilderController", [
     }).
     error(function(data, status, headers, config) {
       console.log("BK_ERR: get columns block tool data - ", status);
+    });
+
+  }
+
+
+  // /* Nav Pills Block Tool */
+  $scope.navPillsBlock = function () {
+    var tool = {}, toolRendered;
+
+    $http.get('/data/navPillsBlock.json').success(function(data) {
+      tool = data;
+      toolRendered = bkCreateToolService.createNavPillsBlockTool(tool);
+      bkPageService.appendToPage(tool);
+      appendRenderedToPage(toolRendered);
+    }).
+    error(function(data, status, headers, config) {
+      console.log("BK_ERR: get nav pills block tool data - ", status);
     });
 
   }
