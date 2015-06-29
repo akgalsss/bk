@@ -5,23 +5,33 @@
   "attributes": {
     "draggable":"true"
   },
+  "canDropIn" : ["nav-pills-item"],
   "child" : [{
       "tagName":"LI",
       "id":"bk_np_i_",
       "class":"nav-pills-item active",
-      "content":"Home"
+      "content":"Home",
+      "attributes": {
+        "draggable":"true"
+      }
     },
     {
       "tagName":"LI",
       "id":"bk_np_i_",
       "class":"nav-pills-item",
-      "content":"About"
+      "content":"About",
+      "attributes": {
+        "draggable":"true"
+      }
     },
     {
       "tagName":"LI",
       "id":"bk_np_i_",
       "class":"nav-pills-item",
-      "content":"Contact"
+      "content":"Contact",
+      "attributes": {
+        "draggable":"true"
+      }
     }
   ]
 

@@ -27,3 +27,30 @@ body {
 .toolColumns, .minHeight {
   min-height: 400px;
 }
+
+.nav-pills-item {
+  cursor: pointer;
+  color: #337ab7;
+  list-style: none;
+  margin: 4px 8px;
+  padding: 8px;
+  border-radius: 4px;
+  float: left;
+}
+
+.nav-pills-item:hover {
+  background-color: #eee;
+}
+
+.nav-pills-item.active {
+  color: #fff;
+  background-color: #337ab7;
+}
+
+.nav-pills-item.active:hover {
+  background-color: #518DC1;
+}
+
+.toolImageText {
+  position: relative;
+}

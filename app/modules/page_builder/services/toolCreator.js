@@ -96,8 +96,15 @@ bkPageBuilder.service('bkCreateToolService', function () {
   }
 
   function createNavPillsBlockTool (toolJson) {
-    console.log("->toolCreator.js:99 create tool:");
-    return "<span class='navPillsBlock ng-scope fleft initToolStyles'>test</span>";
+    var buttons = "";
+    toolJson.child.forEach(function(item) {
+      toolData = item;
+      buttons += createTool();
+    });
+
+    toolData = toolJson;
+    return createTool(buttons);
+
   }
 
   return {

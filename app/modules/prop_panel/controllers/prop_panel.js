@@ -94,6 +94,19 @@ function ($scope, $compile, bkPropPanelService, bkPageService) {
       cssPropBackgroundColor();
     }
 
+    function navPillsBlockProp() {
+      //cssPropBackgroundColor();
+    }
+
+    function navPillsItemProp() {
+      //cssPropColor();
+      //cssPropBackgroundColor();
+      //cssPropPadding();
+
+      $scope.activeToolModel.dataText = activeTool[0]['innerText'];
+      rows += createInputPropertyRow("dataText",$scope.activeToolModel.dataText);
+    }
+
 
     // case tools prop
     if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolTextBlock") > -1) {
@@ -106,6 +119,14 @@ function ($scope, $compile, bkPropPanelService, bkPageService) {
 
     if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("toolColumns") > -1) {
       toolColumnsProp();
+    }
+
+    if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("navPillsBlock") > -1) {
+      navPillsBlockProp();
+    }
+
+    if (activeTool[0]['attributes']['class']['nodeValue'].indexOf("nav-pills-item") > -1) {
+      navPillsItemProp();
     }
 
     angular.element(propTable).html($compile(rows)($scope));

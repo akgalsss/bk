@@ -120,7 +120,7 @@ bkPageBuilder.directive("columns", function(){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='btn btn-primary toolItem columnsBlock' title='Add Columns Block'>Cols</button>",
+		template: "<button class='btn btn-default toolItem columnsBlock' title='Add Columns Block'>Cols</button>",
 	}
 });
 
@@ -136,6 +136,6 @@ bkPageBuilder.directive("navPills", function(){
 	return {
 		link: linkFn,
 		restrict: "E",
-		template: "<button class='btn btn-primary toolItem navPillsBlock' title='Add Nav Pills Block'>NP</button>",
+		template: "<button class='btn btn-default toolItem navPillsBlock' title='Add Nav Pills Block'>nPills</button>",
 	}
 });

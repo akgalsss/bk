@@ -21,7 +21,6 @@ bkPageBuilder.service('bkPageService', function () {
 
 
   function appendChild(parentKey, childKey) {
-    console.log("->page.js:24 childKey:", childKey);
     parent = bkEval(parentKey);
     child = bkEval(childKey);
     if (parent.child) {
