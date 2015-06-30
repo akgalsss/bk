@@ -48,6 +48,11 @@ pageView.controller("pageController", ["$scope", "$http",
 					elem.style.position = elemData['css']['position'];
 				}
 
+				// add textBlock text to store
+				if (elemData['class'].indexOf("nav-pills-item") > -1) {
+					elem.appendChild(document.createTextNode(elemData['content']));
+				}
+
 				parent.appendChild(elem);
 
 				if (elemData['child']) {
